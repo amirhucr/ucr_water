@@ -1,0 +1,96 @@
+.home{
+    display: block;
+    padding: 5%;
+}
+.crop-image img{
+    max-height: 100px;
+    width:  100%;
+    object-fit: contain;
+    /* margin-bottom: 15px; */
+}
+.card{
+    background-color: #F0F0F0;
+    /* flex: 10%; */
+    border-radius: 20px;
+    height: 42%;
+}
+.c1{
+    margin-left: 10%;
+}
+/* .card:hover{
+    transform: scale(1.1);
+    box-shadow: 0px 0px 15px 0px;
+    
+} */
+.input{
+    width: 80%;
+    margin-left: 10%;
+}
+.r1{
+    display: flex;
+    flex: 50% 50%;
+    padding: 1px;
+}
+.sep{
+    width: 100%;
+    margin-top: 30px;
+}
+.gooey-button{
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    /* background-color: #4CAF50; */
+    background-color: black;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+}
+.gooey-button:hover{
+    /* background-color: #3e8e41 */
+    background-color: whitesmoke;
+    color: black;
+    }
+.gooey-button:active {
+    /* background-color: #3e8e41; */
+    background-color: whitesmoke;
+    color: black;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+.Default{
+    width: 75px;
+    margin-left: 2%;
+}
+.cb{
+    display: flex;
+    margin-left: 40%;
+    margin-top: 5px;
+}
+.inp{
+
+    display: flex;
+    
+}
+.card1{
+    flex: 50%;
+    border-radius: 20px;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+.crop_details{
+    height: 100px;
+    margin-bottom: 15px;
+}
+.crop_details1{
+    height: 100px;
+}
+.graph{
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 20px;
+}
