@@ -2,19 +2,12 @@ import React from 'react'
 import Select from 'react-select';
 import crop from './crop.png'
 import drop from './drop.png'
-import dollar from './dollar_sign.png'
 import { useState } from 'react';
 import "./home.css";
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import {Bar} from 'react-chartjs-2';
-import Paper from '@material-ui/core/Paper';
-import {
-  ArgumentAxis,
-  ValueAxis,
-  BarSeries,
-} from '@devexpress/dx-react-chart-material-ui';
-import Chart from 'chart.js/auto'
+import {Bar} from 'react-chartjs-2'; 
+import { Chart as ChartJS } from 'chart.js/auto'
 
 const crops =[
     { label: "Alfalfa ", value: 1 },
@@ -41,14 +34,16 @@ function Home() {
     const [d,setd] = useState('');
     const [wec,setwa] = useState(null);
     const [wec1,setwa1] = useState(null);
-    //let ans = [];
-    //let cps = [];
+    const [wec2,setwa2] = useState(null);
     const [ans, setans] = useState([]);
     const [ans1, setans1] = useState([]);
+    const [ans2, setans2] = useState([]);
     const [cps, setcps] = useState([]);
     const [cpsr, setcpsr] = useState([]);
+    const [cpsw, setcpsw] = useState([]);
     const [selectedValue, setSelectedValue] = useState([]);
     const [selectedValue1, setSelectedValue1] = useState([]);
+    const [selectedValue2, setSelectedValue2] = useState([]);
     const state = {
         labels: cps,
         datasets: [
@@ -61,6 +56,7 @@ function Home() {
           }
         ]
       }
+
       const state1 = {
         labels: cpsr,
         datasets: [
@@ -70,6 +66,32 @@ function Home() {
             borderColor: 'rgba(0,0,0,1)',
             borderWidth: 0.5,
             data: ans1
+          }
+        ]
+      }
+      const state2 = {
+        labels: cpsw,
+        datasets: [
+          {
+            label: 'Water efficiency',
+            backgroundColor: `#00ffff`,
+            borderColor: 'rgba(0,0,0,1)',
+            borderWidth: 0.5,
+            data: ans2
+          }
+        ]
+      }
+      const data0 ={
+        labels: ['Ya', 'Ym'],
+        datasets: [
+          {
+            axis: 'y',
+            barThickness: 10,
+            label: 'Ya and Ym',
+            backgroundColor: `#1e90ff`,
+            borderColor: 'rgba(0,0,0,1)',
+            borderWidth: 0.5,
+            data: [218, 159]
           }
         ]
       }
@@ -220,6 +242,9 @@ function Home() {
       const handleChange1 = (e) => {
         setSelectedValue1(Array.isArray(e) ? e.map(x => x.value) : []);
       }
+      const handleChange2 = (e) => {
+        setSelectedValue2(Array.isArray(e) ? e.map(x => x.value) : []);
+      }
     function myo(){
         if (wec == null){
             alert("Please enter amount of water available")
@@ -326,9 +351,6 @@ function Home() {
             //cps.push(crops[selectedValue[i]].label)
             setcps(cps => [...cps, crops[selectedValue[i]-1].label])
         }
-        
-        console.log(cps)
-        console.log(ans)
     }
     function mr(){
         if (wec1 == null){
@@ -442,57 +464,178 @@ function Home() {
             setcpsr(cpsr => [...cpsr, crops[selectedValue1[i]-1].label])
         }
     }
+    function mwe(){
+        if (wec2 == null){
+            alert("Please enter amount of water available")
+            return
+        }
+        let eci =0;
+        let ecw =0;
+        let ETm =0;
+        let ky = 0;
+        let Ym = 0;
+        let Eta = 0;
+        let Ya = 0;
+        for(let i=0;i<selectedValue2.length;i++){
+            if (selectedValue2[i] == 1){
+                eci = 2;
+                ecw = 1.3;
+                ETm=1500;
+                ky = 1;
+                Ym = 23;
+               }
+            else if ( selectedValue2[i] == 2){
+               eci=7;
+               ecw= 4.7;
+               ETm=1050;
+               ky = 0.85;
+               Ym = 120;
+            }
+            else if (selectedValue2[i] == 3){
+               eci=6;
+               ecw= 4;
+               ETm=620;
+               ky = 1.05;
+               Ym = 7.5;
+            }
+            else if (selectedValue2[i] == 4){
+               eci=6.9;
+               ecw= 4.6;
+               ETm=1200;
+               ky = 0.9;
+               Ym = 19;
+            }
+            else if (selectedValue2[i] ==5 ){
+               eci=4;
+               ecw=  2.7;
+               ETm=1250;
+               ky = 0.9;
+               Ym = 24;
+            }
+            else if (selectedValue2[i] == 6){
+               eci=2.8;
+               ecw= 1.9;
+               ETm=800;
+               ky = 0.9;
+               Ym = 14;
+            }
+            else if (selectedValue2[i] ==7 ){
+                eci=1.3;
+                ecw= 1;
+                ETm=320;
+                ky = 1.15;
+               Ym = 20;
+            }
+            else if (selectedValue2[i] == 8){
+              eci=1;
+              ecw= 0.8;
+              ETm=600;
+              ky = 1.1;
+              Ym = 110;
+            }
+            else if (selectedValue2[i] == 9){
+               eci=2.8;
+               ecw= 1.9;
+               ETm=350;
+               ky = 1;
+               Ym = 15;
+            }
+            else if (selectedValue2[i] == 10){
+              eci=1.2;
+              ecw=0.9;
+              ETm=800;
+              ky = 1.1;
+               Ym = 60;
+            }
+            else if (selectedValue2[i] ==11 ){
+               eci=2;
+               ecw=1.3;
+               ETm=200;
+               ky = 1.15;
+               Ym = 14;
+            }
+            else if (selectedValue2[i] ==12 ){
+              eci=1.7;
+              ecw= 1.1;
+              ETm=600;
+              ky = 1.1;
+               Ym = 27;
+            }
+            Eta = wec2 * 68 * (1-(eci/((5*ecw)-eci)))
+            Ya = Ym * ((ky*((Eta/ETm)-1))+1)
+            ans2.push((Ya/wec2))
+        }
+        for(let i =0 ; i<selectedValue2.length;i++){
+            //cps.push(crops[selectedValue[i]].label)
+            setcpsw(cpsw => [...cpsw, crops[selectedValue2[i]-1].label])
+        }
+    }
+    function yr(){
+
+    }
   
       
     return (
         <div className='home'>
             <div className='r1'>
                 <div className='c0'>
-                <div className='card'>
-                        <div className='crop-image'>
-                        <img src={crop} />   
-                        <p> Crop</p>
-                        </div>
-                        <div className = "crop_details ">
-                        <p className = "input">
-                            <Select id="myc"
-                            onChange={(opt)=>{
-                            let val=opt.value;
-                            console.log(opt.label, opt.value)
-                            setPa(val)
-                            }
-                            }
-                            options ={crops}
-                            //onChange={opt => console.log(opt.label, opt.value)}
-                            />
-                        </p> 
-                        </div>
-                </div> 
-                <div className='yr'>
-                <h1>Yield Reduction(due to salinity build-up)</h1>
-                </div>
-                </div> 
-                <div className='c1'> 
-                    <div className = "at">
-                    <h1> Actual ET </h1>
-                    {pa .myPaVal}
-                    <button className="gooey-button" onClick = {cpot}>Calculate</button>
-                    <h4>{a} mm for maximum yield of {y} mm</h4>
-                    </div>   
+                    <div className='card'>
+                            <div className='crop-image'>
+                            <img src={crop} />   
+                            <p> Crop</p>
+                            </div>
+                            <div className = "crop_details ">
+                            <p className = "input">
+                                <Select id="myc"
+                                onChange={(opt)=>{
+                                let val=opt.value;
+                                console.log(opt.label, opt.value)
+                                setPa(val)
+                                }
+                                }
+                                options ={crops}
+                                />
+                            </p> 
+                            </div>
+                    </div> 
                     <div className = "lr">
-                    <h1> Leaching Requirements and Irrigation Water Depth </h1>
+                    <h2> Leaching Requirements and Irrigation Water Depth </h2>
                     {pa.myPaVal}
                     <button className="gooey-button" onClick = {clr}>Calculate</button>
                     <div className='cb'>
-                    <h4>Leaching Requirement:</h4>
+                    <p>Leaching Requirement:</p>
                     <div className="Default">
                     <CircularProgressbar value={c} text={`${c}%`} />
                     </div>
                     </div>
-                    <h4>Total crop water requirement(based on ET,LR and IE): {d} mm</h4>
-                    </div>   
-                </div>  
-                 
+                    <p>Total crop water requirement(based on ET,LR and IE): {d} mm</p>
+                    </div>  
+
+                </div> 
+                <div className='c1'> 
+                    <div className = "at">
+                        <div><h2>Actual ET </h2>
+                        {pa .myPaVal}
+                        <button className="gooey-button" onClick = {cpot}>Calculate</button>
+                        </div>
+                        <div className='eto'><p>{a} mm for maximum yield of {y} mm</p></div>
+                    </div> 
+                    <div className='yr'>
+                    <h2>Yield Reduction</h2>
+                    <p>(due to salinity build-up)</p>
+                    <button className="gooey-button" onClick = {yr}>Calculate</button>
+                    <div className='yrgraph'><Bar
+                    data={data0}
+                    options={{
+                        indexAxis: 'y',
+                        title:{
+                        display:true,
+                        fontSize:10
+                        },
+                    }}
+                    /></div>
+                    </div>
+                </div> 
             </div>
             <div className="sep">
             <ColoredLine color="black" />
@@ -596,7 +739,58 @@ function Home() {
                         </div>
                     </div>
             </div>
-        </div>
+            <div className="sep">
+            <ColoredLine color="black" />
+            </div>
+            <div className='my'>
+            <div className='h'>
+                    <h1>Maximize Water use efficiency?</h1>
+            </div>
+            <div className='inp'>
+                    <div className='card1'>
+                        <div className='crop-image'>
+                        <img src={crop} />   
+                        <p>Select the crops to compare</p>
+                        </div>
+                        <div className = "crop_details1">
+                        <p>
+                            <Select
+                            onChange={handleChange2}
+                            isMulti
+                            options={crops}
+                            value={crops.filter(obj => selectedValue2.includes(obj.value))}
+                            className="basic-multi-select"
+                            classNamePrefix="select"
+                            />
+                           
+                        </p> 
+                        
+                        </div>
+                    </div> 
+                    <div className='card1'>
+                        <div className='crop-image'>
+                        <img src={drop} />   
+                        <p> Water Available</p>
+                        <input type="number" placeholder = "Enter the amount of water " style={{width: "175px"}} onChange = {e => setwa2(e.target.value)}/>
+                        </div>
+                    </div>
+            </div>
+            <div className='myo'>
+                <button className="gooey-button" onClick = {mwe}>Calculate</button>
+                <div className='graph'>
+                    <Bar
+                    data={state2}
+                    options={{
+                        title:{
+                        display:true,
+                        fontSize:20
+                        },
+                    }}
+                    />
+                </div>
+            </div>
+    </div>
+    </div>
     )
 }
 

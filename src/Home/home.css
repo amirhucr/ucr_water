@@ -16,6 +16,7 @@
 }
 .c1{
     margin-left: 10%;
+    width: 50%;
 }
 /* .card:hover{
     transform: scale(1.1);
@@ -28,8 +29,6 @@
 }
 .r1{
     display: flex;
-    flex: 50% 50%;
-    padding: 1px;
 }
 .sep{
     width: 100%;
@@ -63,7 +62,7 @@
     transform: translateY(4px);
 }
 .Default{
-    width: 75px;
+    width: 60px;
     margin-left: 2%;
 }
 .cb{
@@ -93,4 +92,16 @@
     margin-left: 30%;
     margin-right: 30%;
     margin-top: 20px;
+}
+.yrgraph{
+    margin-top: 20px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.at{
+    display : block;
+    width: 100%;
+}
+.eto{
+    align-items: center;
 }
