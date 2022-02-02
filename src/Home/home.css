@@ -6,17 +6,21 @@
     max-height: 100px;
     width:  100%;
     object-fit: contain;
-    /* margin-bottom: 15px; */
 }
 .card{
     background-color: #F0F0F0;
     /* flex: 10%; */
     border-radius: 20px;
-    height: 42%;
+    height: 27%;
+
+    
+}
+.c0{
+    width: 90%;
 }
 .c1{
-    margin-left: 10%;
-    width: 50%;
+    width: 100%;
+    margin-left: 7%;
 }
 /* .card:hover{
     transform: scale(1.1);
@@ -29,6 +33,7 @@
 }
 .r1{
     display: flex;
+    
 }
 .sep{
     width: 100%;
@@ -62,22 +67,18 @@
     transform: translateY(4px);
 }
 .Default{
-    width: 60px;
+    width: 120px;
     margin-left: 2%;
 }
 .cb{
     display: flex;
-    margin-left: 40%;
+    margin-left: 30%;
     margin-top: 5px;
 }
 .inp{
-
     display: flex;
-    
 }
 .card1{
-    flex: 50%;
-    border-radius: 20px;
     margin-right: 10%;
     margin-left: 10%;
 }
@@ -95,13 +96,27 @@
 }
 .yrgraph{
     margin-top: 20px;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 .at{
-    display : block;
+    display : flex;
     width: 100%;
+    margin-left: 12%;
 }
 .eto{
-    align-items: center;
+    margin-left: 10px;
+    margin-top: 6%;
+}
+.twgraph{
+    margin-top: 10px;
+}
+.lrl{
+    margin-top: 7%;
+}
+.graphdes{
+    display: grid;
+}
+.adv{
+    display: flex;
 }
