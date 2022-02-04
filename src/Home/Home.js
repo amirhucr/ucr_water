@@ -813,9 +813,10 @@ function Home() {
                     <button className="gooey-button" onClick = {cald}>Calculate</button>
                     <h6>X-axis: Deficit Irrigation(%), Y-axis: Yield Reduction(%)</h6>
                     <div className="graphdi" >
-                    <Paper className="graph1">
+                    <Paper className="graph1" >
                     <Chart 
                         data={datadf}
+                        
                     >
                         <ArgumentAxis  />
                         <ValueAxis  />
@@ -855,10 +856,10 @@ function Home() {
                     }}
                     /></div>
                     <div className='graphdes'>
-                    <h9>IW0 -> Total water required for leaching</h9>
-                    <h9>IW1 -> Total water requirement based on ET and LR</h9>
-                    <h9>IW2 -> Total water requirement based on ET and IE</h9>
-                    <h9>IW3 -> Total water requirement based on ET,IE and LR</h9>
+                    <div className='gdes'><h9>IW0 -> Total water required for leaching</h9></div>
+                    <div className='gdes'><h9>IW1 -> Total water requirement based on ET and LR</h9></div>
+                    <div className='gdes'><h9>IW2 -> Total water requirement based on ET and IE</h9></div>
+                    <div className='gdes'><h9>IW3 -> Total water requirement based on ET,IE and LR</h9></div>
                     </div>
                     </div>  
                     <div className='saleach'>

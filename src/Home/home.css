@@ -11,7 +11,7 @@
     background-color: #F0F0F0;
     /* flex: 10%; */
     border-radius: 20px;
-    height: 22%;
+    height: 20%;
 
     
 }
@@ -134,4 +134,7 @@
 }
 .Component-root-1{
     height: 230px !important;
+}
+.gdes{
+    margin-top: 5%;
 }
