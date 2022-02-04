@@ -11,7 +11,7 @@
     background-color: #F0F0F0;
     /* flex: 10%; */
     border-radius: 20px;
-    height: 27%;
+    height: 22%;
 
     
 }
@@ -77,10 +77,15 @@
 }
 .inp{
     display: flex;
+    margin-left: 6%;
 }
 .card1{
     margin-right: 10%;
     margin-left: 10%;
+}
+.cardc{
+    margin-right: 7%;
+    margin-left: 7%;
 }
 .crop_details{
     height: 100px;
@@ -100,16 +105,14 @@
     margin-right: 10%;
 }
 .at{
-    display : flex;
     width: 100%;
-    margin-left: 12%;
 }
 .eto{
     margin-left: 10px;
-    margin-top: 6%;
 }
 .twgraph{
     margin-top: 10px;
+    max-height: 20%;
 }
 .lrl{
     margin-top: 7%;
@@ -119,4 +122,16 @@
 }
 .adv{
     display: flex;
+}
+.graphdi{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.graph1{
+}
+.saleach{
+    margin-top: 100px;
+}
+.Component-root-1{
+    height: 230px !important;
 }

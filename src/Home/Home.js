@@ -11,6 +11,13 @@ import {Bar} from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto'
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import Paper from '@material-ui/core/Paper';
+import {
+  ArgumentAxis,
+  ValueAxis,
+  Chart,
+  BarSeries,
+} from '@devexpress/dx-react-chart-material-ui';
 
 const crops =[
     { label: "Alfalfa ", value: 1 },
@@ -32,6 +39,11 @@ function Home() {
     const [a,seta]    = useState('');
     const [y, sety] = useState('');
     let [lr, setlr] = useState(0);
+    let [d1,setd1] = useState(0);
+    let [d2,setd2] = useState(0);
+    let [d3,setd3] = useState(0);
+    let [d4,setd4] = useState(0);
+    let [d5,setd5] = useState(0);
     let [iw0, setiw0] = useState(0);
     let [iw1, setiw1] = useState(0);
     let [iw2, setiw2] = useState(0);
@@ -59,7 +71,7 @@ function Home() {
         labels: cps,
         datasets: [
           {
-            label: 'Yield(kg/ha)',
+            label: 'Yield (kg/ha)',
             backgroundColor: `#9acd32`,
             borderColor: 'rgba(0,0,0,1)',
             borderWidth: 0.5,
@@ -72,7 +84,7 @@ function Home() {
         labels: cpsr,
         datasets: [
           {
-            label: 'Profit($)',
+            label: 'Profit ($)',
             backgroundColor: `#daa520`,
             borderColor: 'rgba(0,0,0,1)',
             borderWidth: 0.5,
@@ -84,7 +96,7 @@ function Home() {
         labels: cpsw,
         datasets: [
           {
-            label: 'Water efficiency(%)',
+            label: 'Water efficiency (%)',
             backgroundColor: `#00ffff`,
             borderColor: 'rgba(0,0,0,1)',
             borderWidth: 0.5,
@@ -112,7 +124,7 @@ function Home() {
           {
             axis: 'y',
             barThickness: 10,
-            label: 'Irrigation water depth',
+            label: 'Irrigation water depth (mm)',
             backgroundColor: `#1e90ff`,
             borderColor: 'rgba(0,0,0,1)',
             borderWidth: 0.5,
@@ -120,6 +132,13 @@ function Home() {
           }
         ]
       }
+      let datadf = [
+        { argument: '10%', value: d1 },
+        { argument: '20%', value: d2 },
+        { argument: '30%', value: d3 },
+        { argument: '40%', value: d4 },
+        { argument: '50%', value: d5 },
+      ];
     const ColoredLine = ({ color }) => (
         <hr
             style={{
@@ -682,6 +701,73 @@ function Home() {
         setyr1(0.9*ETa)
         setyr2(ETa)
     }
+    function cald(){
+        if (pa == 0){
+            alert("Please enter crop type")
+            return
+        }
+        let ky=0;
+        let Etm=0;
+        if (pa == 1){
+         ky=1;
+         Etm=1500;
+        }
+        else if ( pa == 2){
+         ky = 0.85;
+         Etm = 1050;
+     }
+     else if (pa == 3){
+         ky = 1.05;
+         Etm = 620;
+     }
+     else if (pa == 4){
+         ky = 0.9;
+         Etm = 1200;
+     }
+     else if (pa ==5 ){
+         ky = 0.9;
+         Etm = 1250;
+     }
+     else if (pa == 6){
+         ky = 0.9;
+         Etm = 800;
+     }
+     else if (pa ==7 ){
+         ky = 1.15;
+         Etm = 320;
+     }
+     else if (pa == 8){
+         ky =1.1 ;
+         Etm =600 ;
+     }
+     else if (pa == 9){
+         ky = 1;
+         Etm = 350;
+     }
+     else if (pa == 10){
+         ky =1.1 ;
+         Etm = 800;
+     }
+     else if (pa ==11 ){
+         ky = 1.15;
+         Etm = 200;
+     }
+     else if (pa ==12 ){
+         ky = 1.1;
+         Etm = 600;
+     }
+     d1 = ky*(1-((0.9 * Etm)/Etm)) ;
+     d2 = ky*(1-((0.8 * Etm)/Etm)) ;
+     d3 = ky*(1-((0.7 * Etm)/Etm)) ;
+     d4 = ky*(1-((0.6 * Etm)/Etm)) ;
+     d5 = ky*(1-((0.5 * Etm)/Etm)) ;
+     setd1((d1*100).toFixed(2))
+     setd2((d2*100).toFixed(2))
+     setd3((d3*100).toFixed(2))
+     setd4((d4*100).toFixed(2))
+     setd5((d5*100).toFixed(2))
+     
+    }
   
       
     return (
@@ -707,13 +793,6 @@ function Home() {
                             </p> 
                             </div>
                     </div> 
-                    <div className = "at">
-                        <div><h2>Actual ET </h2>
-                        {pa .myPaVal}
-                        <button className="gooey-button" onClick = {cpot}>Calculate</button>
-                        </div>
-                        <div className='eto'><p>{a} mm for maximum yield of {y} (kg/ha)</p></div>
-                        </div> 
                     <div className='yr'>
                     <h2>Yield Reduction</h2>
                     <p>(due to salinity build-up)</p>
@@ -729,9 +808,32 @@ function Home() {
                     }}
                     /></div>
                     </div>
-
+                    <div className='di'>
+                    <h2>Deficit Irrigation</h2>
+                    <button className="gooey-button" onClick = {cald}>Calculate</button>
+                    <h6>X-axis: Deficit Irrigation(%), Y-axis: Yield Reduction(%)</h6>
+                    <div className="graphdi" >
+                    <Paper className="graph1">
+                    <Chart 
+                        data={datadf}
+                    >
+                        <ArgumentAxis  />
+                        <ValueAxis  />
+                    
+                        <BarSeries valueField="value" argumentField="argument" />
+                        </Chart>
+                    </Paper>
+                    </div>
+                    </div>
                 </div> 
                 <div className='c1'> 
+                    <div className = "at">
+                    <div><h2>Actual ET </h2>
+                    {pa .myPaVal}
+                    <button className="gooey-button" onClick = {cpot}>Calculate</button>
+                    </div>
+                    <div className='eto'><p>{a} mm for maximum yield of {y} (kg/ha)</p></div>
+                    </div> 
                     <div className = "lr">
                     <h2> Leaching Requirements and Total crop water Requirement</h2>
                     {pa.myPaVal}
@@ -748,7 +850,7 @@ function Home() {
                         indexAxis: 'y',
                         title:{
                         display:true,
-                        fontSize:10
+                        fontSize:2
                         },
                     }}
                     /></div>
@@ -759,6 +861,11 @@ function Home() {
                     <h9>IW3 -> Total water requirement based on ET,IE and LR</h9>
                     </div>
                     </div>  
+                    <div className='saleach'>
+                        <h2>Want to know more about Leaching?</h2>
+                        <p>Follow the link below</p>
+                        <a href="https://salinity.ucr.edu/Sindex.html"> SALEACH</a>
+                    </div>
                 </div> 
             </div>
             <div className="sep">
@@ -769,7 +876,7 @@ function Home() {
                             <h1>Maximize Yield?</h1>
                     </div>
                     <div className='inp'>
-                            <div className='card1'>
+                            <div className='cardc'>
                                 <div className='crop-image'>
                                 <img src={crop} />   
                                 <p>Select the crops to compare</p>
@@ -806,7 +913,7 @@ function Home() {
                                     noValidate
                                     autoComplete="off"
                                     >
-                                    <TextField id="standard-basic" type="number" label="Maximum Yield" variant="standard" />
+                                    <TextField id="standard-basic" type="number" label="Irrigation Efficiency" variant="standard" />
                                 </Box>
                             </div>
                     </div>
@@ -824,7 +931,7 @@ function Home() {
                             />
                         </div>
                     </div>
-                    <h4>Maximun Yield will be achieved by {myc} </h4>
+                    <h4>Maximum Yield will be achieved by {myc} </h4>
             </div>
             <div className="sep">
             <ColoredLine color="black" />
@@ -834,7 +941,7 @@ function Home() {
                             <h1>Maximize Revenue?</h1>
                     </div>
                     <div className='inp'>
-                            <div className='card1'>
+                            <div className='cardc'>
                                 <div className='crop-image'>
                                 <img src={crop} />   
                                 <p>Select the crops to compare</p>
