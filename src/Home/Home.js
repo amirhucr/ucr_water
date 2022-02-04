@@ -276,8 +276,8 @@ function Home() {
         }
         lr = ecw/((5*eci) - ecw)
         iw1= (ETm )/((1-lr))
-        iw2= (ETm )/(68)
-        iw3= (ETm )/((68)*(1-lr))
+        iw2= (ETm )/(0.68)
+        iw3= (ETm )/((0.68)*(1-lr))
         iw0 = iw1 - ETm
         setiw1(iw1)
         setiw2(iw2)
