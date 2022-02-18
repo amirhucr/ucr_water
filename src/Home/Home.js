@@ -3,6 +3,8 @@ import Select from 'react-select';
 import crop from './crop.png'
 import drop from './drop.png'
 import dollar from './dollar_sign.png'
+import soil from './soil.png'
+import irrigation from './irrigation.png'
 import { useState } from 'react';
 import "./home.css";
 import { CircularProgressbar } from 'react-circular-progressbar';
@@ -32,6 +34,35 @@ const crops =[
     { label: "Onion ", value: 10 },
     { label: "Spinach ", value: 11 },
     { label: " Sweet Corn", value:  12},
+  ]
+  const soily = [
+    { label: "Sand ", value: 1 },
+    { label: "Sand-Fine ", value:  2},
+    { label: "Loamy Sand ", value:  3},
+    { label: "Loamy Sand- Fine", value:  4},
+    { label: "Sandy Loam ", value: 5},
+    { label: "Sandy Loam- Fine ", value:  6},
+    { label: "Loam ", value:  7},
+    { label: "Silt ", value: 8 },
+    { label: "Silty Loam ", value:  9},
+    { label: "Sandy Clay Loam ", value:  10},
+    { label: "Clay Loam ", value:  11},
+    { label: "Silty Clay Loam", value: 12 },
+    { label: "Sandy Clay ", value:  13},
+    { label: "Silty", value:  14},
+  ]
+  const itype = [
+    { label: "Flood  ", value:  1},
+    { label: "Basin  ", value: 2 },
+    { label: "Border  ", value: 3 },
+    { label: "Furrow  ", value: 4 },
+    { label: " Sprinkler Permanent ", value:  5},
+    { label: "Hand-Move  ", value: 6 },
+    { label: "Linear-Move  ", value:  7},
+    { label: " Side-Roll ", value: 8 },
+    { label: "Micro-Mini ", value:  9},
+    { label: " Hose-Pull ", value:  10},
+    { label: "Center-Pivot ", value:  11},
   ]
 
 function Home() {
@@ -422,7 +453,7 @@ function Home() {
         let Eta = 0;
         let Ya = 0;
         let cost = 200;
-        let pcost = 150;
+        let pcost = 0;
         let revenue = 0;
         let profit =0 ;
         while(ans1.length > 0) {
@@ -519,6 +550,7 @@ function Home() {
             Eta = wec * 68 * (1-(eci/((5*ecw)-eci)))
             Ya = Ym * ((ky*((Eta/ETm)-1))+1)
             revenue = Ya * cost
+            pcost = 0.2 * revenue
             profit = revenue - pcost
             ans1.push(profit)
         }
@@ -772,27 +804,83 @@ function Home() {
       
     return (
         <div className='home'>
+            <div className='r0'>
+                <div className='cardr0'>
+                <div className='crop-image'>
+                <img src={crop} />   
+                <p> Crop</p>
+                </div>
+                <div className = "crop_details ">
+                <p className = "input">
+                    <Select 
+                    onChange={(opt)=>{
+                    let val=opt.value;
+                    console.log(opt.label, opt.value)
+                    setPa(val)
+                    }
+                    }
+                    options ={crops}
+                    //onChange={opt => console.log(opt.label, opt.value)}
+                    />
+                </p> 
+                </div>
+                </div>
+
+                <div className='cardr0'>
+                    <div className='drop-image'>
+                        <img src={drop} />   
+                        <p> Irrigation Water Salinity</p>
+                    </div>
+                    <div className = "crop_details ">
+                        <p className = "input">
+                    
+                        </p> 
+                        <p><form>
+                        <label>Water EC (dS/m):{' '}
+                        <input type="number" placeholder = "(dS/m)" style={{width: "55px"}} /*onChange = {e => setwec(e.target.value)}*//>
+                        </label>
+                    </form></p>
+                    </div>
+            
+                </div>
+
+                <div className='cardr0'>
+            <div className='soil-image'>
+            <img src={soil} />   
+            <p> Soil Texture</p>
+            </div>
+            <div className = "crop_details ">
+            <p className = "input">
+            <Select
+            options ={soily}
+            onChange={opt => console.log(opt.label, opt.value)} />
+            </p> 
+            <p><small> <a href={"https://casoilresource.lawr.ucdavis.edu/gmap/"}> Look up soil map</a></small></p>
+            </div>
+                </div>
+
+                <div className='cardr0'>
+                    <div className='irrigation-image'>
+                    <img src={irrigation} />   
+                    <p> Irrigation System</p>
+                    </div>
+                    <div className = "crop_details ">
+                    <p className = "input">
+                    <Select id = "is"
+                    options ={itype}
+                    onChange={opt => console.log(opt.label, opt.value)} />
+                    </p> 
+                    <p className="if"><form>
+                    <label>Irrigation Efficiency(%):{' '}
+                    <input type="number" placeholder = "%" style={{width: "50px"}} onChange = {e => setie(e.target.value)}/>
+                    </label>
+                    </form>
+                    </p>
+                    </div>
+                </div>
+            </div>
             <div className='r1'>
                 <div className='c0'>
-                    <div className='card'>
-                            <div className='crop-image'>
-                            <img src={crop} />   
-                            <p> Crop</p>
-                            </div>
-                            <div className = "crop_details ">
-                            <p className = "input">
-                                <Select id="myc"
-                                onChange={(opt)=>{
-                                let val=opt.value;
-                                console.log(opt.label, opt.value)
-                                setPa(val)
-                                }
-                                }
-                                options ={crops}
-                                />
-                            </p> 
-                            </div>
-                    </div> 
                     <div className='yr'>
                     <h2>Yield Reduction</h2>
                     <p>(due to salinity build-up)</p>
@@ -826,6 +914,7 @@ function Home() {
                     </Paper>
                     </div>
                     </div>
+
                 </div> 
                 <div className='c1'> 
                     <div className = "at">
