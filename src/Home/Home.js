@@ -20,7 +20,6 @@ import {
   Chart,
   BarSeries,
 } from '@devexpress/dx-react-chart-material-ui';
-
 const crops =[
     { label: "Alfalfa ", value: 1 },
     { label: "Sugar beets ", value:  2},
@@ -81,9 +80,10 @@ function Home() {
     let [iw3, setiw3] = useState(0);
     let [yr1, setyr1] = useState('');
     let [yr2, setyr2] = useState('');
-    const [ie, setie] = useState(100);
+    const [ie, setie] = useState(68);
     const [c,setc] = useState('');
     const [wec,setwa] = useState(null);
+    const [ec,setecw] = useState(null);
     const [wec1,setwa1] = useState(null);
     const [wec2,setwa2] = useState(null);
     const [ans, setans] = useState([]);
@@ -135,22 +135,8 @@ function Home() {
           }
         ]
       }
-      const data0 ={
-        labels: ['Ya', 'Ym'],
-        datasets: [
-          {
-            axis: 'y',
-            barThickness: 10,
-            label: 'Ya and Ym',
-            backgroundColor: `#708090`,
-            borderColor: 'rgba(0,0,0,1)',
-            borderWidth: 0.5,
-            data: [yr1, yr2]
-          }
-        ]
-      }
       const datatw ={
-        labels: ['IW0','IW1', 'IW2','IW3'],
+        labels: ['LR','ET', 'IE','IWR'],
         datasets: [
           {
             axis: 'y',
@@ -161,7 +147,7 @@ function Home() {
             borderWidth: 0.5,
             data: [iw0,iw1, iw2, iw3]
           }
-        ]
+        ],
       }
       let datadf = [
         { argument: '10%', value: d1 },
@@ -235,86 +221,123 @@ function Home() {
             Ym = 27;
         }
         seta(ETa)
-        sety(Ym)
+        
     }
     function clr(){
         if (pa === 0){
             alert("Please enter crop type")
             return
         }
+        let ky=0;
         let eci =0;
         let ecw =0;
         let ETm =0;
+        let Ym = 0;
         if (pa == 1){
+            ky=1;
             eci = 2;
-            ecw = 1.3;
+            ecw = ec ?? 1.3;
             ETm=1500;
+            Ym = 23;
            }
         else if ( pa == 2){
+           ky = 0.85;
            eci=7;
-           ecw= 4.7;
+           ecw=ec ?? 4.7;
            ETm=1050;
+           Ym = 120;
         }
         else if (pa == 3){
+            ky = 1.05;
            eci=6;
-           ecw= 4;
+           ecw=ec ?? 4;
            ETm=620;
+           Ym = 7.5;
         }
         else if (pa == 4){
+            ky = 0.85;
            eci=6.9;
-           ecw= 4.6;
+           ecw=ec ?? 4.6;
            ETm=1200;
+           Ym = 19;
         }
         else if (pa ==5 ){
+            ky = 0.9;
            eci=4;
-           ecw=  2.7;
+           ecw= ec ?? 2.7;
            ETm=1250;
+           Ym = 24;
         }
         else if (pa == 6){
+            ky = 0.9;
            eci=2.8;
-           ecw= 1.9;
+           ecw= ec ?? 1.9;
            ETm=800;
+           Ym = 14;
         }
         else if (pa ==7 ){
+            ky = 1.15;
             eci=1.3;
-            ecw= 1;
+            ecw= ec ?? 1;
             ETm=320;
+            Ym = 20;
         }
         else if (pa == 8){
+            ky =1.1 ;
           eci=1;
-          ecw= 0.8;
+          ecw= ec ?? 0.8;
           ETm=600;
+          Ym = 110;
         }
         else if (pa == 9){
+            ky = 1;
            eci=2.8;
-           ecw= 1.9;
+           ecw= ec ?? 1.9;
            ETm=350;
+           Ym = 15;
         }
         else if (pa == 10){
+            ky =1.1 ;
           eci=1.2;
-          ecw=0.9;
+          ecw=ec ?? 0.9;
           ETm=800;
+          Ym = 60;
         }
         else if (pa ==11 ){
+            ky = 1.15;
            eci=2;
-           ecw=1.3;
+           ecw=ec ?? 1.3;
            ETm=200;
+           Ym = 14;
         }
         else if (pa ==12 ){
+            ky = 1.1;
           eci=1.7;
-          ecw= 1.1;
+          ecw= ec ?? 1.1;
           ETm=600;
+          Ym = 27;
         }
+        d1 = ky*(1-((0.9 * ETm)/ETm)) ;
+        d2 = ky*(1-((0.8 * ETm)/ETm)) ;
+        d3 = ky*(1-((0.7 * ETm)/ETm)) ;
+        d4 = ky*(1-((0.6 * ETm)/ETm)) ;
+        d5 = ky*(1-((0.5 * ETm)/ETm)) ;
+        setd1((d1*100).toFixed(0))
+        setd2((d2*100).toFixed(0))
+        setd3((d3*100).toFixed(0))
+        setd4((d4*100).toFixed(0))
+        setd5((d5*100).toFixed(0))
         lr = ecw/((5*eci) - ecw)
         iw1= (ETm )/((1-lr))
-        iw2= (ETm )/(0.68)
-        iw3= (ETm )/((0.68)*(1-lr))
-        iw0 = iw1 - ETm
-        setiw1(iw1)
+        iw0= (ETm )/(ie/100)
+        iw2 = iw0 - ETm
+        iw3= (ETm )/((ie/100)*(1-lr))
+        setiw1(ETm)
         setiw2(iw2)
         setiw3(iw3)
         setiw0(iw0)
         setc((lr*100).toFixed(2))
+        sety(Ym)
        }
        const handleChange = (e) => {
         setSelectedValue(Array.isArray(e) ? e.map(x => x.value) : []);
@@ -675,64 +698,6 @@ function Home() {
         let i = ans2.indexOf(Math.max(...ans2));
         setmwc(crops[selectedValue2[i]-1].label)
     }
-    function yr(){
-        if (pa === 0){
-            alert("Please enter crop type")
-            return
-        }
-        let ETa = 0;
-        let Ym = 0;
-        if (pa == 1){
-            ETa = 1500;
-            Ym = 23;
-        }
-        else if (pa == 2){
-            ETa = 1050;
-            Ym = 120;
-        }
-        else if (pa == 3){
-            ETa = 620;
-            Ym = 7.5;
-        }
-        else if (pa == 4){
-            ETa = 1200;
-            Ym = 19;
-        }
-        else if (pa == 5){
-            ETa = 1250;
-            Ym = 24;
-        }
-        else if (pa == 6){
-            ETa = 800;
-            Ym = 14;
-        }
-        else if (pa == 7){
-            ETa = 320;
-            Ym = 20;
-        }
-        else if (pa == 8){
-            ETa = 600;
-            Ym = 110;
-        }
-        else if (pa == 9){
-            ETa = 350;
-            Ym = 15;
-        }
-        else if (pa == 10){
-            ETa = 800;
-            Ym = 60;
-        }
-        else if (pa == 11){
-            ETa = 200;
-            Ym = 14;
-        }
-        else if (pa == 12){
-            ETa =600;
-            Ym = 27;
-        }
-        setyr1(0.9*ETa)
-        setyr2(ETa)
-    }
     function cald(){
         if (pa == 0){
             alert("Please enter crop type")
@@ -837,7 +802,7 @@ function Home() {
                         </p> 
                         <p><form>
                         <label>Water EC (dS/m):{' '}
-                        <input type="number" placeholder = "(dS/m)" style={{width: "55px"}} /*onChange = {e => setwec(e.target.value)}*//>
+                        <input type="number" placeholder = "(dS/m)" style={{width: "55px"}} onChange = {e => setecw(e.target.value)}/>
                         </label>
                     </form></p>
                     </div>
@@ -879,26 +844,16 @@ function Home() {
                     </div>
                 </div>
             </div>
+            <div className='fob'><button className="gooey-button" onClick = {clr}>Find out the results</button></div>
             <div className='r1'>
                 <div className='c0'>
-                    <div className='yr'>
-                    <h2>Yield Reduction</h2>
-                    <p>(due to salinity build-up)</p>
-                    <button className="gooey-button" onClick = {yr}>Calculate</button>
-                    <div className='yrgraph'><Bar
-                    data={data0}
-                    options={{
-                        indexAxis: 'y',
-                        title:{
-                        display:true,
-                        fontSize:10
-                        },
-                    }}
-                    /></div>
+                    <div className='ay'>
+                        <h2>Actual Yield</h2>
+                        <div className='eto'><p>The maximum yield achieved will be {y} (kg/ha)</p></div>
                     </div>
                     <div className='di'>
                     <h2>Deficit Irrigation</h2>
-                    <button className="gooey-button" onClick = {cald}>Calculate</button>
+                    
                     <h6>X-axis: Deficit Irrigation(%), Y-axis: Yield Reduction(%)</h6>
                     <div className="graphdi" >
                     <Paper className="graph1" >
@@ -914,20 +869,11 @@ function Home() {
                     </Paper>
                     </div>
                     </div>
-
                 </div> 
                 <div className='c1'> 
-                    <div className = "at">
-                    <div><h2>Actual ET </h2>
-                    {pa .myPaVal}
-                    <button className="gooey-button" onClick = {cpot}>Calculate</button>
-                    </div>
-                    <div className='eto'><p>{a} mm for maximum yield of {y} (kg/ha)</p></div>
-                    </div> 
                     <div className = "lr">
-                    <h2> Leaching Requirements and Total crop water Requirement</h2>
+                    <h2> Leaching and Irrigation Water Requirement</h2>
                     {pa.myPaVal}
-                    <button className="gooey-button" onClick = {clr}>Calculate</button>
                     <div className='cb'>
                     <div className='lrl'><p>Leaching Requirement:</p></div>
                     <div className="Default">
@@ -940,22 +886,24 @@ function Home() {
                         indexAxis: 'y',
                         title:{
                         display:true,
-                        fontSize:2
+                        fontSize:2,
                         },
-                    }}
+                        /*scales: {x: { title: { display: true, text: 'seconds'}}},*/
+                    }
+                }
                     /></div>
                     <div className='graphdes'>
-                    <div className='gdes'><h9>IW0 -> Total water required for leaching</h9></div>
-                    <div className='gdes'><h9>IW1 -> Total water requirement based on ET and LR</h9></div>
-                    <div className='gdes'><h9>IW2 -> Total water requirement based on ET and IE</h9></div>
-                    <div className='gdes'><h9>IW3 -> Total water requirement based on ET,IE and LR</h9></div>
+                    <div className='gdes'><h9>LR -> Total water required for leaching</h9></div>
+                    <div className='gdes'><h9>ET -> Actual ET</h9></div>
+                    <div className='gdes'><h9>IE -> Water required to meet the IE demands</h9></div>
+                    <div className='gdes'><h9>IWR -> Total water requirement based on ET,IE and LR</h9></div>
+                    </div>
+                    <div className='saleach'>
+                    <h2>Want to know more about Leaching Yield Reduction?</h2>
+                    <p>Follow the link below</p>
+                    <a href="https://salinity.ucr.edu/Sindex.html"> SALEACH</a>
                     </div>
                     </div>  
-                    <div className='saleach'>
-                        <h2>Want to know more about Leaching?</h2>
-                        <p>Follow the link below</p>
-                        <a href="https://salinity.ucr.edu/Sindex.html"> SALEACH</a>
-                    </div>
                 </div> 
             </div>
             <div className="sep">
