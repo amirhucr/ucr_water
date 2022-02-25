@@ -328,8 +328,8 @@ function Home() {
         setd4((d4*100).toFixed(0))
         setd5((d5*100).toFixed(0))
         lr = ecw/((5*eci) - ecw)
-        iw1= (ETm )/((1-lr))
-        iw0= (ETm )/(ie/100)
+        iw0= (ETm )/((1-lr))
+        iw1= (ETm )/(ie/100)
         iw2 = iw1 - ETm
         iw3= (ETm )/((ie/100)*(1-lr))
         setiw1(ETm.toFixed(0))
