@@ -330,12 +330,12 @@ function Home() {
         lr = ecw/((5*eci) - ecw)
         iw1= (ETm )/((1-lr))
         iw0= (ETm )/(ie/100)
-        iw2 = iw0 - ETm
+        iw2 = iw1 - ETm
         iw3= (ETm )/((ie/100)*(1-lr))
-        setiw1(ETm)
-        setiw2(iw2)
-        setiw3(iw3)
-        setiw0(iw0)
+        setiw1(ETm.toFixed(0))
+        setiw2(iw2.toFixed(0))
+        setiw3(iw3.toFixed(0))
+        setiw0(iw0.toFixed(0))
         setc((lr*100).toFixed(2))
         sety(Ym)
        }
@@ -836,7 +836,7 @@ function Home() {
                     onChange={opt => console.log(opt.label, opt.value)} />
                     </p> 
                     <p className="if"><form>
-                    <label>Irrigation Efficiency(%):{' '}
+                    <label>Irrigation Efficiency (%):{' '}
                     <input type="number" placeholder = "%" style={{width: "50px"}} onChange = {e => setie(e.target.value)}/>
                     </label>
                     </form>
@@ -849,12 +849,12 @@ function Home() {
                 <div className='c0'>
                     <div className='ay'>
                         <h2>Actual Yield</h2>
-                        <div className='eto'><p>The maximum yield achieved will be {y} (kg/ha)</p></div>
+                        <div className='eto'><p>{y} (tons/ha)</p></div>
                     </div>
                     <div className='di'>
                     <h2>Deficit Irrigation</h2>
                     
-                    <h6>X-axis: Deficit Irrigation(%), Y-axis: Yield Reduction(%)</h6>
+                    <h5>X-axis: Deficit Irrigation(%), Y-axis: Yield Reduction(%)</h5>
                     <div className="graphdi" >
                     <Paper className="graph1" >
                     <Chart 
@@ -896,10 +896,10 @@ function Home() {
                     <div className='gdes'><h9>LR -> Total water required for leaching</h9></div>
                     <div className='gdes'><h9>ET -> Actual ET</h9></div>
                     <div className='gdes'><h9>IE -> Water required to meet the IE demands</h9></div>
-                    <div className='gdes'><h9>IWR -> Total water requirement based on ET,IE and LR</h9></div>
+                    <div className='gdes'><h9>IWR -> Total water requirement based on ET, IE and LR</h9></div>
                     </div>
                     <div className='saleach'>
-                    <h2>Want to know more about Leaching Yield Reduction?</h2>
+                    <h3>Want to know more about Leaching related Yield Reduction?</h3>
                     <p>Follow the link below</p>
                     <a href="https://salinity.ucr.edu/Sindex.html"> SALEACH</a>
                     </div>
