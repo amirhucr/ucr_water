@@ -168,3 +168,13 @@
 .fob{
     margin-top: 3%;
 }
+.lrp{
+    display: flex;
+}
+.f1{
+    display: flex;
+    margin-top: 1%;
+}
+.adsi{
+    display: inline-block
+}

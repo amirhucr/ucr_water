@@ -48,7 +48,8 @@ const crops =[
     { label: "Clay Loam ", value:  11},
     { label: "Silty Clay Loam", value: 12 },
     { label: "Sandy Clay ", value:  13},
-    { label: "Silty", value:  14},
+    { label : "Silty Clay", value : 14},
+    { label: "Silty", value:  15},
   ]
   const itype = [
     { label: "Flood  ", value:  1},
@@ -66,6 +67,30 @@ const crops =[
 
 function Home() {
     const [pa, setPa] = useState(0);
+    const [ai1, setai1] = useState('');
+    const [ai2, setai2] = useState('');
+    const [ai3, setai3] = useState('');
+    const [ai4, setai4] = useState('');
+    const [ai5, setai5] = useState('');
+    const [ay1, setay1] = useState(null);
+    const [ay2, setay2] = useState(null);
+    const [ay3, setay3] = useState(null);
+    const [ay4, setay4] = useState(null);
+    const [ay5, setay5] = useState(null);
+    const [et1, setet1] = useState(null);
+    const [et2, setet2] = useState(null);
+    const [et3, setet3] = useState(null);
+    const [et4, setet4] = useState(null);
+    const [et5, setet5] = useState(null);
+    const [ayv1, setayv1] = useState('');
+    const [ayv2, setayv2] = useState('');
+    const [ayv3, setayv3] = useState('');
+    const [ayv4, setayv4] = useState('');
+    const [ayv5, setayv5] = useState('');
+    let [ginfo, setginfo] = useState('');
+    let [ais, setais] = useState([])
+    const [st, setst] = useState(0);
+    const [it, setit] = useState(0);
     const [a,seta]    = useState('');
     const [y, sety] = useState('');
     let [lr, setlr] = useState(0);
@@ -82,10 +107,12 @@ function Home() {
     let [yr2, setyr2] = useState('');
     const [ie, setie] = useState(68);
     const [c,setc] = useState('');
+    const [d,setd] = useState('');
     const [wec,setwa] = useState(null);
     const [ec,setecw] = useState(null);
     const [wec1,setwa1] = useState(null);
     const [wec2,setwa2] = useState(null);
+    const [weca,setweca] = useState(null);
     const [ans, setans] = useState([]);
     const [ans1, setans1] = useState([]);
     const [ans2, setans2] = useState([]);
@@ -98,6 +125,7 @@ function Home() {
     const [selectedValue, setSelectedValue] = useState([]);
     const [selectedValue1, setSelectedValue1] = useState([]);
     const [selectedValue2, setSelectedValue2] = useState([]);
+    let arr = []
     const state = {
         labels: cps,
         datasets: [
@@ -146,6 +174,20 @@ function Home() {
             borderColor: 'rgba(0,0,0,1)',
             borderWidth: 0.5,
             data: [iw0,iw1, iw2, iw3]
+          }
+        ],
+      }
+      const dataap = {
+        labels: [ai1,ai2, ai3, ai4, ai5],
+        datasets: [
+          {
+            axis: 'y',
+            barThickness: 75,
+            label: ginfo,
+            backgroundColor: `#1e90ff`,
+            borderColor: 'rgba(0,0,0,1)',
+            borderWidth: 0.5,
+            data: ais
           }
         ],
       }
@@ -233,6 +275,10 @@ function Home() {
         let ecw =0;
         let ETm =0;
         let Ym = 0;
+        let k = 0;
+        let clz = 0;
+        let slr = 0;
+        let m = 0;
         if (pa == 1){
             ky=1;
             eci = 2;
@@ -317,6 +363,125 @@ function Home() {
           ETm=600;
           Ym = 27;
         }
+        if ((it && st) != 0 ){
+            if (it == 1 ){
+                k = 0.682
+                clz = 100
+            }
+            else if(it ==2){
+                k = 0.682
+                clz = 100
+            }
+            else if(it ==3){
+                k = 0.682
+                clz = 100
+            }
+            else if(it ==4){
+                k = 0.682
+                clz = 85
+            }
+            else {
+                k = 0.769
+                clz = 100
+            }
+            if(pa == 1 || pa == 2 || pa == 3 || pa == 4 || pa == 5 || pa == 6 || pa == 10){
+                if(st == 1){
+                    m = 0.1575;
+                }
+                else if (st == 2){
+                    m = 0.1114
+                }
+                else if (st == 3){
+                    m = 0.202
+                }
+                else if (st == 4){
+                    m = 0.1964
+                }
+                else if (st == 5){
+                    m = 0.239
+                }
+                else if (st == 6){
+                    m = 0.2736
+                }
+                else if (st == 7){
+                    m = 0.376
+                }
+                else if (st == 8){
+                    m = 0.4129
+                }
+                else if (st == 9){
+                    m = 0.405
+                }
+                else if (st == 10){
+                    m = 0.3236
+                }
+                else if (st == 11){
+                    m = 0.3971
+                }
+                else if (st == 12){
+                    m = 0.4031
+                }
+                else if (st == 13){
+                    m = 0.3855
+                }
+                else if (st == 14){
+                    m = 0.4109
+                }   
+                else if (st == 15){
+                    m = 0.429
+                }
+            }
+            else {
+                if(st == 1){
+                    m = 0.1795;
+                }
+                else if (st == 2){
+                    m = 0.1274
+                }
+                else if (st == 3){
+                    m = 0.23
+                }
+                else if (st == 4){
+                    m = 0.2244
+                }
+                else if (st == 5){
+                    m = 0.273
+                }
+                else if (st == 6){
+                    m = 0.3116
+                }
+                else if (st == 7){
+                    m = 0.428
+                }
+                else if (st == 8){
+                    m = 0.4709
+                }
+                else if (st == 9){
+                    m = 0.461
+                }
+                else if (st == 10){
+                    m = 0.3676
+                }
+                else if (st == 11){
+                    m = 0.4511
+                }
+                else if (st == 12){
+                    m = 0.4591
+                }
+                else if (st == 13){
+                    m = 0.4375
+                }
+                else if (st == 14){
+                    m = 0.4669
+                }   
+                else if (st == 15){
+                    m = 0.487
+                }
+            }
+            slr = ecw/(((2/(k * m))*eci) - ecw)
+            console.log(slr)
+            setd((slr * 100).toFixed(2))
+        }
         d1 = ky*(1-((0.9 * ETm)/ETm)) ;
         d2 = ky*(1-((0.8 * ETm)/ETm)) ;
         d3 = ky*(1-((0.7 * ETm)/ETm)) ;
@@ -345,9 +510,32 @@ function Home() {
       const handleChange1 = (e) => {
         setSelectedValue1(Array.isArray(e) ? e.map(x => x.value) : []);
       }
-      const handleChange2 = (e) => {
-        setSelectedValue2(Array.isArray(e) ? e.map(x => x.value) : []);
+      const dynamictable = (x) => {
+          console.log(x)
+          return (
+              <td>x</td>
+          )
       }
+      const handleChange2 = (e) => {
+        //console.log(e[e.length - 1].label)
+        //console.log(e[0].label)
+        dynamictable(e[e.length - 1].label)
+        arr.push(e[e.length - 1].label)
+        setSelectedValue2(Array.isArray(e) ? e.map(x => x.value) : []); 
+        console.log(arr)
+        //setSelectedValue2(selectedValue2 => [...selectedValue2, e[0].label])
+        //console.log(selectedValue2)
+        // console.log(selectedValue2)
+        // var rows = [];
+        // for (var i =0; i<selectedValue2.length;i++){
+        //     rows.push(crops[selectedValue2[i]-1].label)
+        // }
+        // seta3(rows)
+       //console.log(rows) 
+       //console.log(e[0].label)
+        
+      }
+ 
     function myo(){
         if (wec == null){
             alert("Please enter amount of water available")
@@ -691,6 +879,7 @@ function Home() {
             Ya = Ym * ((ky*((Eta/ETm)-1))+1)
             ans2.push((Ya/wec2))
         }
+        console.log(selectedValue2)
         for(let i =0 ; i<selectedValue2.length;i++){
             //cps.push(crops[selectedValue[i]].label)
             setcpsw(cpsw => [...cpsw, crops[selectedValue2[i]-1].label])
@@ -765,6 +954,350 @@ function Home() {
      setd5((d5*100).toFixed(2))
      
     }
+    function rap(){
+        if (weca == null){
+            alert("Please enter amount of water available")
+            return
+        }
+        setginfo('Maximum Revenue') 
+        let eci =0;
+        let ecw =0;
+        let ETm =0;
+        let ky = 0;
+        let Ym = 0;
+        let Eta = 0;
+        let Ya = 0;
+        let cost = 200;
+        let pcost = 0;
+        let revenue = 0;
+        let profit =0 ;
+        let ans_arr = [];
+        let my_arr = [ayv1, ayv2, ayv3, ayv4, ayv5]
+        let y_arr = [ay1, ay2, ay3, ay4, ay5]
+        let etm_arr = [et1, et2, et3, et4, et5]
+        for(let i=0;i<my_arr.length;i++){
+            if (my_arr[i] == 1){
+                eci = 2;
+                ecw = 1.3;
+                ETm= etm_arr[i] ?? 1500;
+                ky = 1;
+                Ym = y_arr[i] ?? 23;
+               }
+            else if ( my_arr[i] == 2){
+               eci=7;
+               ecw= 4.7;
+               ETm=etm_arr[i] ?? 1050;
+               ky = 0.85;
+               Ym = y_arr[i] ?? 120;
+            }
+            else if (my_arr[i] == 3){
+               eci=6;
+               ecw= 4;
+               ETm= etm_arr[i] ?? 620;
+               ky = 1.05;
+               Ym = y_arr[i] ?? 7.5;
+            }
+            else if (my_arr[i] == 4){
+               eci=6.9;
+               ecw= 4.6;
+               ETm= etm_arr[i] ?? 1200;
+               ky = 0.9;
+               Ym =y_arr[i] ??  19;
+            }
+            else if (my_arr[i] ==5 ){
+               eci=4;
+               ecw=  2.7;
+               ETm= etm_arr[i] ?? 1250;
+               ky = 0.9;
+               Ym = y_arr[i] ?? 24;
+            }
+            else if (my_arr[i] == 6){
+               eci=2.8;
+               ecw= 1.9;
+               ETm= etm_arr[i] ?? 800;
+               ky = 0.9;
+               Ym = y_arr[i] ?? 14;
+            }
+            else if (my_arr[i] ==7 ){
+                eci=1.3;
+                ecw= 1;
+                ETm= etm_arr[i] ?? 320;
+                ky = 1.15;
+               Ym = y_arr[i] ?? 20;
+            }
+            else if (my_arr[i] == 8){
+              eci=1;
+              ecw= 0.8;
+              ETm= etm_arr[i] ?? 600;
+              ky = 1.1;
+              Ym = y_arr[i] ?? 110;
+            }
+            else if (my_arr[i] == 9){
+               eci=2.8;
+               ecw= 1.9;
+               ETm= etm_arr[i] ?? 350;
+               ky = 1;
+               Ym = y_arr[i] ?? 15;
+            }
+            else if (my_arr[i] == 10){
+              eci=1.2;
+              ecw=0.9;
+              ETm= etm_arr[i] ?? 800;
+              ky = 1.1;
+               Ym = y_arr[i] ?? 60;
+            }
+            else if (my_arr[i] ==11 ){
+               eci=2;
+               ecw=1.3;
+               ETm=etm_arr[i] ?? 200;
+               ky = 1.15;
+               Ym = y_arr[i] ?? 14;
+            }
+            else if (my_arr[i] ==12 ){
+              eci=1.7;
+              ecw= 1.1;
+              ETm= etm_arr[i] ?? 600;
+              ky = 1.1;
+               Ym = y_arr[i] ?? 27;
+            }
+            Eta = weca * 68 * (1-(eci/((5*ecw)-eci)))
+            Ya = Ym * ((ky*((Eta/ETm)-1))+1)
+            revenue = Ya * cost
+            pcost = 0.2 * revenue
+            profit = revenue - pcost
+            ans_arr.push(profit)
+        }
+        setais(ans_arr)
+
+    }
+    function yap(){
+        if (weca == null){
+            alert("Please enter amount of water available")
+            return
+        }
+        setginfo('Maximum Yield') 
+        let eci =0;
+        let ecw =0;
+        let ETm =0;
+        let ky = 0;
+        let Ym = 0;
+        let Eta = 0;
+        let Ya = 0;
+        let ans_arr = [];
+        let my_arr = [ayv1, ayv2, ayv3, ayv4, ayv5]
+        let y_arr = [ay1, ay2, ay3, ay4, ay5]
+        let etm_arr = [et1, et2, et3, et4, et5]
+        while(ais.length > 0) {
+            ais.pop();
+        }
+        console.log(y_arr)
+        // while(cps.length > 0) {
+        //     cps.pop();
+        //}
+        for(let i=0;i<my_arr.length;i++){
+            if (my_arr[i] == 1){
+                eci = 2;
+                ecw = 1.3;
+                ETm= etm_arr[i] ?? 1500;
+                ky = 1;
+                Ym = y_arr[i] ?? 23;
+               }
+            else if ( my_arr[i] == 2){
+               eci=7;
+               ecw= 4.7;
+               ETm= etm_arr[i] ?? 1050;
+               ky = 0.85;
+               Ym = y_arr[i] ?? 120;
+            }
+            else if (my_arr[i] == 3){
+               eci=6;
+               ecw= 4;
+               ETm= etm_arr[i] ?? 620;
+               ky = 1.05;
+               Ym = y_arr[i] ??  7.5;
+            }
+            else if (my_arr[i] == 4){
+               eci=6.9;
+               ecw= 4.6;
+               ETm= etm_arr[i] ?? 1200;
+               ky = 0.9;
+               Ym = y_arr[i] ?? 19;
+            }
+            else if (my_arr[i] ==5 ){
+               eci=4;
+               ecw=  2.7;
+               ETm= etm_arr[i] ?? 1250;
+               ky = 0.9;
+               Ym = y_arr[i] ??24;
+            }
+            else if (my_arr[i] == 6){
+               eci=2.8;
+               ecw= 1.9;
+               ETm= etm_arr[i] ?? 800;
+               ky = 0.9;
+               Ym = y_arr[i] ?? 14;
+            }
+            else if (my_arr[i] ==7 ){
+                eci=1.3;
+                ecw= 1;
+                ETm= etm_arr[i] ?? 320;
+                ky = 1.15;
+               Ym =  y_arr[i] ?? 20;
+            }
+            else if (my_arr[i] == 8){
+              eci=1;
+              ecw= 0.8;
+              ETm= etm_arr[i] ?? 600;
+              ky = 1.1;
+              Ym = y_arr[i] ?? 110;
+            }
+            else if (my_arr[i] == 9){
+               eci=2.8;
+               ecw= 1.9;
+               ETm= etm_arr[i] ?? 350;
+               ky = 1;
+               Ym = y_arr[i] ?? 15;
+            }
+            else if (my_arr[i] == 10){
+              eci=1.2;
+              ecw=0.9;
+              ETm= etm_arr[i] ?? 800;
+              ky = 1.1;
+               Ym = y_arr[i] ?? 60;
+            }
+            else if (my_arr[i] ==11 ){
+               eci=2;
+               ecw=1.3;
+               ETm= etm_arr[i] ?? 200;
+               ky = 1.15;
+               Ym = y_arr[i] ?? 14;
+            }
+            else if (my_arr[i] ==12 ){
+              eci=1.7;
+              ecw= 1.1;
+              ETm= etm_arr[i] ?? 600;
+              ky = 1.1;
+               Ym = y_arr[i] ?? 27;
+            }
+            Eta = weca * 68 * (1-(eci/((5*ecw)-eci)))
+            Ya = Ym * ((ky*((Eta/ETm)-1))+1)
+            // setans([...ans,Ya]);
+            ans_arr.push(Ya)
+        }
+        setais(ans_arr)
+        console.log(ais)
+    }
+    function mweap(){
+        if (weca == null){
+            alert("Please enter amount of water available")
+            return
+        }
+        setginfo('Maximum water efficiency') 
+        let eci =0;
+        let ecw =0;
+        let ETm =0;
+        let ky = 0;
+        let Ym = 0;
+        let Eta = 0;
+        let Ya = 0;
+        let ans_arr = [];
+        let my_arr = [ayv1, ayv2, ayv3, ayv4, ayv5]
+        let y_arr = [ay1, ay2, ay3, ay4, ay5]
+        let etm_arr = [et1, et2, et3, et4, et5]
+        while(ais.length > 0) {
+            ais.pop();
+        }
+        for(let i=0;i<my_arr.length;i++){
+            if (my_arr[i] == 1){
+                eci = 2;
+                ecw = 1.3;
+                ETm= etm_arr[i] ?? 1500;
+                ky = 1;
+                Ym = y_arr[i] ?? 23;
+               }
+            else if ( my_arr[i] == 2){
+               eci=7;
+               ecw= 4.7;
+               ETm= etm_arr[i] ?? 1050;
+               ky = 0.85;
+               Ym =y_arr[i] ?? 120;
+            }
+            else if (my_arr[i] == 3){
+               eci=6;
+               ecw= 4;
+               ETm= etm_arr[i] ?? 620;
+               ky = 1.05;
+               Ym = y_arr[i] ?? 7.5;
+            }
+            else if (my_arr[i] == 4){
+               eci=6.9;
+               ecw= 4.6;
+               ETm= etm_arr[i] ?? 1200;
+               ky = 0.9;
+               Ym = y_arr[i] ?? 19;
+            }
+            else if (my_arr[i] ==5 ){
+               eci=4;
+               ecw=  2.7;
+               ETm= etm_arr[i] ?? 1250;
+               ky = 0.9;
+               Ym = y_arr[i] ?? 24;
+            }
+            else if (my_arr[i] == 6){
+               eci=2.8;
+               ecw= 1.9;
+               ETm= etm_arr[i] ?? 800;
+               ky = 0.9;
+               Ym =y_arr[i] ?? 14;
+            }
+            else if (my_arr[i] ==7 ){
+                eci=1.3;
+                ecw= 1;
+                ETm= etm_arr[i] ?? 320;
+                ky = 1.15;
+               Ym = y_arr[i] ?? 20;
+            }
+            else if (my_arr[i] == 8){
+              eci=1;
+              ecw= 0.8;
+              ETm= etm_arr[i] ?? 600;
+              ky = 1.1;
+              Ym = y_arr[i] ?? 110;
+            }
+            else if (my_arr[i] == 9){
+               eci=2.8;
+               ecw= 1.9;
+               ETm= etm_arr[i] ?? 350;
+               ky = 1;
+               Ym = y_arr[i] ?? 15;
+            }
+            else if (my_arr[i] == 10){
+              eci=1.2;
+              ecw=0.9;
+              ETm= etm_arr[i] ?? 800;
+              ky = 1.1;
+               Ym = y_arr[i] ?? 60;
+            }
+            else if (my_arr[i] ==11 ){
+               eci=2;
+               ecw=1.3;
+               ETm= etm_arr[i] ?? 200;
+               ky = 1.15;
+               Ym =y_arr[i] ?? 14;
+            }
+            else if (my_arr[i] ==12 ){
+              eci=1.7;
+              ecw= 1.1;
+              ETm= etm_arr[i] ?? 600;
+              ky = 1.1;
+               Ym = y_arr[i] ?? 27;
+            }
+            Eta = weca * 68 * (1-(eci/((5*ecw)-eci)))
+            Ya = Ym * ((ky*((Eta/ETm)-1))+1)
+            ans_arr.push((Ya/weca))
+        }
+        setais(ans_arr)
+    }
   
       
     return (
@@ -818,7 +1351,12 @@ function Home() {
             <p className = "input">
             <Select
             options ={soily}
-            onChange={opt => console.log(opt.label, opt.value)} />
+            onChange={(opt)=>{
+                let val=opt.value;
+                console.log(opt.label, opt.value)
+                setst(val)
+                }
+                } />
             </p> 
             <p><small> <a href={"https://casoilresource.lawr.ucdavis.edu/gmap/"}> Look up soil map</a></small></p>
             </div>
@@ -833,7 +1371,12 @@ function Home() {
                     <p className = "input">
                     <Select id = "is"
                     options ={itype}
-                    onChange={opt => console.log(opt.label, opt.value)} />
+                    onChange={(opt)=>{
+                        let val=opt.value;
+                        console.log(opt.label, opt.value)
+                        setit(val)
+                        }
+                        } />
                     </p> 
                     <p className="if"><form>
                     <label>Irrigation Efficiency (%):{' '}
@@ -873,13 +1416,26 @@ function Home() {
                 <div className='c1'> 
                     <div className = "lr">
                     <h2> Leaching and Irrigation Water Requirement</h2>
-                    {pa.myPaVal}
-                    <div className='cb'>
-                    <div className='lrl'><p>Leaching Requirement:</p></div>
-                    <div className="Default">
-                    <CircularProgressbar value={c} text={`${c}%`} />
-                    </div>
-                    </div>
+                        <div className='lrp'>
+                            <div className='nlr'>
+                                {pa.myPaVal}
+                                <div className='cb'>
+                                <div className='lrl'><p>Leaching Requirement:</p></div>
+                                <div className="Default">
+                                <CircularProgressbar value={c} text={`${c}%`} style={{ width: 400, height: 400 }} />
+                                </div>
+                                </div>
+                            </div>
+                            <div className='nlr'>
+                                {pa.myPaVal}
+                                <div className='cb'>
+                                <div className='lrl'><p>Leaching Requirement(SALEACH):</p></div>
+                                <div className="Default">
+                                <CircularProgressbar value={d} text={`${d}%`} />
+                                </div>
+                                </div>
+                            </div>
+                        </div>
                     <div className='twgraph'><Bar
                     data={datatw}
                     options={{
@@ -1046,7 +1602,7 @@ function Home() {
                             <div className = "crop_details1">
                             <p>
                                 <Select
-                                onChange={handleChange2}
+                                onChange={(e) => handleChange2(e)}
                                 isMulti
                                 options={crops}
                                 value={crops.filter(obj => selectedValue2.includes(obj.value))}
@@ -1065,6 +1621,23 @@ function Home() {
                             <input type="number" placeholder = "Enter the amount of water " style={{width: "175px"}} onChange = {e => setwa2(e.target.value)}/>
                             </div>
                         </div>
+                        <div className='card1'>
+                        <h4><u>Advanced/Optional Input</u></h4>
+                        <table>
+                            <tr>
+                            <th>Crop name</th>
+                            <th>Input</th>
+                            </tr>
+                            <tbody>
+                            {
+                                <tr>
+                                
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                            
+                    </div>
                 </div>
                 <div className='myo'>
                     <button className="gooey-button" onClick = {mwe}>Calculate</button>
@@ -1082,8 +1655,125 @@ function Home() {
                 </div>
                 <h4>{mwc} maximizes the water use efficiency </h4>
             </div>
+            <div className="sep">
+            <ColoredLine color="black" />
+            </div>
+            <div className='ads'>
+                <h1>Advanced options</h1>
+                <div className='adsi'>
+                    <div className='f1'>
+                    <Select 
+                    onChange={(opt)=>{
+                    let val=opt.label;
+                    let val1 = opt.value;
+                    console.log(opt.label, opt.value)
+                    setai1(val)
+                    setayv1(val1)
+                    }
+                    }
+                    options ={crops}
+                    //onChange={opt => console.log(opt.label, opt.value)}
+                    />
+                    <div> <input type="number" placeholder = "Maximum yield" style={{width: "125px"}} onChange = {e => setay1(e.target.value)}/></div>
+                    <div> <input type="number" placeholder = "Etm" style={{width: "125px"}} onChange = {e => setet1(e.target.value)}/></div>
+                    </div>
+                    <div className='f1'>
+                    <Select 
+                    onChange={(opt)=>{
+                    let val=opt.label;
+                    let val1 = opt.value;
+                    console.log(opt.label, opt.value)
+                    setai2(val)
+                    setayv2(val1)
+                    }
+                    }
+                    options ={crops}
+                    //onChange={opt => console.log(opt.label, opt.value)}
+                    />
+                    <div> <input type="number" placeholder = "Maximum yield" style={{width: "125px"}} onChange = {e => setay2(e.target.value)}/></div>
+                    <div> <input type="number" placeholder = "Etm" style={{width: "125px"}} onChange = {e => setet2(e.target.value)}/></div>
+                    </div>
+                    <div className='f1'>
+                    <Select 
+                    onChange={(opt)=>{
+                    let val=opt.label;
+                    let val1=opt.value;
+                    console.log(opt.label, opt.value)
+                    setai3(val)
+                    setayv3(val1)
+                    }
+                    }
+                    options ={crops}
+                    //onChange={opt => console.log(opt.label, opt.value)}
+                    />
+                    <div> <input type="number" placeholder = "Maximum yield" style={{width: "125px"}} onChange = {e => setay3(e.target.value)}/></div>
+                    <div> <input type="number" placeholder = "Etm" style={{width: "125px"}} onChange = {e => setet3(e.target.value)}/></div>
+                    </div>
+                    <div className='f1'>
+                    <Select 
+                    onChange={(opt)=>{
+                    let val=opt.label;
+                    let val1=opt.value;
+                    console.log(opt.label, opt.value)
+                    setai4(val)
+                    setayv4(val1)
+                    }
+                    }
+                    options ={crops}
+                    //onChange={opt => console.log(opt.label, opt.value)}
+                    />
+                    <div> <input type="number" placeholder = "Maximum yield" style={{width: "125px"}} onChange = {e => setay4(e.target.value)}/></div>
+                    <div> <input type="number" placeholder = "Etm" style={{width: "125px"}} onChange = {e => setet4(e.target.value)}/></div>
+                    </div>
+                    <div className='f1'>
+                    <Select 
+                    onChange={(opt)=>{
+                    let val=opt.label;
+                    let val1=opt.value;
+                    console.log(opt.label, opt.value)
+                    setai5(val)
+                    setayv5(val1)
+                    }
+                    }
+                    options ={crops}
+                    //onChange={opt => console.log(opt.label, opt.value)}
+                    />
+                    <div> <input type="number" placeholder = "Maximum yield" style={{width: "125px"}} onChange = {e => setay5(e.target.value)}/></div>
+                    <div> <input type="number" placeholder = "Etm" style={{width: "125px"}} onChange = {e => setet5(e.target.value)}/></div>
+                    </div>
+                </div>
+                <div>
+                    <p><form>
+                    <label>Total water available:{' '}
+                    <input type="number" placeholder = "(mm)" style={{width: "55px"}} onChange = {e => setweca(e.target.value)}/>
+                    </label>
+                </form></p>
+                </div>
+                <div>
+                    <button className="gooey-button" onClick = {yap}> Yield </button>
+                    <button className="gooey-button" onClick = {rap}> Profit </button>
+                    <button className="gooey-button" onClick = {mweap}>Water Efficiency</button>
+                </div>
+                <div className='graph'>
+                <Bar
+                data={dataap}
+                options={{
+                    title:{
+                    display:true,
+                    fontSize:20
+                    },
+                }}
+                />
+            </div>
+            </div>
         </div>
     )
 }
 
 export default Home
+
+
+// const crops = [{label: "abc", value: 1}]
+// crops.forEach(crops)
+// array.map()
+// array.forEach()
