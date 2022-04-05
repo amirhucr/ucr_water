@@ -176,5 +176,12 @@
     margin-top: 1%;
 }
 .adsi{
-    display: inline-block
+    /* display: inline-block */
+    margin-left: 35%;
+}
+.adpn{
+    margin: 1.5%;
+}
+.adoc{
+    margin-top: 1%;
 }
