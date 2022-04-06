@@ -1,5 +1,5 @@
 import React from 'react'
-import Select from 'react-select';
+import Select, { NonceProvider } from 'react-select';
 import crop from './crop.png'
 import drop from './drop.png'
 import dollar from './dollar_sign.png'
@@ -75,21 +75,31 @@ function Home() {
     const [ai3, setai3] = useState('');
     const [ai4, setai4] = useState('');
     const [ai5, setai5] = useState('');
-    const [ay1, setay1] = useState(null);
-    const [ay2, setay2] = useState(null);
-    const [ay3, setay3] = useState(null);
-    const [ay4, setay4] = useState(null);
-    const [ay5, setay5] = useState(null);
-    const [et1, setet1] = useState(null);
-    const [et2, setet2] = useState(null);
-    const [et3, setet3] = useState(null);
-    const [et4, setet4] = useState(null);
-    const [et5, setet5] = useState(null);
-    const [ayv1, setayv1] = useState('');
-    const [ayv2, setayv2] = useState('');
-    const [ayv3, setayv3] = useState('');
-    const [ayv4, setayv4] = useState('');
-    const [ayv5, setayv5] = useState('');
+    const [ c1, setc1] = useState(null);
+    const [ c2, setc2] = useState(null);
+    const [ c3, setc3] = useState(null);
+    const [ c4, setc4] = useState(null);
+    const [ c5, setc5] = useState(null);
+    const [ pc1, setpc1] = useState(null);
+    const [ pc2, setpc2] = useState(null);
+    const [ pc3, setpc3] = useState(null);
+    const [ pc4, setpc4] = useState(null);
+    const [ pc5, setpc5] = useState(null);
+    let [ay1, setay1] = useState(null);
+    let [ay2, setay2] = useState(null);
+    let [ay3, setay3] = useState(null);
+    let [ay4, setay4] = useState(null);
+    let [ay5, setay5] = useState(null);
+    let [et1, setet1] = useState(null);
+    let [et2, setet2] = useState(null);
+    let [et3, setet3] = useState(null);
+    let [et4, setet4] = useState(null);
+    let [et5, setet5] = useState(null);
+    let [ayv1, setayv1] = useState('');
+    let [ayv2, setayv2] = useState('');
+    let [ayv3, setayv3] = useState('');
+    let [ayv4, setayv4] = useState('');
+    let [ayv5, setayv5] = useState('');
     let [ginfo, setginfo] = useState('');
     let [ais, setais] = useState([])
     const [st, setst] = useState(0);
@@ -112,7 +122,7 @@ function Home() {
     const [c,setc] = useState('');
     const [d,setd] = useState('');
     const [wec,setwa] = useState(null);
-    const [ec,setecw] = useState(null);
+    let [ec,setecw] = useState(null);
     const [wec1,setwa1] = useState(null);
     const [wec2,setwa2] = useState(null);
     const [weca,setweca] = useState(null);
@@ -273,9 +283,15 @@ function Home() {
             alert("Please enter crop type")
             return
         }
-        if(ec != null){
-            if(ec> 5 || ec < 0.5){
-                alert("Irrigation Water Salinity should be between 0.5 to 5")
+        if(ec != null ){
+            if(ec != ""){
+                if(ec> 5 || ec < 0.5){
+                    alert("Irrigation Water Salinity should be between 0.5 to 5")
+                    return
+                }
+            }
+            else if(ec == ""){
+                ec = null
             }
         }
         let ky=0;
@@ -287,6 +303,7 @@ function Home() {
         let clz = 0;
         let slr = 0;
         let m = 0;
+        console.log(ec)
         if (pa == 1){
             ky=1;
             eci = 2;
@@ -504,7 +521,7 @@ function Home() {
         setd4((d4*100).toFixed(0))
         setd5((d5*100).toFixed(0))
         lr = ecw/((5*eci) - ecw)
-        iw0= (ETm )/((1-lr))
+        iw0= ((ETm )/((1-lr)))-ETm
         iw1= (ETm )/(ie/100)
         iw2 = iw1 - ETm
         iw3= (ETm )/((ie/100)*(1-lr))
@@ -973,17 +990,87 @@ function Home() {
             alert("Please enter amount of water available")
             return
         }
-        if(ay1 != null ||ay2 != null || ay3 != null || ay4 != null || ay5 != null){
-            if(ay1 < 5 || ay1 > 150 || ay2 < 5 || ay2 > 150 || ay3 < 5 || ay3 > 150|| ay4 < 5 || ay4 > 150|| ay5 < 5 || ay5 > 150){
+        if(ay1 != null ){
+            if(ay1 != ""){
+            if(ay1 < 5 || ay1 > 150){
                 alert("Expected yield should be in the range of 5 to 150 ")
+                return
             }
         }
-        if(et1 != null || et2 != null || et3 != null || et4 != null || et5 != null){
-            if(et1 < 100 || et1 > 1600 || et2 < 100 || et2 > 1600 || et3 < 100 || et3 > 1600 || et4 < 100 || et4 > 1600 || et5 < 100 || et5 > 1600 ){
-                alert("ETm should be in the range of 100 to 1600")
+        }
+        if(ay2 != null){
+            if(ay2 != ""){
+            if(ay2 < 5 || ay2 > 150){
+                alert("Expected yield should be in the range of 5 to 150 ")
+                return
             }
         }
-        setginfo('Revenue ($)') 
+        }
+        if(ay3 != null){
+            if(ay3 != ""){
+            if(ay3 < 5 || ay3 > 150){
+                alert("Expected yield should be in the range of 5 to 150 ")
+                return
+            }
+        }
+        }
+        if(ay4 != null){
+            if(ay4 != ""){
+            if(ay4 < 5 || ay4 > 150){
+                alert("Expected yield should be in the range of 5 to 150 ")
+                return
+            }
+        }
+        }
+        if(ay5 != null){
+            if(ay5 != ""){
+            if(ay5 < 5 || ay5 > 150){
+                alert("Expected yield should be in the range of 5 to 150 ")
+                return
+            }
+        }
+        }
+        if(et1 != null){
+            if(et1 != ""){
+                if(et1 < 100 || et1 > 1600){
+                    alert("ETm should be in the range of 100 to 1600")
+                    return
+                }
+            }
+        }
+        if(et2 != null){
+            if(et2 != ""){
+                if(et2 < 100 || et2 > 1600){
+                    alert("ETm should be in the range of 100 to 1600")
+                    return
+                }
+            }
+        }
+        if(et3 != null){
+            if(et3 != ""){
+                if(et3 < 100 || et3 > 1600){
+                    alert("ETm should be in the range of 100 to 1600")
+                    return
+                }
+            }
+        }
+        if(et4 != null){
+            if(et4 != ""){
+                if(et4 < 100 || et4 > 1600){
+                    alert("ETm should be in the range of 100 to 1600")
+                    return
+                }
+            }
+        }
+        if(et5 != null){
+            if(et5 != ""){
+                if(et5 < 100 || et5 > 1600){
+                    alert("ETm should be in the range of 100 to 1600")
+                    return
+                }
+            }
+        }
+        setginfo('Profit ($)') 
         let eci =0;
         let ecw =0;
         let ETm =0;
@@ -991,7 +1078,7 @@ function Home() {
         let Ym = 0;
         let Eta = 0;
         let Ya = 0;
-        let cost = 200;
+        let cost = 0;
         let pcost = 0;
         let revenue = 0;
         let profit =0 ;
@@ -999,13 +1086,22 @@ function Home() {
         let my_arr = [ayv1, ayv2, ayv3, ayv4, ayv5]
         let y_arr = [ay1, ay2, ay3, ay4, ay5]
         let etm_arr = [et1, et2, et3, et4, et5]
+        let c_arr = [c1,c2, c3, c4, c5]
+        let p_arr = [pc1, pc2, pc3, pc4, pc5]
         for(let i=0;i<my_arr.length;i++){
+            if (y_arr[i] == ""){
+                y_arr[i] = null
+            }
+            if (etm_arr[i] == ""){
+                etm_arr[i] = null
+            }
             if (my_arr[i] == 1){
                 eci = 2;
                 ecw = 1.3;
                 ETm= etm_arr[i] ?? 1500;
                 ky = 1;
                 Ym = y_arr[i] ?? 23;
+                cost = c_arr[i] ?? 200;
                }
             else if ( my_arr[i] == 2){
                eci=7;
@@ -1013,6 +1109,7 @@ function Home() {
                ETm=etm_arr[i] ?? 1050;
                ky = 0.85;
                Ym = y_arr[i] ?? 120;
+               cost = c_arr[i] ?? 200;
             }
             else if (my_arr[i] == 3){
                eci=6;
@@ -1020,6 +1117,7 @@ function Home() {
                ETm= etm_arr[i] ?? 620;
                ky = 1.05;
                Ym = y_arr[i] ?? 7.5;
+               cost = c_arr[i] ?? 200;
             }
             else if (my_arr[i] == 4){
                eci=6.9;
@@ -1027,6 +1125,7 @@ function Home() {
                ETm= etm_arr[i] ?? 1200;
                ky = 0.9;
                Ym =y_arr[i] ??  19;
+               cost = c_arr[i] ?? 200;
             }
             else if (my_arr[i] ==5 ){
                eci=4;
@@ -1034,6 +1133,7 @@ function Home() {
                ETm= etm_arr[i] ?? 1250;
                ky = 0.9;
                Ym = y_arr[i] ?? 24;
+               cost = c_arr[i] ?? 200;
             }
             else if (my_arr[i] == 6){
                eci=2.8;
@@ -1041,6 +1141,7 @@ function Home() {
                ETm= etm_arr[i] ?? 800;
                ky = 0.9;
                Ym = y_arr[i] ?? 14;
+               cost = c_arr[i] ?? 200;
             }
             else if (my_arr[i] ==7 ){
                 eci=1.3;
@@ -1048,6 +1149,7 @@ function Home() {
                 ETm= etm_arr[i] ?? 320;
                 ky = 1.15;
                Ym = y_arr[i] ?? 20;
+               cost = c_arr[i] ?? 200;
             }
             else if (my_arr[i] == 8){
               eci=1;
@@ -1055,6 +1157,7 @@ function Home() {
               ETm= etm_arr[i] ?? 600;
               ky = 1.1;
               Ym = y_arr[i] ?? 110;
+              cost = c_arr[i] ?? 200;
             }
             else if (my_arr[i] == 9){
                eci=2.8;
@@ -1062,6 +1165,7 @@ function Home() {
                ETm= etm_arr[i] ?? 350;
                ky = 1;
                Ym = y_arr[i] ?? 15;
+               cost = c_arr[i] ?? 200;
             }
             else if (my_arr[i] == 10){
               eci=1.2;
@@ -1069,6 +1173,7 @@ function Home() {
               ETm= etm_arr[i] ?? 800;
               ky = 1.1;
                Ym = y_arr[i] ?? 60;
+               cost = c_arr[i] ?? 200;
             }
             else if (my_arr[i] ==11 ){
                eci=2;
@@ -1076,6 +1181,7 @@ function Home() {
                ETm=etm_arr[i] ?? 200;
                ky = 1.15;
                Ym = y_arr[i] ?? 14;
+               cost = c_arr[i] ?? 200;
             }
             else if (my_arr[i] ==12 ){
               eci=1.7;
@@ -1083,6 +1189,7 @@ function Home() {
               ETm= etm_arr[i] ?? 600;
               ky = 1.1;
                Ym = y_arr[i] ?? 27;
+               cost = c_arr[i] ?? 200;
             }
             else{
                 Ym = 0;
@@ -1090,7 +1197,7 @@ function Home() {
             Eta = weca * 68 * (1-(eci/((5*ecw)-eci)))
             Ya = Ym * ((ky*((Eta/ETm)-1))+1)
             revenue = Ya * cost
-            pcost = 0.2 * revenue
+            pcost = p_arr[i] ?? (0.2 * revenue)
             profit = revenue - pcost
             ans_arr.push(profit)
         }
@@ -1102,14 +1209,91 @@ function Home() {
             alert("Please enter amount of water available")
             return
         }
-        if(ay1 != null ||ay2 != null || ay3 != null || ay4 != null || ay5 != null){
-            if(ay1 < 5 || ay1 > 150 || ay2 < 5 || ay2 > 150 || ay3 < 5 || ay3 > 150|| ay4 < 5 || ay4 > 150|| ay5 < 5 || ay5 > 150){
+        // if(ay1 != null ||ay2 != null || ay3 != null || ay4 != null || ay5 != null){
+        //     if(ay1 != "" || ay2 != "" || ay3 != "" || ay4 != "" || ay5 != ""){
+        //         if(ay1 < 5 || ay1 > 150 || ay2 < 5 || ay2 > 150 || ay3 < 5 || ay3 > 150|| ay4 < 5 || ay4 > 150|| ay5 < 5 || ay5 > 150){
+        //             alert("Expected yield should be in the range of 5 to 150 ")
+        //         }
+        //     }
+        // }
+        if(ay1 != null ){
+            if(ay1 != ""){
+            if(ay1 < 5 || ay1 > 150){
                 alert("Expected yield should be in the range of 5 to 150 ")
+                return
             }
         }
-        if(et1 != null || et2 != null || et3 != null || et4 != null || et5 != null){
-            if(et1 < 100 || et1 > 1600 || et2 < 100 || et2 > 1600 || et3 < 100 || et3 > 1600 || et4 < 100 || et4 > 1600 || et5 < 100 || et5 > 1600 ){
-                alert("ETm should be in the range of 100 to 1600")
+        }
+        if(ay2 != null){
+            if(ay2 != ""){
+            if(ay2 < 5 || ay2 > 150){
+                alert("Expected yield should be in the range of 5 to 150 ")
+                return
+            }
+        }
+        }
+        if(ay3 != null){
+            if(ay3 != ""){
+            if(ay3 < 5 || ay3 > 150){
+                alert("Expected yield should be in the range of 5 to 150 ")
+                return
+            }
+        }
+        }
+        if(ay4 != null){
+            if(ay4 != ""){
+            if(ay4 < 5 || ay4 > 150){
+                alert("Expected yield should be in the range of 5 to 150 ")
+                return
+            }
+        }
+        }
+        if(ay5 != null){
+            if(ay5 != ""){
+            if(ay5 < 5 || ay5 > 150){
+                alert("Expected yield should be in the range of 5 to 150 ")
+                return
+            }
+        }
+        }
+        if(et1 != null){
+            if(et1 != ""){
+                if(et1 < 100 || et1 > 1600){
+                    alert("ETm should be in the range of 100 to 1600")
+                    return
+                }
+            }
+        }
+        if(et2 != null){
+            if(et2 != ""){
+                if(et2 < 100 || et2 > 1600){
+                    alert("ETm should be in the range of 100 to 1600")
+                    return
+                }
+            }
+        }
+        if(et3 != null){
+            if(et3 != ""){
+                if(et3 < 100 || et3 > 1600){
+                    alert("ETm should be in the range of 100 to 1600")
+                    return
+                }
+            }
+        }
+        if(et4 != null){
+            if(et4 != ""){
+                if(et4 < 100 || et4 > 1600){
+                    alert("ETm should be in the range of 100 to 1600")
+                    return
+                }
+            }
+        }
+        if(et5 != null){
+            if(et5 != ""){
+                if(et5 < 100 || et5 > 1600){
+                    alert("ETm should be in the range of 100 to 1600")
+                    return
+                }
             }
         }
         setginfo('Yield (tons/ha)') 
@@ -1127,11 +1311,16 @@ function Home() {
         while(ais.length > 0) {
             ais.pop();
         }
-        console.log(y_arr)
         // while(cps.length > 0) {
         //     cps.pop();
         //}
         for(let i=0;i<my_arr.length;i++){
+            if (y_arr[i] == ""){
+                y_arr[i] = null
+            }
+            if (etm_arr[i] == ""){
+                etm_arr[i] = null
+            }
             if (my_arr[i] == 1){
                 eci = 2;
                 ecw = 1.3;
@@ -1225,21 +1414,90 @@ function Home() {
             ans_arr.push(Ya)
         }
         setais(ans_arr)
-        console.log(ais)
     }
     function mweap(){
         if (weca == null){
             alert("Please enter amount of water available")
             return
         }
-        if(ay1 != null ||ay2 != null || ay3 != null || ay4 != null || ay5 != null){
-            if(ay1 < 5 || ay1 > 150 || ay2 < 5 || ay2 > 150 || ay3 < 5 || ay3 > 150|| ay4 < 5 || ay4 > 150|| ay5 < 5 || ay5 > 150){
+        if(ay1 != null ){
+            if(ay1 != ""){
+            if(ay1 < 5 || ay1 > 150){
                 alert("Expected yield should be in the range of 5 to 150 ")
+                return
             }
         }
-        if(et1 != null || et2 != null || et3 != null || et4 != null || et5 != null){
-            if(et1 < 100 || et1 > 1600 || et2 < 100 || et2 > 1600 || et3 < 100 || et3 > 1600 || et4 < 100 || et4 > 1600 || et5 < 100 || et5 > 1600 ){
-                alert("ETm should be in the range of 100 to 1600")
+        }
+        if(ay2 != null){
+            if(ay2 != ""){
+            if(ay2 < 5 || ay2 > 150){
+                alert("Expected yield should be in the range of 5 to 150 ")
+                return
+            }
+        }
+        }
+        if(ay3 != null){
+            if(ay3 != ""){
+            if(ay3 < 5 || ay3 > 150){
+                alert("Expected yield should be in the range of 5 to 150 ")
+                return
+            }
+        }
+        }
+        if(ay4 != null){
+            if(ay4 != ""){
+            if(ay4 < 5 || ay4 > 150){
+                alert("Expected yield should be in the range of 5 to 150 ")
+                return
+            }
+        }
+        }
+        if(ay5 != null){
+            if(ay5 != ""){
+            if(ay5 < 5 || ay5 > 150){
+                alert("Expected yield should be in the range of 5 to 150 ")
+                return
+            }
+        }
+        }
+        if(et1 != null){
+            if(et1 != ""){
+                if(et1 < 100 || et1 > 1600){
+                    alert("ETm should be in the range of 100 to 1600")
+                    return
+                }
+            }
+        }
+        if(et2 != null){
+            if(et2 != ""){
+                if(et2 < 100 || et2 > 1600){
+                    alert("ETm should be in the range of 100 to 1600")
+                    return
+                }
+            }
+        }
+        if(et3 != null){
+            if(et3 != ""){
+                if(et3 < 100 || et3 > 1600){
+                    alert("ETm should be in the range of 100 to 1600")
+                    return
+                }
+            }
+        }
+        if(et4 != null){
+            if(et4 != ""){
+                if(et4 < 100 || et4 > 1600){
+                    alert("ETm should be in the range of 100 to 1600")
+                    return
+                }
+            }
+        }
+        if(et5 != null){
+            if(et5 != ""){
+                if(et5 < 100 || et5 > 1600){
+                    alert("ETm should be in the range of 100 to 1600")
+                    return
+                }
             }
         }
         setginfo('Water efficiency (%)') 
@@ -1258,6 +1516,12 @@ function Home() {
             ais.pop();
         }
         for(let i=0;i<my_arr.length;i++){
+            if (y_arr[i] == ""){
+                y_arr[i] = null
+            }
+            if (etm_arr[i] == ""){
+                etm_arr[i] = null
+            }
             if (my_arr[i] == 1){
                 eci = 2;
                 ecw = 1.3;
@@ -1503,7 +1767,7 @@ function Home() {
                     /></div>
                     <div className='graphdes'>
                     <div className='gdes'><h9>LR -> Total water required for leaching</h9></div>
-                    <div className='gdes'><h9>ETa -> Actual ETa</h9></div>
+                    <div className='gdes'><h9>ETa -> Actual ET</h9></div>
                     <div className='gdes'><h9>IE -> Water required to meet the Irrigation Efficiency demands</h9></div>
                     <div className='gdes'><h9>IWR -> Total water requirement based on ET, IE and LR</h9></div>
                     </div>
@@ -1734,6 +1998,8 @@ function Home() {
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay1(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet1(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($)" style={{width: "100px"}} onChange = {e => setc1(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Production cost ($)" style={{width: "130px"}} onChange = {e => setpc1(e.target.value)}/></div>
                     </div>
                     <div className='f1'>
                     <p> Crop 2:</p>
@@ -1753,6 +2019,8 @@ function Home() {
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay2(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet2(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($)" style={{width: "100px"}} onChange = {e => setc2(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Production cost ($)" style={{width: "130px"}} onChange = {e => setpc2(e.target.value)}/></div>
                     </div>
                     <div className='f1'>
                     <p> Crop 3:</p>
@@ -1772,6 +2040,8 @@ function Home() {
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay3(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet3(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($)" style={{width: "100px"}} onChange = {e => setc3(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Production cost ($)" style={{width: "130px"}} onChange = {e => setpc3(e.target.value)}/></div>
                     </div>
                     <div className='f1'>
                     <p> Crop 4:</p>
@@ -1791,6 +2061,8 @@ function Home() {
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay4(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet4(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($)" style={{width: "100px"}} onChange = {e => setc4(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Production cost ($)" style={{width: "130px"}} onChange = {e => setpc4(e.target.value)}/></div>
                     </div>
                     <div className='f1'>
                     <p> Crop 5:</p>
@@ -1810,6 +2082,8 @@ function Home() {
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay5(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet5(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($)" style={{width: "100px"}} onChange = {e => setc5(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Production cost ($)" style={{width: "130px"}} onChange = {e => setpc5(e.target.value)}/></div>
                     </div>
                 </div>
                 <div>
