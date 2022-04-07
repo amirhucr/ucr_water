@@ -160,7 +160,7 @@ function Home() {
         labels: cps,
         datasets: [
           {
-            label: 'Yield (kg/ha)',
+            label: 'Yield (tons/ha)',
             backgroundColor: `#9acd32`,
             borderColor: 'rgba(0,0,0,1)',
             borderWidth: 0.5,
@@ -173,7 +173,7 @@ function Home() {
         labels: cpsr,
         datasets: [
           {
-            label: 'Profit ($)',
+            label: 'Profit ($/ha)',
             backgroundColor: `#daa520`,
             borderColor: 'rgba(0,0,0,1)',
             borderWidth: 0.5,
@@ -303,7 +303,7 @@ function Home() {
         if(ec != null ){
             if(ec != ""){
                 if(ec> 5 || ec < 0.5){
-                    alert("Irrigation Water Salinity should be between 0.5 to 5")
+                    alert("Irrigation Water Salinity should be between 0.5(dS/m) to 5(dS/m)")
                     return
                 }
             }
@@ -538,7 +538,6 @@ function Home() {
                 }
             }
             slr = ecw/(((2/(k * m))*eci) - ecw)
-            console.log(slr)
             setd((slr * 100).toFixed(2))
         }
         d1 = ky*(1-((0.9 * ETm)/ETm)) ;
@@ -551,7 +550,7 @@ function Home() {
         setd3((d3*100).toFixed(0))
         setd4((d4*100).toFixed(0))
         setd5((d5*100).toFixed(0))
-        lr = eci/((5*ecw) - eci)
+        lr = ecw/((5*eci) - ecw)
         iw0= ((ETm )/((1-lr)))-ETm
         iw1= (ETm )/(ie/100)
         iw2 = iw1 - ETm
@@ -562,6 +561,7 @@ function Home() {
         setiw0(iw0.toFixed(0))
         setc((lr*100).toFixed(2))
         sety(Ym)
+        console.log(lr)
        }
        const handleChange = (e) => {
         setSelectedValue(Array.isArray(e) ? e.map(x => x.value) : []);
@@ -698,7 +698,7 @@ function Home() {
               ky = 1.1;
                Ym = 27;
             }
-            Eta = wec * 0.68 * (1-(eci/((5*ecw)-eci)))
+            Eta = wec * 0.68 * (1-(ecw/((5*eci) - ecw)))
             Ya = Ym * ((ky*((Eta/ETm)-1))+1)
             // setans([...ans,Ya]);
             ans.push(Ya)
@@ -817,7 +817,7 @@ function Home() {
               ky = 1.1;
                Ym = 27;
             }
-            Eta = wec1 * 0.68 * (1-(eci/((5*ecw)-eci)))
+            Eta = wec1 * 0.68 * (1-(ecw/((5*eci) - ecw)))
             Ya = Ym * ((ky*((Eta/ETm)-1))+1)
             // console.log(Eta)
             // console.log(Ya)
@@ -937,7 +937,7 @@ function Home() {
               ky = 1.1;
                Ym = 27;
             }
-            Eta = wec2 * 0.68 * (1-(eci/((5*ecw)-eci)))
+            Eta = wec2 * 0.68 * (1-(ecw/((5*eci) - ecw)))
             Ya = Ym * ((ky*((Eta/ETm)-1))+1)
             ans2.push((Ya/wec2))
         }
@@ -1018,6 +1018,10 @@ function Home() {
     }
     function rap(){
         if (weca == null){
+            alert("Please enter amount of water available")
+            return
+        }
+        if (weca == ""){
             alert("Please enter amount of water available")
             return
         }
@@ -1115,7 +1119,7 @@ function Home() {
         else if (aie == null){
             aie =68
         }
-        setginfo('Profit ($)') 
+        setginfo('Profit ($/ha)') 
         let eci =0;
         let ecw =0;
         let ETm =0;
@@ -1239,18 +1243,22 @@ function Home() {
             else{
                 Ym = 0;
             }
-            Eta = weca * (aie/100) * (1-(eci/((5*ecw)-eci)))
+            Eta = weca * (aie/100) * (1-(ecw/((5*eci) - ecw)))
             Ya = Ym * ((ky*((Eta/ETm)-1))+1)
             revenue = Ya * cost
             pcost = p_arr[i] ?? (0.2 * revenue)
             profit = revenue - pcost
-            ans_arr.push(profit)
+            ans_arr.push(profit.toFixed(0))
         }
         setais(ans_arr)
 
     }
     function yap(){
         if (weca == null){
+            alert("Please enter amount of water available")
+            return
+        }
+        if (weca == ""){
             alert("Please enter amount of water available")
             return
         }
@@ -1467,15 +1475,19 @@ function Home() {
             else{
                 Ym = 0;
             }
-            Eta = weca * (aie/100) * (1-(eci/((5*ecw)-eci)))
+            Eta = weca * (aie/100) * (1-(ecw/((5*eci) - ecw)))
             Ya = Ym * ((ky*((Eta/ETm)-1)+1))
             // setans([...ans,Ya]);
-            ans_arr.push(Ya)
+            ans_arr.push(Ya.toFixed(1))
         }
         setais(ans_arr)
     }
     function mweap(){
         if (weca == null){
+            alert("Please enter amount of water available")
+            return
+        }
+        if (weca == ""){
             alert("Please enter amount of water available")
             return
         }
@@ -1683,7 +1695,7 @@ function Home() {
                 Ym = 0;
             }
             console.log(aie)
-            Eta = weca * (aie/100) * (1-(eci/((5*ecw)-eci)))
+            Eta = weca * (aie/100) * (1-(ecw/((5*eci) - ecw)))
             Ya = Ym * ((ky*((Eta/ETm)-1))+1)
             ans_arr.push((Ya/weca))
         }
@@ -1697,7 +1709,7 @@ function Home() {
                 <div className='cardr0'>
                 <div className='crop-image'>
                 <img src={crop} />   
-                <p> Crop</p>
+                <p> Crop*</p>
                 </div>
                 <div className = "crop_details ">
                 <p className = "input">
@@ -1820,7 +1832,7 @@ function Home() {
                             <div className='nlr'>
                                 {pa.myPaVal}
                                 <div className='cb'>
-                                <div className='lrl'><p>Leaching Requirement(SALEACH):</p></div>
+                                <div className='lrl'><p>Leaching Requirement (SALEACH method):</p></div>
                                 <div className="Default">
                                 <CircularProgressbar value={d} text={`${d}%`} />
                                 </div>
@@ -1841,7 +1853,7 @@ function Home() {
                     /></div>
                     <div className='graphdes'>
                     <div className='gdes'><h9>LRw -> Total water required for leaching</h9></div>
-                    <div className='gdes'><h9>ETa -> Actual ET</h9></div>
+                    <div className='gdes'><h9>ETa -> Actual Evapotranspiration (ET)</h9></div>
                     <div className='gdes'><h9>IEw -> Water required to meet the Irrigation Efficiency demands</h9></div>
                     <div className='gdes'><h9>IWR -> Total water requirement based on ET, IE and LR</h9></div>
                     </div>
@@ -2051,11 +2063,11 @@ function Home() {
             </div>
             <div className='ads'>
                 <h1><u>Advanced options</u></h1>
-                <h4> Run optimization upto 5 crops</h4>
+                <h4> Run optimization for up to 5 crops</h4>
                 <p>(Empty/left out inputs will take default values)</p>
                 <div className='adsi'>
                     <div className='f1'>
-                    <p> Crop 1:</p>
+                    <p> Crop 1</p>
                     <div className='adoc'>
                         <Select 
                         autosize={false}
@@ -2074,11 +2086,11 @@ function Home() {
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay1(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet1(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($)" style={{width: "100px"}} onChange = {e => setc1(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "Production cost ($)" style={{width: "130px"}} onChange = {e => setpc1(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($/ton)" style={{width: "120px"}} onChange = {e => setc1(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Production cost ($/ha)" style={{width: "145px"}} onChange = {e => setpc1(e.target.value)}/></div>
                     </div>
                     <div className='f1'>
-                    <p> Crop 2:</p>
+                    <p> Crop 2</p>
                     <div className='adoc'>
                         <Select 
                         onChange={(opt)=>{
@@ -2095,11 +2107,11 @@ function Home() {
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay2(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet2(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($)" style={{width: "100px"}} onChange = {e => setc2(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "Production cost ($)" style={{width: "130px"}} onChange = {e => setpc2(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($/ton)" style={{width: "120px"}} onChange = {e => setc2(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Production cost ($/ha)" style={{width: "145px"}} onChange = {e => setpc2(e.target.value)}/></div>
                     </div>
                     <div className='f1'>
-                    <p> Crop 3:</p>
+                    <p> Crop 3</p>
                     <div className='adoc'>
                         <Select 
                         onChange={(opt)=>{
@@ -2116,11 +2128,11 @@ function Home() {
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay3(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet3(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($)" style={{width: "100px"}} onChange = {e => setc3(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "Production cost ($)" style={{width: "130px"}} onChange = {e => setpc3(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($/ton)" style={{width: "120px"}} onChange = {e => setc3(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Production cost ($/ha)" style={{width: "145px"}} onChange = {e => setpc3(e.target.value)}/></div>
                     </div>
                     <div className='f1'>
-                    <p> Crop 4:</p>
+                    <p> Crop 4</p>
                     <div className='adoc'>
                         <Select 
                         onChange={(opt)=>{
@@ -2137,11 +2149,11 @@ function Home() {
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay4(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet4(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($)" style={{width: "100px"}} onChange = {e => setc4(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "Production cost ($)" style={{width: "130px"}} onChange = {e => setpc4(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($/ton)" style={{width: "120px"}} onChange = {e => setc4(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Production cost ($/ha)" style={{width: "145px"}} onChange = {e => setpc4(e.target.value)}/></div>
                     </div>
                     <div className='f1'>
-                    <p> Crop 5:</p>
+                    <p> Crop 5</p>
                     <div className='adoc'>
                         <Select 
                         onChange={(opt)=>{
@@ -2158,8 +2170,8 @@ function Home() {
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay5(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet5(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($)" style={{width: "100px"}} onChange = {e => setc5(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "Production cost ($)" style={{width: "130px"}} onChange = {e => setpc5(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($/ton)" style={{width: "120px"}} onChange = {e => setc5(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Production cost ($/ha)" style={{width: "145px"}} onChange = {e => setpc5(e.target.value)}/></div>
                     </div>
                 </div>
                 <div>
@@ -2170,7 +2182,7 @@ function Home() {
                 </form></p>
                 <p><form>
                     <label>Irrigation efficiency (%):{' '}
-                    <input type="number" placeholder = "(mm)" style={{width: "55px"}} onChange = {e => setaie(e.target.value)}/>
+                    <input type="number" placeholder = "(%)" style={{width: "55px"}} onChange = {e => setaie(e.target.value)}/>
                     </label>
                 </form></p>
                 </div>
