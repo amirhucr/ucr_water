@@ -21,6 +21,7 @@ import {
   BarSeries,
 } from '@devexpress/dx-react-chart-material-ui';
 const crops =[
+    { label: "None", value: 0},
     { label: "Alfalfa ", value: 1 },
     { label: "Sugar beets ", value:  2},
     { label: " Wheat", value: 3 },
@@ -33,9 +34,25 @@ const crops =[
     { label: "Onion ", value: 10 },
     { label: "Spinach ", value: 11 },
     { label: " Sweet Corn", value:  12},
-    { label: "None", value: 0},
+    
+  ]
+  const crops_m =[
+    { label: "Alfalfa ", value: 1 },
+    { label: "Sugar beets ", value:  2},
+    { label: " Wheat", value: 3 },
+    { label: " Bermuda Grass", value:  4},
+    { label: " Klein Grass", value:  5},
+    { label: "Sudan Grass ", value:  6},
+    { label: "Lettuce ", value: 7 },
+    { label: "Carrots ", value:8  },
+    { label: "Broccoli ", value:  9},
+    { label: "Onion ", value: 10 },
+    { label: "Spinach ", value: 11 },
+    { label: " Sweet Corn", value:  12},
+    
   ]
   const soily = [
+    { label: "None", value: 0},
     { label: "Sand ", value: 1 },
     { label: "Sand-Fine ", value:  2},
     { label: "Loamy Sand ", value:  3},
@@ -51,9 +68,9 @@ const crops =[
     { label: "Sandy Clay ", value:  13},
     { label : "Silty Clay", value : 14},
     { label: "Silty", value:  15},
-    { label: "None", value: 0},
   ]
   const itype = [
+    { label: "None", value: 0},
     { label: "Flood  ", value:  1},
     { label: "Basin  ", value: 2 },
     { label: "Border  ", value: 3 },
@@ -65,7 +82,6 @@ const crops =[
     { label: "Micro-Mini ", value:  9},
     { label: " Hose-Pull ", value:  10},
     { label: "Center-Pivot ", value:  11},
-    { label: "None", value: 0},
   ]
 
 function Home() {
@@ -102,8 +118,8 @@ function Home() {
     let [ayv5, setayv5] = useState('');
     let [ginfo, setginfo] = useState('');
     let [ais, setais] = useState([])
-    const [st, setst] = useState(0);
-    const [it, setit] = useState(0);
+    let [st, setst] = useState(0);
+    let [it, setit] = useState(0);
     const [a,seta]    = useState('');
     const [y, sety] = useState('');
     let [lr, setlr] = useState(0);
@@ -118,7 +134,7 @@ function Home() {
     let [iw3, setiw3] = useState(0);
     let [yr1, setyr1] = useState('');
     let [yr2, setyr2] = useState('');
-    const [ie, setie] = useState(68);
+    let [ie, setie] = useState(68);
     const [c,setc] = useState('');
     const [d,setd] = useState('');
     const [wec,setwa] = useState(null);
@@ -126,6 +142,7 @@ function Home() {
     const [wec1,setwa1] = useState(null);
     const [wec2,setwa2] = useState(null);
     const [weca,setweca] = useState(null);
+    let [aie, setaie] = useState(null);
     const [ans, setans] = useState([]);
     const [ans1, setans1] = useState([]);
     const [ans2, setans2] = useState([]);
@@ -177,12 +194,12 @@ function Home() {
         ]
       }
       const datatw ={
-        labels: ['LR','ETa', 'IE','IWR'],
+        labels: ['LRw','ETa', 'IEw','IWR'],
         datasets: [
           {
             axis: 'y',
             barThickness: 10,
-            label: 'Irrigation water depth (mm)',
+            label: 'Irrigation water demand (mm)',
             backgroundColor: `#1e90ff`,
             borderColor: 'rgba(0,0,0,1)',
             borderWidth: 0.5,
@@ -294,6 +311,17 @@ function Home() {
                 ec = null
             }
         }
+        if(ie != null ){
+            if(ie != ""){
+                if(ie> 100 || ie < 50){
+                    alert("Irrigation Efficieny should be between 50% to 100%")
+                    return
+                }
+            }
+            else if(ie == ""){
+                ie = 68
+            }
+        }
         let ky=0;
         let eci =0;
         let ecw =0;
@@ -387,6 +415,12 @@ function Home() {
           ecw= ec ?? 1.1;
           ETm=600;
           Ym = 27;
+        }
+        if(it == 0){
+            it =1
+        }
+        if(st == 0){
+            st = 5
         }
         if ((it && st) != 0 ){
             if (it == 1 ){
@@ -507,9 +541,6 @@ function Home() {
             console.log(slr)
             setd((slr * 100).toFixed(2))
         }
-        if (it == 0 || st == 0){
-            setd('')
-        }
         d1 = ky*(1-((0.9 * ETm)/ETm)) ;
         d2 = ky*(1-((0.8 * ETm)/ETm)) ;
         d3 = ky*(1-((0.7 * ETm)/ETm)) ;
@@ -520,7 +551,7 @@ function Home() {
         setd3((d3*100).toFixed(0))
         setd4((d4*100).toFixed(0))
         setd5((d5*100).toFixed(0))
-        lr = ecw/((5*eci) - ecw)
+        lr = eci/((5*ecw) - eci)
         iw0= ((ETm )/((1-lr)))-ETm
         iw1= (ETm )/(ie/100)
         iw2 = iw1 - ETm
@@ -667,17 +698,17 @@ function Home() {
               ky = 1.1;
                Ym = 27;
             }
-            Eta = wec * 68 * (1-(eci/((5*ecw)-eci)))
+            Eta = wec * 0.68 * (1-(eci/((5*ecw)-eci)))
             Ya = Ym * ((ky*((Eta/ETm)-1))+1)
             // setans([...ans,Ya]);
             ans.push(Ya)
         }
         for(let i =0 ; i<selectedValue.length;i++){
             //cps.push(crops[selectedValue[i]].label)
-            setcps(cps => [...cps, crops[selectedValue[i]-1].label])
+            setcps(cps => [...cps, crops_m[selectedValue[i]-1].label])
         }
         let i = ans.indexOf(Math.max(...ans));
-        setmyc(crops[selectedValue[i]-1].label)
+        setmyc(crops_m[selectedValue[i]-1].label)
     }
     function mr(){
         if (wec1 == null){
@@ -786,7 +817,7 @@ function Home() {
               ky = 1.1;
                Ym = 27;
             }
-            Eta = wec1 * 68 * (1-(eci/((5*ecw)-eci)))
+            Eta = wec1 * 0.68 * (1-(eci/((5*ecw)-eci)))
             Ya = Ym * ((ky*((Eta/ETm)-1))+1)
             // console.log(Eta)
             // console.log(Ya)
@@ -798,10 +829,10 @@ function Home() {
         }
         for(let i =0 ; i<selectedValue1.length;i++){
             //cps.push(crops[selectedValue[i]].label)
-            setcpsr(cpsr => [...cpsr, crops[selectedValue1[i]-1].label])
+            setcpsr(cpsr => [...cpsr, crops_m[selectedValue1[i]-1].label])
         }
         let i = ans1.indexOf(Math.max(...ans1));
-        setmrc(crops[selectedValue1[i]-1].label)
+        setmrc(crops_m[selectedValue1[i]-1].label)
     }
     function mwe(){
         if (wec2 == null){
@@ -906,17 +937,17 @@ function Home() {
               ky = 1.1;
                Ym = 27;
             }
-            Eta = wec2 * 68 * (1-(eci/((5*ecw)-eci)))
+            Eta = wec2 * 0.68 * (1-(eci/((5*ecw)-eci)))
             Ya = Ym * ((ky*((Eta/ETm)-1))+1)
             ans2.push((Ya/wec2))
         }
         console.log(selectedValue2)
         for(let i =0 ; i<selectedValue2.length;i++){
             //cps.push(crops[selectedValue[i]].label)
-            setcpsw(cpsw => [...cpsw, crops[selectedValue2[i]-1].label])
+            setcpsw(cpsw => [...cpsw, crops_m[selectedValue2[i]-1].label])
         }
         let i = ans2.indexOf(Math.max(...ans2));
-        setmwc(crops[selectedValue2[i]-1].label)
+        setmwc(crops_m[selectedValue2[i]-1].label)
     }
     function cald(){
         if (pa == 0){
@@ -993,7 +1024,7 @@ function Home() {
         if(ay1 != null ){
             if(ay1 != ""){
             if(ay1 < 5 || ay1 > 150){
-                alert("Expected yield should be in the range of 5 to 150 ")
+                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
                 return
             }
         }
@@ -1001,7 +1032,7 @@ function Home() {
         if(ay2 != null){
             if(ay2 != ""){
             if(ay2 < 5 || ay2 > 150){
-                alert("Expected yield should be in the range of 5 to 150 ")
+                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
                 return
             }
         }
@@ -1009,7 +1040,7 @@ function Home() {
         if(ay3 != null){
             if(ay3 != ""){
             if(ay3 < 5 || ay3 > 150){
-                alert("Expected yield should be in the range of 5 to 150 ")
+                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
                 return
             }
         }
@@ -1017,7 +1048,7 @@ function Home() {
         if(ay4 != null){
             if(ay4 != ""){
             if(ay4 < 5 || ay4 > 150){
-                alert("Expected yield should be in the range of 5 to 150 ")
+                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
                 return
             }
         }
@@ -1025,7 +1056,7 @@ function Home() {
         if(ay5 != null){
             if(ay5 != ""){
             if(ay5 < 5 || ay5 > 150){
-                alert("Expected yield should be in the range of 5 to 150 ")
+                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
                 return
             }
         }
@@ -1033,7 +1064,7 @@ function Home() {
         if(et1 != null){
             if(et1 != ""){
                 if(et1 < 100 || et1 > 1600){
-                    alert("ETm should be in the range of 100 to 1600")
+                    alert("ETm should be in the range of 100mm to 1600mm")
                     return
                 }
             }
@@ -1041,7 +1072,7 @@ function Home() {
         if(et2 != null){
             if(et2 != ""){
                 if(et2 < 100 || et2 > 1600){
-                    alert("ETm should be in the range of 100 to 1600")
+                    alert("ETm should be in the range of 100mm to 1600mm")
                     return
                 }
             }
@@ -1049,7 +1080,7 @@ function Home() {
         if(et3 != null){
             if(et3 != ""){
                 if(et3 < 100 || et3 > 1600){
-                    alert("ETm should be in the range of 100 to 1600")
+                    alert("ETm should be in the range of 100mm to 1600mm")
                     return
                 }
             }
@@ -1057,7 +1088,7 @@ function Home() {
         if(et4 != null){
             if(et4 != ""){
                 if(et4 < 100 || et4 > 1600){
-                    alert("ETm should be in the range of 100 to 1600")
+                    alert("ETm should be in the range of 100mm to 1600mm")
                     return
                 }
             }
@@ -1065,10 +1096,24 @@ function Home() {
         if(et5 != null){
             if(et5 != ""){
                 if(et5 < 100 || et5 > 1600){
-                    alert("ETm should be in the range of 100 to 1600")
+                    alert("ETm should be in the range of 100mm to 1600mm")
                     return
                 }
             }
+        }
+        if(aie != null ){
+            if(aie != ""){
+                if(aie> 100 || aie < 50){
+                    alert("Irrigation Efficieny should be between 50% to 100%")
+                    return
+                }
+            }
+            else if(aie == "" || aie == null){
+                aie = 68
+            }
+        }
+        else if (aie == null){
+            aie =68
         }
         setginfo('Profit ($)') 
         let eci =0;
@@ -1194,7 +1239,7 @@ function Home() {
             else{
                 Ym = 0;
             }
-            Eta = weca * 68 * (1-(eci/((5*ecw)-eci)))
+            Eta = weca * (aie/100) * (1-(eci/((5*ecw)-eci)))
             Ya = Ym * ((ky*((Eta/ETm)-1))+1)
             revenue = Ya * cost
             pcost = p_arr[i] ?? (0.2 * revenue)
@@ -1219,7 +1264,7 @@ function Home() {
         if(ay1 != null ){
             if(ay1 != ""){
             if(ay1 < 5 || ay1 > 150){
-                alert("Expected yield should be in the range of 5 to 150 ")
+                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
                 return
             }
         }
@@ -1227,7 +1272,7 @@ function Home() {
         if(ay2 != null){
             if(ay2 != ""){
             if(ay2 < 5 || ay2 > 150){
-                alert("Expected yield should be in the range of 5 to 150 ")
+                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
                 return
             }
         }
@@ -1235,7 +1280,7 @@ function Home() {
         if(ay3 != null){
             if(ay3 != ""){
             if(ay3 < 5 || ay3 > 150){
-                alert("Expected yield should be in the range of 5 to 150 ")
+                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
                 return
             }
         }
@@ -1243,7 +1288,7 @@ function Home() {
         if(ay4 != null){
             if(ay4 != ""){
             if(ay4 < 5 || ay4 > 150){
-                alert("Expected yield should be in the range of 5 to 150 ")
+                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
                 return
             }
         }
@@ -1251,7 +1296,7 @@ function Home() {
         if(ay5 != null){
             if(ay5 != ""){
             if(ay5 < 5 || ay5 > 150){
-                alert("Expected yield should be in the range of 5 to 150 ")
+                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
                 return
             }
         }
@@ -1259,7 +1304,7 @@ function Home() {
         if(et1 != null){
             if(et1 != ""){
                 if(et1 < 100 || et1 > 1600){
-                    alert("ETm should be in the range of 100 to 1600")
+                    alert("ETm should be in the range of 100mm to 1600mm")
                     return
                 }
             }
@@ -1267,7 +1312,7 @@ function Home() {
         if(et2 != null){
             if(et2 != ""){
                 if(et2 < 100 || et2 > 1600){
-                    alert("ETm should be in the range of 100 to 1600")
+                    alert("ETm should be in the range of 100mm to 1600mm")
                     return
                 }
             }
@@ -1275,7 +1320,7 @@ function Home() {
         if(et3 != null){
             if(et3 != ""){
                 if(et3 < 100 || et3 > 1600){
-                    alert("ETm should be in the range of 100 to 1600")
+                    alert("ETm should be in the range of 100mm to 1600mm")
                     return
                 }
             }
@@ -1283,7 +1328,7 @@ function Home() {
         if(et4 != null){
             if(et4 != ""){
                 if(et4 < 100 || et4 > 1600){
-                    alert("ETm should be in the range of 100 to 1600")
+                    alert("ETm should be in the range of 100mm to 1600mm")
                     return
                 }
             }
@@ -1291,12 +1336,26 @@ function Home() {
         if(et5 != null){
             if(et5 != ""){
                 if(et5 < 100 || et5 > 1600){
-                    alert("ETm should be in the range of 100 to 1600")
+                    alert("ETm should be in the range of 100mm to 1600mm")
                     return
                 }
             }
         }
-        setginfo('Yield (tons/ha)') 
+        if(aie != null ){
+            if(aie != ""){
+                if(aie> 100 || aie < 50){
+                    alert("Irrigation Efficieny should be between 50% to 100%")
+                    return
+                }
+            }
+            else if(aie == ""){
+                aie = 68
+            }
+        }
+        else if (aie == null){
+            aie =68
+        }
+        setginfo('Crop Yield (tons/ha)') 
         let eci =0;
         let ecw =0;
         let ETm =0;
@@ -1408,7 +1467,7 @@ function Home() {
             else{
                 Ym = 0;
             }
-            Eta = weca * 68 * (1-(eci/((5*ecw)-eci)))
+            Eta = weca * (aie/100) * (1-(eci/((5*ecw)-eci)))
             Ya = Ym * ((ky*((Eta/ETm)-1)+1))
             // setans([...ans,Ya]);
             ans_arr.push(Ya)
@@ -1423,7 +1482,7 @@ function Home() {
         if(ay1 != null ){
             if(ay1 != ""){
             if(ay1 < 5 || ay1 > 150){
-                alert("Expected yield should be in the range of 5 to 150 ")
+                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
                 return
             }
         }
@@ -1431,7 +1490,7 @@ function Home() {
         if(ay2 != null){
             if(ay2 != ""){
             if(ay2 < 5 || ay2 > 150){
-                alert("Expected yield should be in the range of 5 to 150 ")
+                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
                 return
             }
         }
@@ -1439,7 +1498,7 @@ function Home() {
         if(ay3 != null){
             if(ay3 != ""){
             if(ay3 < 5 || ay3 > 150){
-                alert("Expected yield should be in the range of 5 to 150 ")
+                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
                 return
             }
         }
@@ -1447,7 +1506,7 @@ function Home() {
         if(ay4 != null){
             if(ay4 != ""){
             if(ay4 < 5 || ay4 > 150){
-                alert("Expected yield should be in the range of 5 to 150 ")
+                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
                 return
             }
         }
@@ -1455,7 +1514,7 @@ function Home() {
         if(ay5 != null){
             if(ay5 != ""){
             if(ay5 < 5 || ay5 > 150){
-                alert("Expected yield should be in the range of 5 to 150 ")
+                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
                 return
             }
         }
@@ -1463,7 +1522,7 @@ function Home() {
         if(et1 != null){
             if(et1 != ""){
                 if(et1 < 100 || et1 > 1600){
-                    alert("ETm should be in the range of 100 to 1600")
+                    alert("ETm should be in the range of 100mm to 1600mm")
                     return
                 }
             }
@@ -1471,7 +1530,7 @@ function Home() {
         if(et2 != null){
             if(et2 != ""){
                 if(et2 < 100 || et2 > 1600){
-                    alert("ETm should be in the range of 100 to 1600")
+                    alert("ETm should be in the range of 100mm to 1600mm")
                     return
                 }
             }
@@ -1479,7 +1538,7 @@ function Home() {
         if(et3 != null){
             if(et3 != ""){
                 if(et3 < 100 || et3 > 1600){
-                    alert("ETm should be in the range of 100 to 1600")
+                    alert("ETm should be in the range of 100mm to 1600mm")
                     return
                 }
             }
@@ -1487,7 +1546,7 @@ function Home() {
         if(et4 != null){
             if(et4 != ""){
                 if(et4 < 100 || et4 > 1600){
-                    alert("ETm should be in the range of 100 to 1600")
+                    alert("ETm should be in the range of 100mm to 1600mm")
                     return
                 }
             }
@@ -1495,12 +1554,26 @@ function Home() {
         if(et5 != null){
             if(et5 != ""){
                 if(et5 < 100 || et5 > 1600){
-                    alert("ETm should be in the range of 100 to 1600")
+                    alert("ETm should be in the range of 100mm  to 1600mm")
                     return
                 }
             }
         }
-        setginfo('Water efficiency (%)') 
+        if(aie != null ){
+            if(aie != ""){
+                if(aie> 100 || aie < 50){
+                    alert("Irrigation Efficieny should be between 50% to 100%")
+                    return
+                }
+            }
+            else if(aie == "" ){
+                aie = 68
+            }
+        }
+        else if (aie == null){
+            aie =68
+        }
+        setginfo('Water use efficiency (tons/(ha*mm))') 
         let eci =0;
         let ecw =0;
         let ETm =0;
@@ -1609,7 +1682,8 @@ function Home() {
             else{
                 Ym = 0;
             }
-            Eta = weca * 68 * (1-(eci/((5*ecw)-eci)))
+            console.log(aie)
+            Eta = weca * (aie/100) * (1-(eci/((5*ecw)-eci)))
             Ya = Ym * ((ky*((Eta/ETm)-1))+1)
             ans_arr.push((Ya/weca))
         }
@@ -1766,9 +1840,9 @@ function Home() {
                 }
                     /></div>
                     <div className='graphdes'>
-                    <div className='gdes'><h9>LR -> Total water required for leaching</h9></div>
+                    <div className='gdes'><h9>LRw -> Total water required for leaching</h9></div>
                     <div className='gdes'><h9>ETa -> Actual ET</h9></div>
-                    <div className='gdes'><h9>IE -> Water required to meet the Irrigation Efficiency demands</h9></div>
+                    <div className='gdes'><h9>IEw -> Water required to meet the Irrigation Efficiency demands</h9></div>
                     <div className='gdes'><h9>IWR -> Total water requirement based on ET, IE and LR</h9></div>
                     </div>
                     <div className='saleach'>
@@ -1797,8 +1871,8 @@ function Home() {
                                     <Select
                                     onChange={handleChange}
                                     isMulti
-                                    options={crops}
-                                    value={crops.filter(obj => selectedValue.includes(obj.value))}
+                                    options={crops_m}
+                                    value={crops_m.filter(obj => selectedValue.includes(obj.value))}
                                     className="basic-multi-select"
                                     classNamePrefix="select"
                                     />
@@ -1862,8 +1936,8 @@ function Home() {
                                     <Select
                                     onChange={handleChange1}
                                     isMulti
-                                    options={crops}
-                                    value={crops.filter(obj => selectedValue1.includes(obj.value))}
+                                    options={crops_m}
+                                    value={crops_m.filter(obj => selectedValue1.includes(obj.value))}
                                     className="basic-multi-select"
                                     classNamePrefix="select"
                                     />
@@ -1921,8 +1995,8 @@ function Home() {
                                 <Select
                                 onChange={(e) => handleChange2(e)}
                                 isMulti
-                                options={crops}
-                                value={crops.filter(obj => selectedValue2.includes(obj.value))}
+                                options={crops_m}
+                                value={crops_m.filter(obj => selectedValue2.includes(obj.value))}
                                 className="basic-multi-select"
                                 classNamePrefix="select"
                                 />
@@ -1984,6 +2058,8 @@ function Home() {
                     <p> Crop 1:</p>
                     <div className='adoc'>
                         <Select 
+                        autosize={false}
+                        styles={{width: '120px !important'}}
                         onChange={(opt)=>{
                         let val=opt.label;
                         let val1 = opt.value;
@@ -2088,8 +2164,13 @@ function Home() {
                 </div>
                 <div>
                     <p><form>
-                    <label>Total water available (mm):{' '}
+                    <label>Total water available (mm)*:{' '}
                     <input type="number" placeholder = "(mm)" style={{width: "55px"}} onChange = {e => setweca(e.target.value)}/>
+                    </label>
+                </form></p>
+                <p><form>
+                    <label>Irrigation efficiency (%):{' '}
+                    <input type="number" placeholder = "(mm)" style={{width: "55px"}} onChange = {e => setaie(e.target.value)}/>
                     </label>
                 </form></p>
                 </div>
