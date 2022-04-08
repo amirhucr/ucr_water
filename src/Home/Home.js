@@ -185,7 +185,7 @@ function Home() {
         labels: cpsw,
         datasets: [
           {
-            label: 'Water efficiency (%)',
+            label: 'Water efficiency (tons/(ha*mm))',
             backgroundColor: `#00ffff`,
             borderColor: 'rgba(0,0,0,1)',
             borderWidth: 0.5,
@@ -2066,6 +2066,13 @@ function Home() {
                 <h4> Run optimization for up to 5 crops</h4>
                 <p>(Empty/left out inputs will take default values)</p>
                 <div className='adsi'>
+                        <div className='f1'>
+                            <div className='aco'><h4>Crop</h4></div>
+                            <div className='aey'><h4>Expected Yield (tons/ha)</h4></div>
+                            <div className='aetm'><h4>ETm (mm)</h4></div>
+                            <div className='acc'><h4>Crop Cost ($/ton)</h4></div>
+                            <div className='apc'><h4>Production Cost ($/ha)</h4></div>
+                        </div>
                     <div className='f1'>
                     <p> Crop 1</p>
                     <div className='adoc'>
