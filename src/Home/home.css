@@ -108,7 +108,15 @@
 }
 .inp{
     display: flex;
+    margin-left: 24%;
+}
+.inp1{
+    display: flex;
     margin-left: 6%;
+}
+.inp2{
+    display: flex;
+    margin-left: 18%;
 }
 .card1{
     margin-right: 10%;
@@ -183,11 +191,12 @@
     margin: 1.5%;
 }
 .adoc{
+    width: 15%;
     margin-top: 1%;
     margin-left: 1%;
 }
 .aey{
-    margin-left: 4%;
+    margin-left: 7%;
 }
 .aetm{
     margin-left: 2%;
@@ -196,8 +205,8 @@
     margin-left: 5%;
 }
 .apc{
-    margin-left: 4%;
+    margin-left: 3.25%;
 }
 .aco{
-    margin-left: 9%;
+    margin-left: 11%;
 }

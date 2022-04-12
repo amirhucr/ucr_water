@@ -91,16 +91,16 @@ function Home() {
     const [ai3, setai3] = useState('');
     const [ai4, setai4] = useState('');
     const [ai5, setai5] = useState('');
-    const [ c1, setc1] = useState(null);
-    const [ c2, setc2] = useState(null);
-    const [ c3, setc3] = useState(null);
-    const [ c4, setc4] = useState(null);
-    const [ c5, setc5] = useState(null);
-    const [ pc1, setpc1] = useState(null);
-    const [ pc2, setpc2] = useState(null);
-    const [ pc3, setpc3] = useState(null);
-    const [ pc4, setpc4] = useState(null);
-    const [ pc5, setpc5] = useState(null);
+    let [ c1, setc1] = useState(null);
+    let [ c2, setc2] = useState(null);
+    let [ c3, setc3] = useState(null);
+    let [ c4, setc4] = useState(null);
+    let [ c5, setc5] = useState(null);
+    let [ pc1, setpc1] = useState(null);
+    let [ pc2, setpc2] = useState(null);
+    let [ pc3, setpc3] = useState(null);
+    let [ pc4, setpc4] = useState(null);
+    let [ pc5, setpc5] = useState(null);
     let [ay1, setay1] = useState(null);
     let [ay2, setay2] = useState(null);
     let [ay3, setay3] = useState(null);
@@ -142,6 +142,7 @@ function Home() {
     const [wec1,setwa1] = useState(null);
     const [wec2,setwa2] = useState(null);
     const [weca,setweca] = useState(null);
+    let [bgc, setbgc] = useState(null)
     let [aie, setaie] = useState(null);
     const [ans, setans] = useState([]);
     const [ans1, setans1] = useState([]);
@@ -214,7 +215,7 @@ function Home() {
             axis: 'y',
             barThickness: 75,
             label: ginfo,
-            backgroundColor: `#1e90ff`,
+            backgroundColor: bgc,
             borderColor: 'rgba(0,0,0,1)',
             borderWidth: 0.5,
             data: ais
@@ -300,16 +301,93 @@ function Home() {
             alert("Please enter crop type")
             return
         }
-        if(ec != null ){
-            if(ec != ""){
-                if(ec> 5 || ec < 0.5){
-                    alert("Irrigation Water Salinity should be between 0.5(dS/m) to 5(dS/m)")
-                    return
+        if(ec != ""){
+            if(ec != null ){
+                if(pa == 1){
+                    if(ec > 2 || ec < 1){
+                        alert("Irrigation Water Salinity of Alfalfa should be between 1(dS/m) to 2(ds/m) ")
+                        return
+                    }
                 }
+                else if(pa == 2){
+                    if(ec > 5 || ec < 4){
+                        alert("Irrigation Water Salinity of Sugar beets should be between 4(dS/m) to 5(dS/m)")
+                        return
+                    }
+                }
+                else if(pa == 3){
+                    if(ec > 5 || ec < 3){
+                        alert("Irrigation Water Salinity of Wheat should be between 3(dS/m) to 5(dS/m)")
+                        return
+                    }
+                }
+                else if(pa == 4){
+                    if(ec > 5 || ec < 4){
+                        alert("Irrigation Water Salinity of Bermuda Grass should be between 4(dS/m) to 5(dS/m)")
+                        return
+                    }
+                }
+                else if(pa == 5){
+                    if(ec > 5 || ec < 4){
+                        alert("Irrigation Water Salinity of Klein Grass should be between 4(dS/m) to 5(dS/m)")
+                        return
+                    }
+                }
+                else if(pa == 6){
+                    if(ec > 2.5 || ec < 1){
+                        alert("Irrigation Water Salinity of Sudan Grass should be between 1(dS/m) to 2.5(dS/m)")
+                        return
+                    }
+                }
+                else if(pa == 7){
+                    if(ec > 1.5 || ec < 0.5){
+                        alert("Irrigation Water Salinity of Lettuce should be between 0.5(dS/m) to 1.5(dS/m)")
+                        return
+                    }
+                }
+                else if(pa == 8){
+                    if(ec > 1.5 || ec < 0.5){
+                        alert("Irrigation Water Salinity of Carrots should be between 0.5(dS/m) to 1.5(dS/m)")
+                        return
+                    }
+                }
+                else if(pa == 9){
+                    if(ec > 2.5 || ec < 1){
+                        alert("Irrigation Water Salinity of Broccoli should be between 1(dS/m) to 2.5(dS/m)")
+                        return
+                    }
+                }
+                else if(pa == 10){
+                    if(ec > 1.5 || ec < 0.5){
+                        alert("Irrigation Water Salinity of Onions should be between 0.5(dS/m) to 1.5(dS/m)")
+                        return
+                    }
+                }
+                else if(pa == 11 ){
+                    if(ec > 2 || ec < 1 ){
+                        alert("Irrigation Water Salinity of Spinach should be between 1(dS/m) to 2(dS/m)")
+                        return
+                    }
+                }
+                else if(pa == 12){
+                    if(ec > 2 || ec < 0.5){
+                        alert("Irrigation Water Salinity of Sweet Corn should be between 0.5(dS/m) to 2(dS/m)")
+                        return
+                    }
+                }
+                // if(ec != ""){
+                //     if(ec> 5 || ec < 0.5){
+                //         alert("Irrigation Water Salinity should be between 0.5(dS/m) to 5(dS/m)")
+                //         return
+                //     }
+                // }
+                // else if(ec == ""){
+                //     ec = null
+                // }
             }
-            else if(ec == ""){
-                ec = null
-            }
+        }
+        else if (ec == ""){
+            ec = null
         }
         if(ie != null ){
             if(ie != ""){
@@ -1119,7 +1197,38 @@ function Home() {
         else if (aie == null){
             aie =68
         }
+        if (c1 == ""){
+            c1 = null
+        }
+        if (c2 == ""){
+            c2 = null
+        }
+        if (c3 == ""){
+            c3 = null
+        }
+        if (c4 == ""){
+            c4 = null
+        }
+        if (c5 == ""){
+            c5 = null
+        }
+        if (pc1 == ""){
+            pc1 = null
+        }
+        if (pc2 == ""){
+            pc2 = null
+        }
+        if (pc3 == ""){
+            pc3 = null
+        }
+        if (pc4 == ""){
+            pc4 = null
+        }
+        if (pc5 == ""){
+            pc5 = null
+        }
         setginfo('Profit ($/ha)') 
+        setbgc('#daa520')
         let eci =0;
         let ecw =0;
         let ETm =0;
@@ -1364,6 +1473,7 @@ function Home() {
             aie =68
         }
         setginfo('Crop Yield (tons/ha)') 
+        setbgc('#9acd32')
         let eci =0;
         let ecw =0;
         let ETm =0;
@@ -1586,6 +1696,7 @@ function Home() {
             aie =68
         }
         setginfo('Water use efficiency (tons/(ha*mm))') 
+        setbgc(`#00ffff`)
         let eci =0;
         let ecw =0;
         let ETm =0;
@@ -1900,19 +2011,6 @@ function Home() {
                                 <input type="number" placeholder = "Enter the amount of water " style={{width: "175px"}} onChange = {e => setwa(e.target.value)}/>
                                 </div>
                             </div>
-                            <div className='card1'>
-                                <h4><u>Advanced/Optional Input</u></h4>
-                                <Box
-                                    component="form"
-                                    sx={{
-                                        '& > :not(style)': { m: 1, width: '17ch' },
-                                    }}
-                                    noValidate
-                                    autoComplete="off"
-                                    >
-                                    <TextField id="standard-basic" type="number" label="Irrigation Efficiency" variant="standard" />
-                                </Box>
-                            </div>
                     </div>
                     <div className='myo'>
                         <button className="gooey-button" onClick = {myo}>Calculate</button>
@@ -1937,7 +2035,7 @@ function Home() {
                     <div className='h'>
                             <h1>Maximize Revenue?</h1>
                     </div>
-                    <div className='inp'>
+                    <div className='inp1'>
                             <div className='cardc'>
                                 <div className='crop-image'>
                                 <img src={crop} />   
@@ -1996,7 +2094,7 @@ function Home() {
                 <div className='h'>
                         <h1>Maximize Water use efficiency?</h1>
                 </div>
-                <div className='inp'>
+                <div className='inp2'>
                         <div className='card1'>
                             <div className='crop-image'>
                             <img src={crop} />   
@@ -2024,23 +2122,6 @@ function Home() {
                             <input type="number" placeholder = "Enter the amount of water " style={{width: "175px"}} onChange = {e => setwa2(e.target.value)}/>
                             </div>
                         </div>
-                        <div className='card1'>
-                        <h4><u>Advanced/Optional Input</u></h4>
-                        <table>
-                            <tr>
-                            <th>Crop name</th>
-                            <th>Input</th>
-                            </tr>
-                            <tbody>
-                            {
-                                <tr>
-                                
-                                </tr>
-                            }
-                            </tbody>
-                        </table>
-                            
-                    </div>
                 </div>
                 <div className='myo'>
                     <button className="gooey-button" onClick = {mwe}>Calculate</button>
@@ -2065,12 +2146,29 @@ function Home() {
                 <h1><u>Advanced options</u></h1>
                 <h4> Run optimization for up to 5 crops</h4>
                 <p>(Empty/left out inputs will take default values)</p>
+                <div>
+                <div className='card1'>
+                            <div className='crop-image'>
+                            <img src={drop} />   
+                            </div>
+                        </div>
+                    <p><form>
+                    <label>Total water available (mm)*:{' '}
+                    <input type="number" placeholder = "(mm)" style={{width: "55px"}} onChange = {e => setweca(e.target.value)}/>
+                    </label>
+                </form></p>
+                <p><form>
+                    <label>Irrigation efficiency (%):{' '}
+                    <input type="number" placeholder = "(%)" style={{width: "55px"}} onChange = {e => setaie(e.target.value)}/>
+                    </label>
+                </form></p>
+                </div>
                 <div className='adsi'>
                         <div className='f1'>
                             <div className='aco'><h4>Crop</h4></div>
                             <div className='aey'><h4>Expected Yield (tons/ha)</h4></div>
                             <div className='aetm'><h4>ETm (mm)</h4></div>
-                            <div className='acc'><h4>Crop Cost ($/ton)</h4></div>
+                            <div className='acc'><h4>Crop Price ($/ton)</h4></div>
                             <div className='apc'><h4>Production Cost ($/ha)</h4></div>
                         </div>
                     <div className='f1'>
@@ -2093,7 +2191,7 @@ function Home() {
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay1(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet1(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($/ton)" style={{width: "120px"}} onChange = {e => setc1(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Crop Price ($/ton)" style={{width: "120px"}} onChange = {e => setc1(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "Production cost ($/ha)" style={{width: "145px"}} onChange = {e => setpc1(e.target.value)}/></div>
                     </div>
                     <div className='f1'>
@@ -2114,7 +2212,7 @@ function Home() {
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay2(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet2(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($/ton)" style={{width: "120px"}} onChange = {e => setc2(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Crop Price ($/ton)" style={{width: "120px"}} onChange = {e => setc2(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "Production cost ($/ha)" style={{width: "145px"}} onChange = {e => setpc2(e.target.value)}/></div>
                     </div>
                     <div className='f1'>
@@ -2135,7 +2233,7 @@ function Home() {
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay3(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet3(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($/ton)" style={{width: "120px"}} onChange = {e => setc3(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Crop Price ($/ton)" style={{width: "120px"}} onChange = {e => setc3(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "Production cost ($/ha)" style={{width: "145px"}} onChange = {e => setpc3(e.target.value)}/></div>
                     </div>
                     <div className='f1'>
@@ -2156,7 +2254,7 @@ function Home() {
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay4(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet4(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($/ton)" style={{width: "120px"}} onChange = {e => setc4(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Crop Price ($/ton)" style={{width: "120px"}} onChange = {e => setc4(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "Production cost ($/ha)" style={{width: "145px"}} onChange = {e => setpc4(e.target.value)}/></div>
                     </div>
                     <div className='f1'>
@@ -2177,26 +2275,15 @@ function Home() {
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay5(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet5(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "Crop cost ($/ton)" style={{width: "120px"}} onChange = {e => setc5(e.target.value)}/></div>
+                    <div className='adpn'> <input type="number" placeholder = "Crop Price ($/ton)" style={{width: "120px"}} onChange = {e => setc5(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "Production cost ($/ha)" style={{width: "145px"}} onChange = {e => setpc5(e.target.value)}/></div>
                     </div>
                 </div>
+                
                 <div>
-                    <p><form>
-                    <label>Total water available (mm)*:{' '}
-                    <input type="number" placeholder = "(mm)" style={{width: "55px"}} onChange = {e => setweca(e.target.value)}/>
-                    </label>
-                </form></p>
-                <p><form>
-                    <label>Irrigation efficiency (%):{' '}
-                    <input type="number" placeholder = "(%)" style={{width: "55px"}} onChange = {e => setaie(e.target.value)}/>
-                    </label>
-                </form></p>
-                </div>
-                <div>
-                    <button className="gooey-button" style = {{marginLeft:"1%" }} onClick = {yap}> Compare Yield </button>
-                    <button className="gooey-button" style = {{marginLeft:"1%" }} onClick = {rap}> Compare Profit </button>
-                    <button className="gooey-button" style = {{marginLeft:"1%" }} onClick = {mweap}>Compare Water Efficiency</button>
+                    <button className="gooey-button" style = {{marginLeft:"1%" , marginTop:"1%" }} onClick = {yap}> Compare Yield </button>
+                    <button className="gooey-button" style = {{marginLeft:"1%" , marginTop:"1%"}} onClick = {rap}> Compare Profit </button>
+                    <button className="gooey-button" style = {{marginLeft:"1%" , marginTop:"1%" }} onClick = {mweap}>Compare Water Efficiency</button>
                 </div>
                 <div className='graph'>
                 <Bar
