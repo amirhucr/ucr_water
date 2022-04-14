@@ -185,10 +185,11 @@
 }
 .adsi{
     /* display: inline-block */
-    margin-left: 20%;
+    margin-left: 8%;
 }
 .adpn{
     margin: 1.5%;
+    margin-left: 7%;
 }
 .adoc{
     width: 15%;
@@ -196,17 +197,37 @@
     margin-left: 1%;
 }
 .aey{
-    margin-left: 7%;
+    margin-left: 10%;
+    margin-top: 2.5%;
 }
 .aetm{
     margin-left: 2%;
+    margin-top: 2.5%;
 }
 .acc{
-    margin-left: 5%;
+    margin-left: 3.5%;
 }
 .apc{
-    margin-left: 3.25%;
+    margin-left: 10%;
+    margin-top: 2.5%;
 }
 .aco{
     margin-left: 11%;
+    margin-top: 2.5%;
+}
+.atop{
+    display: flex;
+    margin-left: 16%;
+}
+.adpn2{
+    margin: 1.5%;
+    margin-left: 7%;
+}
+.adpn3{
+    margin: 1.5%;
+    margin-left: 7%;
+}
+.adpn4{
+    margin: 1.5%;
+    margin-left: 7%;
 }

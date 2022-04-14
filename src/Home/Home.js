@@ -120,6 +120,7 @@ function Home() {
     let [ais, setais] = useState([])
     let [st, setst] = useState(0);
     let [it, setit] = useState(0);
+    let [ait, setait] = useState(0)
     const [a,seta]    = useState('');
     const [y, sety] = useState('');
     let [lr, setlr] = useState(0);
@@ -134,7 +135,7 @@ function Home() {
     let [iw3, setiw3] = useState(0);
     let [yr1, setyr1] = useState('');
     let [yr2, setyr2] = useState('');
-    let [ie, setie] = useState(68);
+    let [ie, setie] = useState(null);
     const [c,setc] = useState('');
     const [d,setd] = useState('');
     const [wec,setwa] = useState(null);
@@ -153,6 +154,11 @@ function Home() {
     let [myc, setmyc] = useState('');
     let [mrc, setmrc] = useState('');
     let [mwc, setmwc] = useState('');
+    let [imt1, setimt1] = useState('');
+    let [imt2, setimt2] = useState('');
+    let [imt3, setimt3] = useState('');
+    let [imt4, setimt4] = useState('');
+    let [imt5, setimt5] = useState('');
     const [selectedValue, setSelectedValue] = useState([]);
     const [selectedValue1, setSelectedValue1] = useState([]);
     const [selectedValue2, setSelectedValue2] = useState([]);
@@ -396,7 +402,42 @@ function Home() {
                     return
                 }
             }
-            else if(ie == ""){
+        }
+        if(ie == null || ie == ""){
+            if(it == 1){
+                ie = 68
+            }
+            else if (it == 2){
+                ie = 83
+            }
+            else if (it == 3){
+                ie = 73
+            }
+            else if (it == 4){
+                ie = 73
+            }
+            else if (it == 5){
+                ie = 78
+            }
+            else if (it == 6){
+                ie = 70
+            }
+            else if (it == 7){
+                ie = 82
+            }
+            else if (it == 8){
+                ie = 70
+            }
+            else if (it == 9){
+                ie = 81
+            }
+            else if (it == 10){
+                ie = 73
+            }
+            else if (it == 11){
+                ie = 80
+            }
+            else{
                 ie = 68
             }
         }
@@ -413,84 +454,84 @@ function Home() {
         if (pa == 1){
             ky=1;
             eci = 2;
-            ecw = ec ?? 1.3;
+            ecw = ec ?? 1.2;
             ETm=1500;
             Ym = 23;
            }
         else if ( pa == 2){
            ky = 0.85;
            eci=7;
-           ecw=ec ?? 4.7;
+           ecw=ec ?? 1.2;
            ETm=1050;
            Ym = 120;
         }
         else if (pa == 3){
             ky = 1.05;
            eci=6;
-           ecw=ec ?? 4;
+           ecw=ec ?? 1.2;
            ETm=620;
            Ym = 7.5;
         }
         else if (pa == 4){
             ky = 0.85;
            eci=6.9;
-           ecw=ec ?? 4.6;
+           ecw=ec ?? 1.2;
            ETm=1200;
            Ym = 19;
         }
         else if (pa ==5 ){
             ky = 0.9;
            eci=4;
-           ecw= ec ?? 2.7;
+           ecw= ec ?? 1.2;
            ETm=1250;
            Ym = 24;
         }
         else if (pa == 6){
             ky = 0.9;
            eci=2.8;
-           ecw= ec ?? 1.9;
+           ecw= ec ?? 1.2;
            ETm=800;
            Ym = 14;
         }
         else if (pa ==7 ){
             ky = 1.15;
             eci=1.3;
-            ecw= ec ?? 1;
+            ecw= ec ?? 1.2;
             ETm=320;
             Ym = 20;
         }
         else if (pa == 8){
             ky =1.1 ;
           eci=1;
-          ecw= ec ?? 0.8;
+          ecw= ec ?? 1.2;
           ETm=600;
           Ym = 110;
         }
         else if (pa == 9){
             ky = 1;
            eci=2.8;
-           ecw= ec ?? 1.9;
+           ecw= ec ?? 1.2;
            ETm=350;
            Ym = 15;
         }
         else if (pa == 10){
             ky =1.1 ;
           eci=1.2;
-          ecw=ec ?? 0.9;
+          ecw=ec ?? 1.2;
           ETm=800;
           Ym = 60;
         }
         else if (pa ==11 ){
             ky = 1.15;
            eci=2;
-           ecw=ec ?? 1.3;
+           ecw=ec ?? 1.2;
            ETm=200;
            Ym = 14;
         }
         else if (pa ==12 ){
             ky = 1.1;
           eci=1.7;
-          ecw= ec ?? 1.1;
+          ecw= ec ?? 1.2;
           ETm=600;
           Ym = 27;
         }
@@ -629,17 +670,17 @@ function Home() {
         setd4((d4*100).toFixed(0))
         setd5((d5*100).toFixed(0))
         lr = ecw/((5*eci) - ecw)
-        iw0= ((ETm )/((1-lr)))-ETm
-        iw1= (ETm )/(ie/100)
-        iw2 = iw1 - ETm
+        iw1= (ETm )
         iw3= (ETm )/((ie/100)*(1-lr))
+        iw2 = iw3 - (iw3*(ie/100))
+        iw0 = iw3 - iw1 - iw2
         setiw1(ETm.toFixed(0))
         setiw2(iw2.toFixed(0))
         setiw3(iw3.toFixed(0))
         setiw0(iw0.toFixed(0))
         setc((lr*100).toFixed(2))
         sety(Ym)
-        console.log(lr)
+        console.log(ie)
        }
        const handleChange = (e) => {
         setSelectedValue(Array.isArray(e) ? e.map(x => x.value) : []);
@@ -1103,45 +1144,13 @@ function Home() {
             alert("Please enter amount of water available")
             return
         }
-        if(ay1 != null ){
-            if(ay1 != ""){
-            if(ay1 < 5 || ay1 > 150){
-                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
+        if (weca != null && weca != ""){
+            if(weca< 0 || weca > 3000){
+                alert("Available water should be between 0 and 3000")
+            }
+            if(weca == 0){
                 return
             }
-        }
-        }
-        if(ay2 != null){
-            if(ay2 != ""){
-            if(ay2 < 5 || ay2 > 150){
-                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
-                return
-            }
-        }
-        }
-        if(ay3 != null){
-            if(ay3 != ""){
-            if(ay3 < 5 || ay3 > 150){
-                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
-                return
-            }
-        }
-        }
-        if(ay4 != null){
-            if(ay4 != ""){
-            if(ay4 < 5 || ay4 > 150){
-                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
-                return
-            }
-        }
-        }
-        if(ay5 != null){
-            if(ay5 != ""){
-            if(ay5 < 5 || ay5 > 150){
-                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
-                return
-            }
-        }
         }
         if(et1 != null){
             if(et1 != ""){
@@ -1190,12 +1199,44 @@ function Home() {
                     return
                 }
             }
-            else if(aie == "" || aie == null){
+        }
+        if(aie == null || aie == ""){
+            if(ait == 1){
                 aie = 68
             }
-        }
-        else if (aie == null){
-            aie =68
+            else if (ait == 2){
+                aie = 83
+            }
+            else if (ait == 3){
+                aie = 73
+            }
+            else if (ait == 4){
+                aie = 73
+            }
+            else if (ait == 5){
+                aie = 78
+            }
+            else if (ait == 6){
+                aie = 70
+            }
+            else if (ait == 7){
+                aie = 82
+            }
+            else if (ait == 8){
+                aie = 70
+            }
+            else if (ait == 9){
+                aie = 81
+            }
+            else if (ait == 10){
+                aie = 73
+            }
+            else if (ait == 11){
+                aie = 80
+            }
+            else{
+                aie = 68
+            }
         }
         if (c1 == ""){
             c1 = null
@@ -1259,7 +1300,11 @@ function Home() {
                 ETm= etm_arr[i] ?? 1500;
                 ky = 1;
                 Ym = y_arr[i] ?? 23;
-                cost = c_arr[i] ?? 200;
+                cost = c_arr[i] ?? 209;
+                if ( Ym > 125){
+                    alert("The maximum expected yield for Sugar beets should be 125(tons/ha)")
+                    return
+                }
                }
             else if ( my_arr[i] == 2){
                eci=7;
@@ -1267,7 +1312,11 @@ function Home() {
                ETm=etm_arr[i] ?? 1050;
                ky = 0.85;
                Ym = y_arr[i] ?? 120;
-               cost = c_arr[i] ?? 200;
+               cost = c_arr[i] ?? 147;
+               if ( Ym > 125){
+                alert("The maximum expected yield for Sugar beets should be 125(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] == 3){
                eci=6;
@@ -1275,7 +1324,11 @@ function Home() {
                ETm= etm_arr[i] ?? 620;
                ky = 1.05;
                Ym = y_arr[i] ?? 7.5;
-               cost = c_arr[i] ?? 200;
+               cost = c_arr[i] ?? 288;
+               if ( Ym > 9){
+                alert("The maximum expected yield for Wheat should be 9(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] == 4){
                eci=6.9;
@@ -1284,6 +1337,10 @@ function Home() {
                ky = 0.9;
                Ym =y_arr[i] ??  19;
                cost = c_arr[i] ?? 200;
+               if ( Ym > 20){
+                alert("The maximum expected yield for Bermuda Grass should be 20(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] ==5 ){
                eci=4;
@@ -1292,6 +1349,10 @@ function Home() {
                ky = 0.9;
                Ym = y_arr[i] ?? 24;
                cost = c_arr[i] ?? 200;
+               if ( Ym > 25){
+                alert("The maximum expected yield for Klein Grass should be 25(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] == 6){
                eci=2.8;
@@ -1300,6 +1361,10 @@ function Home() {
                ky = 0.9;
                Ym = y_arr[i] ?? 14;
                cost = c_arr[i] ?? 200;
+               if ( Ym > 15){
+                alert("The maximum expected yield for Sudan Grass should be 15(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] ==7 ){
                 eci=1.3;
@@ -1307,7 +1372,11 @@ function Home() {
                 ETm= etm_arr[i] ?? 320;
                 ky = 1.15;
                Ym = y_arr[i] ?? 20;
-               cost = c_arr[i] ?? 200;
+               cost = c_arr[i] ?? 683.93;
+               if ( Ym > 20){
+                alert("The maximum expected yield for Lettuce should be 20(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] == 8){
               eci=1;
@@ -1315,7 +1384,11 @@ function Home() {
               ETm= etm_arr[i] ?? 600;
               ky = 1.1;
               Ym = y_arr[i] ?? 110;
-              cost = c_arr[i] ?? 200;
+              cost = c_arr[i] ?? 464.29;
+              if ( Ym > 111){
+                alert("The maximum expected yield for Carrots should be 111(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] == 9){
                eci=2.8;
@@ -1323,7 +1396,11 @@ function Home() {
                ETm= etm_arr[i] ?? 350;
                ky = 1;
                Ym = y_arr[i] ?? 15;
-               cost = c_arr[i] ?? 200;
+               cost = c_arr[i] ?? 919.64;
+               if ( Ym > 16){
+                alert("The maximum expected yield for Broccoli should be 16(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] == 10){
               eci=1.2;
@@ -1331,7 +1408,11 @@ function Home() {
               ETm= etm_arr[i] ?? 800;
               ky = 1.1;
                Ym = y_arr[i] ?? 60;
-               cost = c_arr[i] ?? 200;
+               cost = c_arr[i] ?? 503.57;
+               if ( Ym > 62){
+                alert("The maximum expected yield for Onions should be 62(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] ==11 ){
                eci=2;
@@ -1339,7 +1420,11 @@ function Home() {
                ETm=etm_arr[i] ?? 200;
                ky = 1.15;
                Ym = y_arr[i] ?? 14;
-               cost = c_arr[i] ?? 200;
+               cost = c_arr[i] ?? 1237.50;
+               if ( Ym > 15){
+                alert("The maximum expected yield for Spinach should be 15(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] ==12 ){
               eci=1.7;
@@ -1347,13 +1432,20 @@ function Home() {
               ETm= etm_arr[i] ?? 600;
               ky = 1.1;
                Ym = y_arr[i] ?? 27;
-               cost = c_arr[i] ?? 200;
+               cost = c_arr[i] ?? 1482.14;
+               if ( Ym > 30){
+                alert("The maximum expected yield for Sweet Corn should be 30(tons/ha)")
+                return
+            }
             }
             else{
                 Ym = 0;
             }
             Eta = weca * (aie/100) * (1-(ecw/((5*eci) - ecw)))
             Ya = Ym * ((ky*((Eta/ETm)-1))+1)
+            if (Ya>Ym){
+                Ya = Ym
+            }
             revenue = Ya * cost
             pcost = p_arr[i] ?? (0.2 * revenue)
             profit = revenue - pcost
@@ -1371,6 +1463,14 @@ function Home() {
             alert("Please enter amount of water available")
             return
         }
+        if (weca != null && weca != ""){
+            if(weca< 0 || weca > 3000){
+                alert("Available water should be between 0 and 3000")
+            }
+            if(weca == 0){
+                return
+            }
+        }
         // if(ay1 != null ||ay2 != null || ay3 != null || ay4 != null || ay5 != null){
         //     if(ay1 != "" || ay2 != "" || ay3 != "" || ay4 != "" || ay5 != ""){
         //         if(ay1 < 5 || ay1 > 150 || ay2 < 5 || ay2 > 150 || ay3 < 5 || ay3 > 150|| ay4 < 5 || ay4 > 150|| ay5 < 5 || ay5 > 150){
@@ -1378,46 +1478,46 @@ function Home() {
         //         }
         //     }
         // }
-        if(ay1 != null ){
-            if(ay1 != ""){
-            if(ay1 < 5 || ay1 > 150){
-                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
-                return
-            }
-        }
-        }
-        if(ay2 != null){
-            if(ay2 != ""){
-            if(ay2 < 5 || ay2 > 150){
-                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
-                return
-            }
-        }
-        }
-        if(ay3 != null){
-            if(ay3 != ""){
-            if(ay3 < 5 || ay3 > 150){
-                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
-                return
-            }
-        }
-        }
-        if(ay4 != null){
-            if(ay4 != ""){
-            if(ay4 < 5 || ay4 > 150){
-                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
-                return
-            }
-        }
-        }
-        if(ay5 != null){
-            if(ay5 != ""){
-            if(ay5 < 5 || ay5 > 150){
-                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
-                return
-            }
-        }
-        }
+        // if(ay1 != null ){
+        //     if(ay1 != ""){
+        //     if(ay1 < 5 || ay1 > 150){
+        //         alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
+        //         return
+        //     }
+        // }
+        // }
+        // if(ay2 != null){
+        //     if(ay2 != ""){
+        //     if(ay2 < 5 || ay2 > 150){
+        //         alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
+        //         return
+        //     }
+        // }
+        // }
+        // if(ay3 != null){
+        //     if(ay3 != ""){
+        //     if(ay3 < 5 || ay3 > 150){
+        //         alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
+        //         return
+        //     }
+        // }
+        // }
+        // if(ay4 != null){
+        //     if(ay4 != ""){
+        //     if(ay4 < 5 || ay4 > 150){
+        //         alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
+        //         return
+        //     }
+        // }
+        // }
+        // if(ay5 != null){
+        //     if(ay5 != ""){
+        //     if(ay5 < 5 || ay5 > 150){
+        //         alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
+        //         return
+        //     }
+        // }
+        // }
         if(et1 != null){
             if(et1 != ""){
                 if(et1 < 100 || et1 > 1600){
@@ -1465,12 +1565,44 @@ function Home() {
                     return
                 }
             }
-            else if(aie == ""){
+        }
+        if(aie == null || aie == ""){
+            if(ait == 1){
                 aie = 68
             }
-        }
-        else if (aie == null){
-            aie =68
+            else if (ait == 2){
+                aie = 83
+            }
+            else if (ait == 3){
+                aie = 73
+            }
+            else if (ait == 4){
+                aie = 73
+            }
+            else if (ait == 5){
+                aie = 78
+            }
+            else if (ait == 6){
+                aie = 70
+            }
+            else if (ait == 7){
+                aie = 82
+            }
+            else if (ait == 8){
+                aie = 70
+            }
+            else if (ait == 9){
+                aie = 81
+            }
+            else if (ait == 10){
+                aie = 73
+            }
+            else if (ait == 11){
+                aie = 80
+            }
+            else{
+                aie = 68
+            }
         }
         setginfo('Crop Yield (tons/ha)') 
         setbgc('#9acd32')
@@ -1488,9 +1620,6 @@ function Home() {
         while(ais.length > 0) {
             ais.pop();
         }
-        // while(cps.length > 0) {
-        //     cps.pop();
-        //}
         for(let i=0;i<my_arr.length;i++){
             if (y_arr[i] == ""){
                 y_arr[i] = null
@@ -1504,6 +1633,10 @@ function Home() {
                 ETm= etm_arr[i] ?? 1500;
                 ky = 1;
                 Ym = y_arr[i] ?? 23;
+                if ( Ym > 25){
+                    alert("The maximum expected yield for Alfalfa should be 25(tons/ha)")
+                    return
+                }
                }
             else if ( my_arr[i] == 2){
                eci=7;
@@ -1511,6 +1644,10 @@ function Home() {
                ETm= etm_arr[i] ?? 1050;
                ky = 0.85;
                Ym = y_arr[i] ?? 120;
+               if ( Ym > 125){
+                alert("The maximum expected yield for Sugar beets should be 125(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] == 3){
                eci=6;
@@ -1518,6 +1655,10 @@ function Home() {
                ETm= etm_arr[i] ?? 620;
                ky = 1.05;
                Ym = y_arr[i] ??  7.5;
+               if ( Ym > 9){
+                alert("The maximum expected yield for Wheat should be 9(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] == 4){
                eci=6.9;
@@ -1525,6 +1666,10 @@ function Home() {
                ETm= etm_arr[i] ?? 1200;
                ky = 0.9;
                Ym = y_arr[i] ?? 19;
+               if ( Ym > 20){
+                alert("The maximum expected yield for Bermuda Grass should be 20(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] ==5 ){
                eci=4;
@@ -1532,6 +1677,10 @@ function Home() {
                ETm= etm_arr[i] ?? 1250;
                ky = 0.9;
                Ym = y_arr[i] ??24;
+               if ( Ym > 25){
+                alert("The maximum expected yield for Klein Grass should be 25(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] == 6){
                eci=2.8;
@@ -1539,6 +1688,10 @@ function Home() {
                ETm= etm_arr[i] ?? 800;
                ky = 0.9;
                Ym = y_arr[i] ?? 14;
+               if ( Ym > 15){
+                alert("The maximum expected yield for Sudan Grass should be 15(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] ==7 ){
                 eci=1.3;
@@ -1546,6 +1699,10 @@ function Home() {
                 ETm= etm_arr[i] ?? 320;
                 ky = 1.15;
                Ym =  y_arr[i] ?? 20;
+               if ( Ym > 20){
+                alert("The maximum expected yield for Lettuce should be 20(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] == 8){
               eci=1;
@@ -1553,6 +1710,10 @@ function Home() {
               ETm= etm_arr[i] ?? 600;
               ky = 1.1;
               Ym = y_arr[i] ?? 110;
+              if ( Ym > 111){
+                alert("The maximum expected yield for Carrots should be 111(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] == 9){
                eci=2.8;
@@ -1560,6 +1721,10 @@ function Home() {
                ETm= etm_arr[i] ?? 350;
                ky = 1;
                Ym = y_arr[i] ?? 15;
+               if ( Ym > 16){
+                alert("The maximum expected yield for Broccoli should be 16(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] == 10){
               eci=1.2;
@@ -1567,6 +1732,10 @@ function Home() {
               ETm= etm_arr[i] ?? 800;
               ky = 1.1;
                Ym = y_arr[i] ?? 60;
+               if ( Ym > 62){
+                alert("The maximum expected yield for Onions should be 62(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] ==11 ){
                eci=2;
@@ -1574,6 +1743,10 @@ function Home() {
                ETm= etm_arr[i] ?? 200;
                ky = 1.15;
                Ym = y_arr[i] ?? 14;
+               if ( Ym > 15){
+                alert("The maximum expected yield for Spinach should be 15(tons/ha)")
+                return
+            }
             }
             else if (my_arr[i] ==12 ){
               eci=1.7;
@@ -1581,12 +1754,19 @@ function Home() {
               ETm= etm_arr[i] ?? 600;
               ky = 1.1;
                Ym = y_arr[i] ?? 27;
+               if ( Ym > 30){
+                alert("The maximum expected yield for Sweet Corn should be 30(tons/ha)")
+                return
+            }
             }
             else{
                 Ym = 0;
             }
             Eta = weca * (aie/100) * (1-(ecw/((5*eci) - ecw)))
             Ya = Ym * ((ky*((Eta/ETm)-1)+1))
+            if (Ya>Ym){
+                Ya = Ym
+            }
             // setans([...ans,Ya]);
             ans_arr.push(Ya.toFixed(1))
         }
@@ -1601,45 +1781,13 @@ function Home() {
             alert("Please enter amount of water available")
             return
         }
-        if(ay1 != null ){
-            if(ay1 != ""){
-            if(ay1 < 5 || ay1 > 150){
-                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
+        if (weca != null && weca != ""){
+            if(weca< 0 || weca > 3000){
+                alert("Available water should be between 0 and 3000")
+            }
+            if(weca == 0){
                 return
             }
-        }
-        }
-        if(ay2 != null){
-            if(ay2 != ""){
-            if(ay2 < 5 || ay2 > 150){
-                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
-                return
-            }
-        }
-        }
-        if(ay3 != null){
-            if(ay3 != ""){
-            if(ay3 < 5 || ay3 > 150){
-                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
-                return
-            }
-        }
-        }
-        if(ay4 != null){
-            if(ay4 != ""){
-            if(ay4 < 5 || ay4 > 150){
-                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
-                return
-            }
-        }
-        }
-        if(ay5 != null){
-            if(ay5 != ""){
-            if(ay5 < 5 || ay5 > 150){
-                alert("Expected yield should be in the range of 5(tons/ha) to 150(tons/ha) ")
-                return
-            }
-        }
         }
         if(et1 != null){
             if(et1 != ""){
@@ -1688,30 +1836,69 @@ function Home() {
                     return
                 }
             }
-            else if(aie == "" ){
+        }
+        if(aie == null || aie == ""){
+            if(ait == 1){
+                aie = 68
+            }
+            else if (ait == 2){
+                aie = 83
+            }
+            else if (ait == 3){
+                aie = 73
+            }
+            else if (ait == 4){
+                aie = 73
+            }
+            else if (ait == 5){
+                aie = 78
+            }
+            else if (ait == 6){
+                aie = 70
+            }
+            else if (ait == 7){
+                aie = 82
+            }
+            else if (ait == 8){
+                aie = 70
+            }
+            else if (ait == 9){
+                aie = 81
+            }
+            else if (ait == 10){
+                aie = 73
+            }
+            else if (ait == 11){
+                aie = 80
+            }
+            else{
                 aie = 68
             }
         }
-        else if (aie == null){
-            aie =68
-        }
-        setginfo('Water use efficiency (tons/(ha*mm))') 
-        setbgc(`#00ffff`)
-        let eci =0;
-        let ecw =0;
-        let ETm =0;
-        let ky = 0;
-        let Ym = 0;
-        let Eta = 0;
-        let Ya = 0;
+        setginfo('Water saving percentage(%)') 
+        setbgc(`#6495ed`)
         let ans_arr = [];
         let my_arr = [ayv1, ayv2, ayv3, ayv4, ayv5]
         let y_arr = [ay1, ay2, ay3, ay4, ay5]
         let etm_arr = [et1, et2, et3, et4, et5]
+        let imt_arr = [imt1,imt2,imt3,imt4,imt5]
         while(ais.length > 0) {
             ais.pop();
         }
+        while(imt_arr.length > 0) {
+            imt_arr.pop();
+        }
         for(let i=0;i<my_arr.length;i++){
+            let eci =0;
+            let ecw =0;
+            let ETm =0;
+            let ky = 0;
+            let Ym = 0;
+            let Eta = 0;
+            let temp = 1;
+            let lr = 0;
+            let aiw3 = 0;
+            let wsp =0;
             if (y_arr[i] == ""){
                 y_arr[i] = null
             }
@@ -1804,13 +1991,44 @@ function Home() {
             }
             else{
                 Ym = 0;
+                temp = 0;
             }
-            console.log(aie)
-            Eta = weca * (aie/100) * (1-(ecw/((5*eci) - ecw)))
-            Ya = Ym * ((ky*((Eta/ETm)-1))+1)
-            ans_arr.push((Ya/weca))
+            lr = ecw/((5*eci) - ecw)
+            aiw3= (ETm )/((aie/100)*(1-lr))
+            wsp = ((weca - aiw3) / weca) * temp
+            console.log(weca)
+            console.log(aiw3)
+            if ( wsp < 0){
+                wsp = 0
+            }
+            // console.log(wsp)
+
+            ans_arr.push((wsp*100))
+            if ((weca *(aie/100)) < ETm){
+                // let value = 0;
+                // value = ((ETm - (weca*(aie/100)))/ETm) *100
+                imt_arr[i]= "Deficit irrigation is practiced"
+            }
+            else if ((weca *(aie/100) > ETm) && (weca < aiw3)){
+                imt_arr[i] ="Not enough water for leaching. There could be yield reduction because of salinity build up."
+            }
+            else if (aiw3 == weca ){
+                imt_arr[i] ="Maximum yield could be achieved, since IE, ET and leaching requirements are fulfilled."
+            }
+            else if ( weca > aiw3 ){
+                imt_arr[i]="Water can be conserved"
+            }
+            else{
+                imt_arr[i] = " "
+            }
         }
         setais(ans_arr)
+        
+        setimt1(imt_arr[0])
+        setimt2(imt_arr[1])
+        setimt3(imt_arr[2])
+        setimt4(imt_arr[3])
+        setimt5(imt_arr[4])
     }
   
       
@@ -1820,7 +2038,7 @@ function Home() {
                 <div className='cardr0'>
                 <div className='crop-image'>
                 <img src={crop} />   
-                <p> Crop*</p>
+                <p> Crop</p>
                 </div>
                 <div className = "crop_details ">
                 <p className = "input">
@@ -1905,13 +2123,13 @@ function Home() {
             <div className='r1'>
                 <div className='c0'>
                     <div className='ay'>
-                        <h2>Actual Yield</h2>
+                        <h2>Maximum Yield</h2>
                         <div className='eto'><p>{y} (tons/ha)</p></div>
                     </div>
                     <div className='di'>
                     <h2>Deficit Irrigation</h2>
                     
-                    <h5>X-axis: Deficit Irrigation(%), Y-axis: Yield Reduction(%)</h5>
+                    <h5>X-axis: Deficit irrigation (% of full irrigation), Y-axis: Yield Reduction(% of maximum yield)</h5>
                     <div className="graphdi" >
                     <Paper className="graph1" >
                     <Chart 
@@ -1934,7 +2152,7 @@ function Home() {
                             <div className='nlr'>
                                 {pa.myPaVal}
                                 <div className='cb'>
-                                <div className='lrl'><p>Leaching Requirement:</p></div>
+                                <div className='lrl'><p>Leaching Requirement (Standard method):</p></div>
                                 <div className="Default">
                                 <CircularProgressbar value={c} text={`${c}%`} style={{ width: 400, height: 400 }} />
                                 </div>
@@ -1971,173 +2189,10 @@ function Home() {
                     <div className='saleach'>
                     <h3>Want to know more about Leaching related Yield Reduction?</h3>
                     <p>Follow the link below</p>
-                    <a href="https://salinity.ucr.edu/Sindex.html"> SALEACH</a>
+                    <a href="https://salinity.ucr.edu/Sindex.html" target="_blank"> SALEACH</a>
                     </div>
                     </div>  
                 </div> 
-            </div>
-            <div className="sep">
-            <ColoredLine color="black" />
-            </div>
-            <div className='my'>
-                    <div className='h'>
-                            <h1>Maximize Yield?</h1>
-                    </div>
-                    <div className='inp'>
-                            <div className='cardc'>
-                                <div className='crop-image'>
-                                <img src={crop} />   
-                                <p>Select the crops to compare</p>
-                                </div>
-                                <div className = "crop_details1">
-                                <p>
-                                    <Select
-                                    onChange={handleChange}
-                                    isMulti
-                                    options={crops_m}
-                                    value={crops_m.filter(obj => selectedValue.includes(obj.value))}
-                                    className="basic-multi-select"
-                                    classNamePrefix="select"
-                                    />
-                                   
-                                </p> 
-                                
-                                </div>
-                            </div> 
-                            <div className='card1'>
-                                <div className='crop-image'>
-                                <img src={drop} />   
-                                <p> Water Available(mm)</p>
-                                <input type="number" placeholder = "Enter the amount of water " style={{width: "175px"}} onChange = {e => setwa(e.target.value)}/>
-                                </div>
-                            </div>
-                    </div>
-                    <div className='myo'>
-                        <button className="gooey-button" onClick = {myo}>Calculate</button>
-                        <div className='graph'>
-                            <Bar
-                            data={state}
-                            options={{
-                                title:{
-                                display:true,
-                                fontSize:20
-                                },
-                            }}
-                            />
-                        </div>
-                    </div>
-                    <h4>Maximum Yield will be achieved by {myc} </h4>
-            </div>
-            <div className="sep">
-            <ColoredLine color="black" />
-            </div>
-            <div className='my'>
-                    <div className='h'>
-                            <h1>Maximize Revenue?</h1>
-                    </div>
-                    <div className='inp1'>
-                            <div className='cardc'>
-                                <div className='crop-image'>
-                                <img src={crop} />   
-                                <p>Select the crops to compare</p>
-                                </div>
-                                <div className = "crop_details1">
-                                <p>
-                                    <Select
-                                    onChange={handleChange1}
-                                    isMulti
-                                    options={crops_m}
-                                    value={crops_m.filter(obj => selectedValue1.includes(obj.value))}
-                                    className="basic-multi-select"
-                                    classNamePrefix="select"
-                                    />
-                                   
-                                </p> 
-                                
-                                </div>
-                            </div> 
-                            <div className='card1'>
-                                <div className='crop-image'>
-                                <img src={drop} />   
-                                <p> Water Available(mm)</p>
-                                <input type="number" placeholder = "Enter the amount of water " style={{width: "175px"}} onChange = {e => setwa1(e.target.value)}/>
-                                </div>
-                            </div>
-                            <div className='card1'>
-                                <div className='crop-image'>
-                                <img src={dollar} />   
-                                <p> Production cost($)</p>
-                                <input type="number" placeholder = "Enter the amount " style={{width: "175px"}} onChange = {e => setwa1(e.target.value)}/>
-                                </div>
-                            </div>
-                    </div>
-                    <div className='myo'>
-                        <button className="gooey-button" onClick = {mr}>Calculate</button>
-                        <div className='graph'>
-                            <Bar
-                            data={state1}
-                            options={{
-                                title:{
-                                display:true,
-                                fontSize:20
-                                },
-                            }}
-                            />
-                        </div>
-                    </div>
-                    <h4>Maximun Revenue will be generated by {mrc} </h4>
-            </div>
-            <div className="sep">
-            <ColoredLine color="black" />
-            </div>
-            <div className='my'>
-                <div className='h'>
-                        <h1>Maximize Water use efficiency?</h1>
-                </div>
-                <div className='inp2'>
-                        <div className='card1'>
-                            <div className='crop-image'>
-                            <img src={crop} />   
-                            <p>Select the crops to compare</p>
-                            </div>
-                            <div className = "crop_details1">
-                            <p>
-                                <Select
-                                onChange={(e) => handleChange2(e)}
-                                isMulti
-                                options={crops_m}
-                                value={crops_m.filter(obj => selectedValue2.includes(obj.value))}
-                                className="basic-multi-select"
-                                classNamePrefix="select"
-                                />
-                            
-                            </p> 
-                            
-                            </div>
-                        </div> 
-                        <div className='card1'>
-                            <div className='crop-image'>
-                            <img src={drop} />   
-                            <p> Water Available(mm)</p>
-                            <input type="number" placeholder = "Enter the amount of water " style={{width: "175px"}} onChange = {e => setwa2(e.target.value)}/>
-                            </div>
-                        </div>
-                </div>
-                <div className='myo'>
-                    <button className="gooey-button" onClick = {mwe}>Calculate</button>
-                    <div className='graph'>
-                        <Bar
-                        data={state2}
-                        options={{
-                            title:{
-                            display:true,
-                            fontSize:20
-                            },
-                        }}
-                        />
-                    </div>
-                </div>
-                <h4>{mwc} maximizes the water use efficiency </h4>
             </div>
             <div className="sep">
             <ColoredLine color="black" />
@@ -2146,30 +2201,56 @@ function Home() {
                 <h1><u>Advanced options</u></h1>
                 <h4> Run optimization for up to 5 crops</h4>
                 <p>(Empty/left out inputs will take default values)</p>
-                <div>
-                <div className='card1'>
+                <div className='atop'>
+                    <div className='card1'>
                             <div className='crop-image'>
                             <img src={drop} />   
                             </div>
-                        </div>
                     <p><form>
-                    <label>Total water available (mm)*:{' '}
+                    <label>Total water available for irrigation (mm)*:{' '}
                     <input type="number" placeholder = "(mm)" style={{width: "55px"}} onChange = {e => setweca(e.target.value)}/>
                     </label>
-                </form></p>
+                    </form></p>
                 <p><form>
-                    <label>Irrigation efficiency (%):{' '}
-                    <input type="number" placeholder = "(%)" style={{width: "55px"}} onChange = {e => setaie(e.target.value)}/>
+                    <label>Irrigation water salinity (dS/m):{' '}
+                    <input type="number" placeholder = "(dS/m)" style={{width: "55px"}} onChange = {e => setaie(e.target.value)}/>
                     </label>
                 </form></p>
+                    </div>
+                    <div className='card2'>
+                        <div className='irrigation-image'>
+                        <img src={irrigation} />   
+                        </div>
+                        <div className = "crop_details ">
+                        <p className = "input">
+                        <Select id = "is"
+                        options ={itype}
+                        onChange={(opt)=>{
+                            let val=opt.value;
+                            console.log(opt.label, opt.value)
+                            setait(val)
+                            }
+                            } />
+                        </p> 
+                        <p className="if"><form>
+                        <label>Irrigation Efficiency (%):{' '}
+                        <input type="number" placeholder = "%" style={{width: "50px"}} onChange = {e => setaie(e.target.value)}/>
+                        </label>
+                        </form>
+                        </p>
+                        </div>
+                    </div>
                 </div>
                 <div className='adsi'>
                         <div className='f1'>
                             <div className='aco'><h4>Crop</h4></div>
-                            <div className='aey'><h4>Expected Yield (tons/ha)</h4></div>
-                            <div className='aetm'><h4>ETm (mm)</h4></div>
-                            <div className='acc'><h4>Crop Price ($/ton)</h4></div>
-                            <div className='apc'><h4>Production Cost ($/ha)</h4></div>
+                            <div className='aey'><h5>Maximum expected yield (tons/ha)</h5></div>
+                            <div className='aetm'><h5>ET for maximum expected yield (mm)</h5></div>
+                            <div className='acc'>
+                                <h5>Crop Price ($/ton)</h5>
+                                <p><small> <a href={"https://www.barchart.com/futures/grains"}> Look up crop price</a></small></p>
+                            </div>
+                            <div className='apc'><h5>Production Cost ($/ha)</h5></div>
                         </div>
                     <div className='f1'>
                     <p> Crop 1</p>
@@ -2190,9 +2271,9 @@ function Home() {
                         />
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay1(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet1(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "Crop Price ($/ton)" style={{width: "120px"}} onChange = {e => setc1(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "Production cost ($/ha)" style={{width: "145px"}} onChange = {e => setpc1(e.target.value)}/></div>
+                    <div className='adpn2'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet1(e.target.value)}/></div>
+                    <div className='adpn3'> <input type="number" placeholder = "Crop Price ($/ton)" style={{width: "120px"}} onChange = {e => setc1(e.target.value)}/></div>
+                    <div className='adpn4'> <input type="number" placeholder = "Production cost ($/ha)" style={{width: "145px"}} onChange = {e => setpc1(e.target.value)}/></div>
                     </div>
                     <div className='f1'>
                     <p> Crop 2</p>
@@ -2211,7 +2292,7 @@ function Home() {
                         />
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay2(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet2(e.target.value)}/></div>
+                    <div className='adpn2'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet2(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "Crop Price ($/ton)" style={{width: "120px"}} onChange = {e => setc2(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "Production cost ($/ha)" style={{width: "145px"}} onChange = {e => setpc2(e.target.value)}/></div>
                     </div>
@@ -2232,7 +2313,7 @@ function Home() {
                         />
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay3(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet3(e.target.value)}/></div>
+                    <div className='adpn2'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet3(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "Crop Price ($/ton)" style={{width: "120px"}} onChange = {e => setc3(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "Production cost ($/ha)" style={{width: "145px"}} onChange = {e => setpc3(e.target.value)}/></div>
                     </div>
@@ -2253,7 +2334,7 @@ function Home() {
                         />
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay4(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet4(e.target.value)}/></div>
+                    <div className='adpn2'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet4(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "Crop Price ($/ton)" style={{width: "120px"}} onChange = {e => setc4(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "Production cost ($/ha)" style={{width: "145px"}} onChange = {e => setpc4(e.target.value)}/></div>
                     </div>
@@ -2274,7 +2355,7 @@ function Home() {
                         />
                     </div>
                     <div className='adpn'> <input type="number" placeholder = "Expected yield (tons/ha)" style={{width: "160px"}} onChange = {e => setay5(e.target.value)}/></div>
-                    <div className='adpn'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet5(e.target.value)}/></div>
+                    <div className='adpn2'> <input type="number" placeholder = "ETm (mm)" style={{width: "100px"}} onChange = {e => setet5(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "Crop Price ($/ton)" style={{width: "120px"}} onChange = {e => setc5(e.target.value)}/></div>
                     <div className='adpn'> <input type="number" placeholder = "Production cost ($/ha)" style={{width: "145px"}} onChange = {e => setpc5(e.target.value)}/></div>
                     </div>
@@ -2283,7 +2364,7 @@ function Home() {
                 <div>
                     <button className="gooey-button" style = {{marginLeft:"1%" , marginTop:"1%" }} onClick = {yap}> Compare Yield </button>
                     <button className="gooey-button" style = {{marginLeft:"1%" , marginTop:"1%"}} onClick = {rap}> Compare Profit </button>
-                    <button className="gooey-button" style = {{marginLeft:"1%" , marginTop:"1%" }} onClick = {mweap}>Compare Water Efficiency</button>
+                    <button className="gooey-button" style = {{marginLeft:"1%" , marginTop:"1%" }} onClick = {mweap}>Compare Water saving potential</button>
                 </div>
                 <div className='graph'>
                 <Bar
@@ -2295,7 +2376,16 @@ function Home() {
                     },
                 }}
                 />
-            </div>
+                </div>
+                <div>
+                <h2>Irrigation Management Tip</h2>
+                <p>(based on Water saving potential)</p>
+                <p>Crop 1 -> {imt1}</p>
+                <p>Crop 2 -> {imt2}</p>
+                <p>Crop 3 -> {imt3}</p>
+                <p>Crop 4 -> {imt4}</p>
+                <p>Crop 5 -> {imt5}</p>
+                </div>
             </div>
         </div>
     )
@@ -2308,3 +2398,4 @@ export default Home
 // crops.forEach(crops)
 // array.map()
 // array.forEach()
+
