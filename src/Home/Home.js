@@ -140,6 +140,7 @@ function Home() {
     const [d,setd] = useState('');
     const [wec,setwa] = useState(null);
     let [ec,setecw] = useState(null);
+    let [ad_ec, setad_ec] = useState(null);
     const [wec1,setwa1] = useState(null);
     const [wec2,setwa2] = useState(null);
     const [weca,setweca] = useState(null);
@@ -308,90 +309,98 @@ function Home() {
             return
         }
         if(ec != ""){
-            if(ec != null ){
-                if(pa == 1){
-                    if(ec > 2 || ec < 1){
-                        alert("Irrigation Water Salinity of Alfalfa should be between 1(dS/m) to 2(ds/m) ")
-                        return
-                    }
+            if(ec!= null){
+                if(ec< 0 || ec>2){
+                    alert("Irrigation water salinity should be between 0(dS/m) to 2(dS/m)")
+                    return
                 }
-                else if(pa == 2){
-                    if(ec > 5 || ec < 4){
-                        alert("Irrigation Water Salinity of Sugar beets should be between 4(dS/m) to 5(dS/m)")
-                        return
-                    }
-                }
-                else if(pa == 3){
-                    if(ec > 5 || ec < 3){
-                        alert("Irrigation Water Salinity of Wheat should be between 3(dS/m) to 5(dS/m)")
-                        return
-                    }
-                }
-                else if(pa == 4){
-                    if(ec > 5 || ec < 4){
-                        alert("Irrigation Water Salinity of Bermuda Grass should be between 4(dS/m) to 5(dS/m)")
-                        return
-                    }
-                }
-                else if(pa == 5){
-                    if(ec > 5 || ec < 4){
-                        alert("Irrigation Water Salinity of Klein Grass should be between 4(dS/m) to 5(dS/m)")
-                        return
-                    }
-                }
-                else if(pa == 6){
-                    if(ec > 2.5 || ec < 1){
-                        alert("Irrigation Water Salinity of Sudan Grass should be between 1(dS/m) to 2.5(dS/m)")
-                        return
-                    }
-                }
-                else if(pa == 7){
-                    if(ec > 1.5 || ec < 0.5){
-                        alert("Irrigation Water Salinity of Lettuce should be between 0.5(dS/m) to 1.5(dS/m)")
-                        return
-                    }
-                }
-                else if(pa == 8){
-                    if(ec > 1.5 || ec < 0.5){
-                        alert("Irrigation Water Salinity of Carrots should be between 0.5(dS/m) to 1.5(dS/m)")
-                        return
-                    }
-                }
-                else if(pa == 9){
-                    if(ec > 2.5 || ec < 1){
-                        alert("Irrigation Water Salinity of Broccoli should be between 1(dS/m) to 2.5(dS/m)")
-                        return
-                    }
-                }
-                else if(pa == 10){
-                    if(ec > 1.5 || ec < 0.5){
-                        alert("Irrigation Water Salinity of Onions should be between 0.5(dS/m) to 1.5(dS/m)")
-                        return
-                    }
-                }
-                else if(pa == 11 ){
-                    if(ec > 2 || ec < 1 ){
-                        alert("Irrigation Water Salinity of Spinach should be between 1(dS/m) to 2(dS/m)")
-                        return
-                    }
-                }
-                else if(pa == 12){
-                    if(ec > 2 || ec < 0.5){
-                        alert("Irrigation Water Salinity of Sweet Corn should be between 0.5(dS/m) to 2(dS/m)")
-                        return
-                    }
-                }
-                // if(ec != ""){
-                //     if(ec> 5 || ec < 0.5){
-                //         alert("Irrigation Water Salinity should be between 0.5(dS/m) to 5(dS/m)")
-                //         return
-                //     }
-                // }
-                // else if(ec == ""){
-                //     ec = null
-                // }
             }
         }
+        // if(ec != ""){
+        //     if(ec != null ){
+        //         if(pa == 1){
+        //             if(ec > 2 || ec < 1){
+        //                 alert("Irrigation Water Salinity of Alfalfa should be between 1(dS/m) to 2(ds/m) ")
+        //                 return
+        //             }
+        //         }
+        //         else if(pa == 2){
+        //             if(ec > 5 || ec < 4){
+        //                 alert("Irrigation Water Salinity of Sugar beets should be between 4(dS/m) to 5(dS/m)")
+        //                 return
+        //             }
+        //         }
+        //         else if(pa == 3){
+        //             if(ec > 5 || ec < 3){
+        //                 alert("Irrigation Water Salinity of Wheat should be between 3(dS/m) to 5(dS/m)")
+        //                 return
+        //             }
+        //         }
+        //         else if(pa == 4){
+        //             if(ec > 5 || ec < 4){
+        //                 alert("Irrigation Water Salinity of Bermuda Grass should be between 4(dS/m) to 5(dS/m)")
+        //                 return
+        //             }
+        //         }
+        //         else if(pa == 5){
+        //             if(ec > 5 || ec < 4){
+        //                 alert("Irrigation Water Salinity of Klein Grass should be between 4(dS/m) to 5(dS/m)")
+        //                 return
+        //             }
+        //         }
+        //         else if(pa == 6){
+        //             if(ec > 2.5 || ec < 1){
+        //                 alert("Irrigation Water Salinity of Sudan Grass should be between 1(dS/m) to 2.5(dS/m)")
+        //                 return
+        //             }
+        //         }
+        //         else if(pa == 7){
+        //             if(ec > 1.5 || ec < 0.5){
+        //                 alert("Irrigation Water Salinity of Lettuce should be between 0.5(dS/m) to 1.5(dS/m)")
+        //                 return
+        //             }
+        //         }
+        //         else if(pa == 8){
+        //             if(ec > 1.5 || ec < 0.5){
+        //                 alert("Irrigation Water Salinity of Carrots should be between 0.5(dS/m) to 1.5(dS/m)")
+        //                 return
+        //             }
+        //         }
+        //         else if(pa == 9){
+        //             if(ec > 2.5 || ec < 1){
+        //                 alert("Irrigation Water Salinity of Broccoli should be between 1(dS/m) to 2.5(dS/m)")
+        //                 return
+        //             }
+        //         }
+        //         else if(pa == 10){
+        //             if(ec > 1.5 || ec < 0.5){
+        //                 alert("Irrigation Water Salinity of Onions should be between 0.5(dS/m) to 1.5(dS/m)")
+        //                 return
+        //             }
+        //         }
+        //         else if(pa == 11 ){
+        //             if(ec > 2 || ec < 1 ){
+        //                 alert("Irrigation Water Salinity of Spinach should be between 1(dS/m) to 2(dS/m)")
+        //                 return
+        //             }
+        //         }
+        //         else if(pa == 12){
+        //             if(ec > 2 || ec < 0.5){
+        //                 alert("Irrigation Water Salinity of Sweet Corn should be between 0.5(dS/m) to 2(dS/m)")
+        //                 return
+        //             }
+        //         }
+        //         // if(ec != ""){
+        //         //     if(ec> 5 || ec < 0.5){
+        //         //         alert("Irrigation Water Salinity should be between 0.5(dS/m) to 5(dS/m)")
+        //         //         return
+        //         //     }
+        //         // }
+        //         // else if(ec == ""){
+        //         //     ec = null
+        //         // }
+        //     }
+        // }
         else if (ec == ""){
             ec = null
         }
@@ -1147,47 +1156,56 @@ function Home() {
         if (weca != null && weca != ""){
             if(weca< 0 || weca > 3000){
                 alert("Available water should be between 0 and 3000")
-            }
-            if(weca == 0){
                 return
             }
         }
-        if(et1 != null){
-            if(et1 != ""){
-                if(et1 < 100 || et1 > 1600){
-                    alert("ETm should be in the range of 100mm to 1600mm")
+        if(ad_ec != ""){
+            if(ad_ec!= null){
+                if(ad_ec< 0 || ad_ec>2){
+                    alert("Irrigation water salinity should be between 0(dS/m) to 2(dS/m)")
                     return
                 }
             }
         }
+        else if (ad_ec == ""){
+            ad_ec = null
+        }
+        if(et1 != null){
+                    if(et1 != ""){
+                        if(et1 < 100 || et1 > 2000){
+                            alert("ETm should be in the range of 100mm to 2000mm")
+                            return
+                        }
+                    }
+                }
         if(et2 != null){
             if(et2 != ""){
-                if(et2 < 100 || et2 > 1600){
-                    alert("ETm should be in the range of 100mm to 1600mm")
+                if(et2 < 100 || et2 > 2000){
+                    alert("ETm should be in the range of 100mm to 2000mm")
                     return
                 }
             }
         }
         if(et3 != null){
             if(et3 != ""){
-                if(et3 < 100 || et3 > 1600){
-                    alert("ETm should be in the range of 100mm to 1600mm")
+                if(et3 < 100 || et3 > 2000){
+                    alert("ETm should be in the range of 100mm to 2000mm")
                     return
                 }
             }
         }
         if(et4 != null){
             if(et4 != ""){
-                if(et4 < 100 || et4 > 1600){
-                    alert("ETm should be in the range of 100mm to 1600mm")
+                if(et4 < 100 || et4 > 2000){
+                    alert("ETm should be in the range of 100mm to 2000mm")
                     return
                 }
             }
         }
         if(et5 != null){
             if(et5 != ""){
-                if(et5 < 100 || et5 > 1600){
-                    alert("ETm should be in the range of 100mm to 1600mm")
+                if(et5 < 100 || et5 > 2000){
+                    alert("ETm should be in the range of 100mm to 2000mm")
                     return
                 }
             }
@@ -1268,6 +1286,14 @@ function Home() {
         if (pc5 == ""){
             pc5 = null
         }
+        if(c1 <0 || c2 <0 || c3 <0 || c4 <0 || c5 <0){
+            alert("Crop cost cannot be negative")
+            return
+        }
+        if(pc1 <0 || pc2 <0 || pc3 <0 || pc4 <0 || pc5 <0){
+            alert("Production cost cannot be negative")
+            return
+        }
         setginfo('Profit ($/ha)') 
         setbgc('#daa520')
         let eci =0;
@@ -1296,145 +1322,145 @@ function Home() {
             }
             if (my_arr[i] == 1){
                 eci = 2;
-                ecw = 1.3;
+                ecw = ad_ec ?? 1.2;
                 ETm= etm_arr[i] ?? 1500;
                 ky = 1;
                 Ym = y_arr[i] ?? 23;
                 cost = c_arr[i] ?? 209;
-                if ( Ym > 125){
-                    alert("The maximum expected yield for Sugar beets should be 125(tons/ha)")
+                if ( Ym > 30 || Ym < 15){
+                    alert("The maximum expected yield for Alfalfa should be between 15(tons/ha) to 30(tons/ha)")
                     return
                 }
                }
             else if ( my_arr[i] == 2){
                eci=7;
-               ecw= 4.7;
+               ecw = ad_ec ?? 1.2;
                ETm=etm_arr[i] ?? 1050;
                ky = 0.85;
                Ym = y_arr[i] ?? 120;
                cost = c_arr[i] ?? 147;
-               if ( Ym > 125){
-                alert("The maximum expected yield for Sugar beets should be 125(tons/ha)")
+               if ( Ym > 140 || Ym < 100){
+                alert("The maximum expected yield for Sugar beets should be between 100(tons/ha) to 140(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] == 3){
                eci=6;
-               ecw= 4;
+               ecw = ad_ec ?? 1.2;
                ETm= etm_arr[i] ?? 620;
                ky = 1.05;
                Ym = y_arr[i] ?? 7.5;
                cost = c_arr[i] ?? 288;
-               if ( Ym > 9){
-                alert("The maximum expected yield for Wheat should be 9(tons/ha)")
+               if ( Ym > 10 || Ym < 5){
+                alert("The maximum expected yield for Wheat should be between 5(tons/ha) to 10(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] == 4){
                eci=6.9;
-               ecw= 4.6;
+               ecw = ad_ec ?? 1.2;
                ETm= etm_arr[i] ?? 1200;
                ky = 0.9;
                Ym =y_arr[i] ??  19;
                cost = c_arr[i] ?? 200;
-               if ( Ym > 20){
-                alert("The maximum expected yield for Bermuda Grass should be 20(tons/ha)")
+               if ( Ym > 25 || Ym < 15){
+                alert("The maximum expected yield for Bermuda Grass should be between 15(tons/ha) to 25(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] ==5 ){
                eci=4;
-               ecw=  2.7;
+               ecw = ad_ec ?? 1.2;
                ETm= etm_arr[i] ?? 1250;
                ky = 0.9;
                Ym = y_arr[i] ?? 24;
                cost = c_arr[i] ?? 200;
-               if ( Ym > 25){
-                alert("The maximum expected yield for Klein Grass should be 25(tons/ha)")
+               if ( Ym > 30 || Ym < 20){
+                alert("The maximum expected yield for Klein Grass should be between 20(tons/ha) to 30(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] == 6){
                eci=2.8;
-               ecw= 1.9;
+               ecw = ad_ec ?? 1.2;
                ETm= etm_arr[i] ?? 800;
                ky = 0.9;
                Ym = y_arr[i] ?? 14;
                cost = c_arr[i] ?? 200;
-               if ( Ym > 15){
-                alert("The maximum expected yield for Sudan Grass should be 15(tons/ha)")
+               if ( Ym > 20 || Ym < 10){
+                alert("The maximum expected yield for Sudan Grass should be between 10(tons/ha) to 20(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] ==7 ){
                 eci=1.3;
-                ecw= 1;
+                ecw = ad_ec ?? 1.2;
                 ETm= etm_arr[i] ?? 320;
                 ky = 1.15;
                Ym = y_arr[i] ?? 20;
                cost = c_arr[i] ?? 683.93;
-               if ( Ym > 20){
-                alert("The maximum expected yield for Lettuce should be 20(tons/ha)")
+               if ( Ym > 30 || Ym < 10){
+                alert("The maximum expected yield for Lettuce should be between 10(tons/ha) to 30(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] == 8){
               eci=1;
-              ecw= 0.8;
+              ecw = ad_ec ?? 1.2;
               ETm= etm_arr[i] ?? 600;
               ky = 1.1;
               Ym = y_arr[i] ?? 110;
               cost = c_arr[i] ?? 464.29;
-              if ( Ym > 111){
-                alert("The maximum expected yield for Carrots should be 111(tons/ha)")
+              if ( Ym > 130 || Ym < 90){
+                alert("The maximum expected yield for Carrots should be between 90(tons/ha) to 130(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] == 9){
                eci=2.8;
-               ecw= 1.9;
+               ecw = ad_ec ?? 1.2;
                ETm= etm_arr[i] ?? 350;
                ky = 1;
                Ym = y_arr[i] ?? 15;
                cost = c_arr[i] ?? 919.64;
-               if ( Ym > 16){
-                alert("The maximum expected yield for Broccoli should be 16(tons/ha)")
+               if ( Ym > 20 || Ym < 10){
+                alert("The maximum expected yield for Broccoli should be between 10(tons/ha) to 20(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] == 10){
               eci=1.2;
-              ecw=0.9;
+              ecw = ad_ec ?? 1.2;
               ETm= etm_arr[i] ?? 800;
               ky = 1.1;
                Ym = y_arr[i] ?? 60;
                cost = c_arr[i] ?? 503.57;
-               if ( Ym > 62){
-                alert("The maximum expected yield for Onions should be 62(tons/ha)")
+               if ( Ym > 70 || Ym <50){
+                alert("The maximum expected yield for Onions should be between 50(tons/ha) to 70(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] ==11 ){
                eci=2;
-               ecw=1.3;
+               ecw = ad_ec ?? 1.2;
                ETm=etm_arr[i] ?? 200;
                ky = 1.15;
                Ym = y_arr[i] ?? 14;
                cost = c_arr[i] ?? 1237.50;
-               if ( Ym > 15){
-                alert("The maximum expected yield for Spinach should be 15(tons/ha)")
+               if ( Ym > 10 || Ym <20){
+                alert("The maximum expected yield for Spinach should be between 10(tons/ha) to 20(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] ==12 ){
               eci=1.7;
-              ecw= 1.1;
+              ecw = ad_ec ?? 1.2;
               ETm= etm_arr[i] ?? 600;
               ky = 1.1;
                Ym = y_arr[i] ?? 27;
                cost = c_arr[i] ?? 1482.14;
-               if ( Ym > 30){
-                alert("The maximum expected yield for Sweet Corn should be 30(tons/ha)")
+               if ( Ym > 40 || 20){
+                alert("The maximum expected yield for Sweet Corn should be between 20(tons/ha) to 40(tons/ha)")
                 return
             }
             }
@@ -1466,10 +1492,19 @@ function Home() {
         if (weca != null && weca != ""){
             if(weca< 0 || weca > 3000){
                 alert("Available water should be between 0 and 3000")
-            }
-            if(weca == 0){
                 return
             }
+        }
+        if(ad_ec != ""){
+            if(ad_ec!= null){
+                if(ad_ec< 0 || ad_ec>2){
+                    alert("Irrigation water salinity should be between 0(dS/m) to 2(dS/m)")
+                    return
+                }
+            }
+        }
+        else if (ad_ec == ""){
+            ad_ec = null
         }
         // if(ay1 != null ||ay2 != null || ay3 != null || ay4 != null || ay5 != null){
         //     if(ay1 != "" || ay2 != "" || ay3 != "" || ay4 != "" || ay5 != ""){
@@ -1520,40 +1555,40 @@ function Home() {
         // }
         if(et1 != null){
             if(et1 != ""){
-                if(et1 < 100 || et1 > 1600){
-                    alert("ETm should be in the range of 100mm to 1600mm")
+                if(et1 < 100 || et1 > 2000){
+                    alert("ETm should be in the range of 100mm to 2000mm")
                     return
                 }
             }
         }
         if(et2 != null){
             if(et2 != ""){
-                if(et2 < 100 || et2 > 1600){
-                    alert("ETm should be in the range of 100mm to 1600mm")
+                if(et2 < 100 || et2 > 2000){
+                    alert("ETm should be in the range of 100mm to 2000mm")
                     return
                 }
             }
         }
         if(et3 != null){
             if(et3 != ""){
-                if(et3 < 100 || et3 > 1600){
-                    alert("ETm should be in the range of 100mm to 1600mm")
+                if(et3 < 100 || et3 > 2000){
+                    alert("ETm should be in the range of 100mm to 2000mm")
                     return
                 }
             }
         }
         if(et4 != null){
             if(et4 != ""){
-                if(et4 < 100 || et4 > 1600){
-                    alert("ETm should be in the range of 100mm to 1600mm")
+                if(et4 < 100 || et4 > 2000){
+                    alert("ETm should be in the range of 100mm to 2000mm")
                     return
                 }
             }
         }
         if(et5 != null){
             if(et5 != ""){
-                if(et5 < 100 || et5 > 1600){
-                    alert("ETm should be in the range of 100mm to 1600mm")
+                if(et5 < 100 || et5 > 2000){
+                    alert("ETm should be in the range of 100mm to 2000mm")
                     return
                 }
             }
@@ -1629,133 +1664,133 @@ function Home() {
             }
             if (my_arr[i] == 1){
                 eci = 2;
-                ecw = 1.3;
+                ecw = ad_ec ?? 1.2;
                 ETm= etm_arr[i] ?? 1500;
                 ky = 1;
                 Ym = y_arr[i] ?? 23;
-                if ( Ym > 25){
-                    alert("The maximum expected yield for Alfalfa should be 25(tons/ha)")
+                if ( Ym > 30 || Ym < 15){
+                    alert("The maximum expected yield for Alfalfa should be between 15(tons/ha) to 30(tons/ha)")
                     return
                 }
                }
             else if ( my_arr[i] == 2){
                eci=7;
-               ecw= 4.7;
+               ecw= ad_ec ?? 1.2;
                ETm= etm_arr[i] ?? 1050;
                ky = 0.85;
                Ym = y_arr[i] ?? 120;
-               if ( Ym > 125){
-                alert("The maximum expected yield for Sugar beets should be 125(tons/ha)")
+               if ( Ym > 140 || Ym < 100){
+                alert("The maximum expected yield for Sugar beets should be between 100(tons/ha) to 140(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] == 3){
                eci=6;
-               ecw= 4;
+               ecw= ad_ec ?? 1.2;
                ETm= etm_arr[i] ?? 620;
                ky = 1.05;
                Ym = y_arr[i] ??  7.5;
-               if ( Ym > 9){
-                alert("The maximum expected yield for Wheat should be 9(tons/ha)")
+               if ( Ym > 10 || Ym < 5){
+                alert("The maximum expected yield for Wheat should be between 5(tons/ha) to 10(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] == 4){
                eci=6.9;
-               ecw= 4.6;
+               ecw= ad_ec ?? 1.2;
                ETm= etm_arr[i] ?? 1200;
                ky = 0.9;
                Ym = y_arr[i] ?? 19;
-               if ( Ym > 20){
-                alert("The maximum expected yield for Bermuda Grass should be 20(tons/ha)")
+               if ( Ym > 25 || Ym < 15){
+                alert("The maximum expected yield for Bermuda Grass should be between 15(tons/ha) to 25(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] ==5 ){
                eci=4;
-               ecw=  2.7;
+               ecw=  ad_ec ?? 1.2;
                ETm= etm_arr[i] ?? 1250;
                ky = 0.9;
                Ym = y_arr[i] ??24;
-               if ( Ym > 25){
-                alert("The maximum expected yield for Klein Grass should be 25(tons/ha)")
+               if ( Ym > 30 || Ym < 20){
+                alert("The maximum expected yield for Klein Grass should be between 20(tons/ha) to 30(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] == 6){
                eci=2.8;
-               ecw= 1.9;
+               ecw= ad_ec ?? 1.2;
                ETm= etm_arr[i] ?? 800;
                ky = 0.9;
                Ym = y_arr[i] ?? 14;
-               if ( Ym > 15){
-                alert("The maximum expected yield for Sudan Grass should be 15(tons/ha)")
+               if ( Ym > 20 || Ym < 10){
+                alert("The maximum expected yield for Sudan Grass should be between 10(tons/ha) to 20(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] ==7 ){
                 eci=1.3;
-                ecw= 1;
+                ecw= ad_ec ?? 1.2;
                 ETm= etm_arr[i] ?? 320;
                 ky = 1.15;
                Ym =  y_arr[i] ?? 20;
-               if ( Ym > 20){
-                alert("The maximum expected yield for Lettuce should be 20(tons/ha)")
+               if ( Ym > 30 || Ym < 10){
+                alert("The maximum expected yield for Lettuce should be between 10(tons/ha) to 30(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] == 8){
               eci=1;
-              ecw= 0.8;
+              ecw= ad_ec ?? 1.2;
               ETm= etm_arr[i] ?? 600;
               ky = 1.1;
               Ym = y_arr[i] ?? 110;
-              if ( Ym > 111){
-                alert("The maximum expected yield for Carrots should be 111(tons/ha)")
+              if ( Ym > 130 || Ym < 90){
+                alert("The maximum expected yield for Carrots should be between 90(tons/ha) to 130(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] == 9){
                eci=2.8;
-               ecw= 1.9;
+               ecw= ad_ec ?? 1.2;
                ETm= etm_arr[i] ?? 350;
                ky = 1;
                Ym = y_arr[i] ?? 15;
-               if ( Ym > 16){
-                alert("The maximum expected yield for Broccoli should be 16(tons/ha)")
+               if ( Ym > 20 || Ym < 10){
+                alert("The maximum expected yield for Broccoli should be between 10(tons/ha) to 20(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] == 10){
               eci=1.2;
-              ecw=0.9;
+              ecw=ad_ec ?? 1.2;
               ETm= etm_arr[i] ?? 800;
               ky = 1.1;
                Ym = y_arr[i] ?? 60;
-               if ( Ym > 62){
-                alert("The maximum expected yield for Onions should be 62(tons/ha)")
+               if ( Ym > 70 || Ym <50){
+                alert("The maximum expected yield for Onions should be between 50(tons/ha) to 70(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] ==11 ){
                eci=2;
-               ecw=1.3;
+               ecw=ad_ec ?? 1.2;
                ETm= etm_arr[i] ?? 200;
                ky = 1.15;
                Ym = y_arr[i] ?? 14;
-               if ( Ym > 15){
-                alert("The maximum expected yield for Spinach should be 15(tons/ha)")
+               if ( Ym > 10 || Ym <20){
+                alert("The maximum expected yield for Spinach should be between 10(tons/ha) to 20(tons/ha)")
                 return
             }
             }
             else if (my_arr[i] ==12 ){
               eci=1.7;
-              ecw= 1.1;
+              ecw= ad_ec ?? 1.2;
               ETm= etm_arr[i] ?? 600;
               ky = 1.1;
                Ym = y_arr[i] ?? 27;
-               if ( Ym > 30){
-                alert("The maximum expected yield for Sweet Corn should be 30(tons/ha)")
+               if ( Ym > 40 || 20){
+                alert("The maximum expected yield for Sweet Corn should be between 20(tons/ha) to 40(tons/ha)")
                 return
             }
             }
@@ -1766,6 +1801,9 @@ function Home() {
             Ya = Ym * ((ky*((Eta/ETm)-1)+1))
             if (Ya>Ym){
                 Ya = Ym
+            }
+            if(weca == 0){
+                Ya = 0
             }
             // setans([...ans,Ya]);
             ans_arr.push(Ya.toFixed(1))
@@ -1784,47 +1822,56 @@ function Home() {
         if (weca != null && weca != ""){
             if(weca< 0 || weca > 3000){
                 alert("Available water should be between 0 and 3000")
-            }
-            if(weca == 0){
                 return
             }
         }
+        if(ad_ec != ""){
+            if(ad_ec!= null){
+                if(ad_ec< 0 || ad_ec>2){
+                    alert("Irrigation water salinity should be between 0(dS/m) to 2(dS/m)")
+                    return
+                }
+            }
+        }
+        else if (ad_ec == ""){
+            ad_ec = null
+        }
         if(et1 != null){
             if(et1 != ""){
-                if(et1 < 100 || et1 > 1600){
-                    alert("ETm should be in the range of 100mm to 1600mm")
+                if(et1 < 100 || et1 > 2000){
+                    alert("ETm should be in the range of 100mm to 2000mm")
                     return
                 }
             }
         }
         if(et2 != null){
             if(et2 != ""){
-                if(et2 < 100 || et2 > 1600){
-                    alert("ETm should be in the range of 100mm to 1600mm")
+                if(et2 < 100 || et2 > 2000){
+                    alert("ETm should be in the range of 100mm to 2000mm")
                     return
                 }
             }
         }
         if(et3 != null){
             if(et3 != ""){
-                if(et3 < 100 || et3 > 1600){
-                    alert("ETm should be in the range of 100mm to 1600mm")
+                if(et3 < 100 || et3 > 2000){
+                    alert("ETm should be in the range of 100mm to 2000mm")
                     return
                 }
             }
         }
         if(et4 != null){
             if(et4 != ""){
-                if(et4 < 100 || et4 > 1600){
-                    alert("ETm should be in the range of 100mm to 1600mm")
+                if(et4 < 100 || et4 > 2000){
+                    alert("ETm should be in the range of 100mm to 2000mm")
                     return
                 }
             }
         }
         if(et5 != null){
             if(et5 != ""){
-                if(et5 < 100 || et5 > 1600){
-                    alert("ETm should be in the range of 100mm  to 1600mm")
+                if(et5 < 100 || et5 > 2000){
+                    alert("ETm should be in the range of 100mm to 2000mm")
                     return
                 }
             }
@@ -1907,84 +1954,84 @@ function Home() {
             }
             if (my_arr[i] == 1){
                 eci = 2;
-                ecw = 1.3;
+                ecw = ad_ec ?? 1.2;
                 ETm= etm_arr[i] ?? 1500;
                 ky = 1;
                 Ym = y_arr[i] ?? 23;
                }
             else if ( my_arr[i] == 2){
                eci=7;
-               ecw= 4.7;
+               ecw= ad_ec ?? 1.2;
                ETm= etm_arr[i] ?? 1050;
                ky = 0.85;
                Ym =y_arr[i] ?? 120;
             }
             else if (my_arr[i] == 3){
                eci=6;
-               ecw= 4;
+               ecw= ad_ec ?? 1.2;
                ETm= etm_arr[i] ?? 620;
                ky = 1.05;
                Ym = y_arr[i] ?? 7.5;
             }
             else if (my_arr[i] == 4){
                eci=6.9;
-               ecw= 4.6;
+               ecw=ad_ec ?? 1.2;
                ETm= etm_arr[i] ?? 1200;
                ky = 0.9;
                Ym = y_arr[i] ?? 19;
             }
             else if (my_arr[i] ==5 ){
                eci=4;
-               ecw=  2.7;
+               ecw=  ad_ec ?? 1.2;
                ETm= etm_arr[i] ?? 1250;
                ky = 0.9;
                Ym = y_arr[i] ?? 24;
             }
             else if (my_arr[i] == 6){
                eci=2.8;
-               ecw= 1.9;
+               ecw= ad_ec ?? 1.2;
                ETm= etm_arr[i] ?? 800;
                ky = 0.9;
                Ym =y_arr[i] ?? 14;
             }
             else if (my_arr[i] ==7 ){
                 eci=1.3;
-                ecw= 1;
+                ecw= ad_ec ?? 1.2;
                 ETm= etm_arr[i] ?? 320;
                 ky = 1.15;
                Ym = y_arr[i] ?? 20;
             }
             else if (my_arr[i] == 8){
               eci=1;
-              ecw= 0.8;
+              ecw= ad_ec ?? 1.2;
               ETm= etm_arr[i] ?? 600;
               ky = 1.1;
               Ym = y_arr[i] ?? 110;
             }
             else if (my_arr[i] == 9){
                eci=2.8;
-               ecw= 1.9;
+               ecw= ad_ec ?? 1.2;
                ETm= etm_arr[i] ?? 350;
                ky = 1;
                Ym = y_arr[i] ?? 15;
             }
             else if (my_arr[i] == 10){
               eci=1.2;
-              ecw=0.9;
+              ecw=ad_ec ?? 1.2;
               ETm= etm_arr[i] ?? 800;
               ky = 1.1;
                Ym = y_arr[i] ?? 60;
             }
             else if (my_arr[i] ==11 ){
                eci=2;
-               ecw=1.3;
+               ecw=ad_ec ?? 1.2;
                ETm= etm_arr[i] ?? 200;
                ky = 1.15;
                Ym =y_arr[i] ?? 14;
             }
             else if (my_arr[i] ==12 ){
               eci=1.7;
-              ecw= 1.1;
+              ecw= ad_ec ?? 1.2;
               ETm= etm_arr[i] ?? 600;
               ky = 1.1;
                Ym = y_arr[i] ?? 27;
@@ -2034,6 +2081,18 @@ function Home() {
       
     return (
         <div className='home'>
+            <div className='mainhead'>
+                <h2><u>Crop-specific Irrigation Recommendation</u></h2>
+                <p>Select a crop and click on the button below to find out the maximum yield and irrigation water requirements.</p>
+                <p>If known, users are encouraged to enter the salinity of irrigation water, soil type,
+                and irrigation system/ efficiency to obtain the results for the actual scenario. If not
+                known, the default irrigation water salinity, soil texture and irrigation efficiency
+                used are 1.2dS/m, sandy loam type, and 68%, respectively.</p>
+                <p>Leaching requirements are calculated using two methods (standard method and
+                    SALEACH method). For irrigation water demand, the leaching requirements based
+                    on the standard method are considered. Deficit irrigation graph shows the % of
+                    maximum yield that might be reduced if deficit irrigation is practiced by 10-50%.</p>
+            </div>
             <div className='r0'>
                 <div className='cardr0'>
                 <div className='crop-image'>
@@ -2182,7 +2241,7 @@ function Home() {
                     /></div>
                     <div className='graphdes'>
                     <div className='gdes'><h9>LRw -> Total water required for leaching</h9></div>
-                    <div className='gdes'><h9>ETa -> Actual Evapotranspiration (ET)</h9></div>
+                    <div className='gdes'><h9>ET -> Evapotranspiration for maximum yield </h9></div>
                     <div className='gdes'><h9>IEw -> Water required to meet the Irrigation Efficiency demands</h9></div>
                     <div className='gdes'><h9>IWR -> Total water requirement based on ET, IE and LR</h9></div>
                     </div>
@@ -2198,13 +2257,29 @@ function Home() {
             <ColoredLine color="black" />
             </div>
             <div className='ads'>
-                <h1><u>Advanced options</u></h1>
-                <h4> Run optimization for up to 5 crops</h4>
-                <p>(Empty/left out inputs will take default values)</p>
+                <div className='mainhead'>
+                    <h2><u>Optimum Crop Selection</u></h2>
+                    <p>Enter the total water available and select up to five crops to run the irrigation and crop
+                    optimization in terms of crop yield, profit and water saving potential while achieving
+                    maximum yield. Irrigation efficiency in field, crop evapotranspiration and leaching
+                    requirements based on the water salinity are considered for the optimization.</p>
+                    <p>If known for the field, users can enter the irrigation water salinity and irrigation efficiency to
+                    obtain the results for the actual scenario. Else, the default values of irrigation water salinity
+                    and irrigation efficiency used are 1.2dS/m, and 68%, respectively. For the selected crops,
+                    users are encouraged to use the maximum expected yield, evapotranspiration for maximum
+                    yield, updated crop prices and site-specific production cost for accurate results.</p>
+                    <p>Crop prices from USDA and 2021 California state agriculture overview are used as default.
+                    (Sources - https://www.nass.usda.gov/Publications/Todays_Reports/reports/agpr0721.pdf
+                    
+                    https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=CALIFORNIA)</p>
+                    <p><a href="https://www.barchart.com/futures/grains" target="_blank"> Look up recent crop price</a></p>
+                </div>
+                
                 <div className='atop'>
                     <div className='card1'>
                             <div className='crop-image'>
                             <img src={drop} />   
+                            <p>Water related Inputs</p>
                             </div>
                     <p><form>
                     <label>Total water available for irrigation (mm)*:{' '}
@@ -2213,13 +2288,14 @@ function Home() {
                     </form></p>
                 <p><form>
                     <label>Irrigation water salinity (dS/m):{' '}
-                    <input type="number" placeholder = "(dS/m)" style={{width: "55px"}} onChange = {e => setaie(e.target.value)}/>
+                    <input type="number" placeholder = "(dS/m)" style={{width: "55px"}} onChange = {e => setad_ec(e.target.value)}/>
                     </label>
                 </form></p>
                     </div>
                     <div className='card2'>
                         <div className='irrigation-image'>
-                        <img src={irrigation} />   
+                        <img src={irrigation} />  
+                        <p> Irrigation System</p> 
                         </div>
                         <div className = "crop_details ">
                         <p className = "input">
@@ -2242,16 +2318,15 @@ function Home() {
                     </div>
                 </div>
                 <div className='adsi'>
-                        <div className='f1'>
-                            <div className='aco'><h4>Crop</h4></div>
-                            <div className='aey'><h5>Maximum expected yield (tons/ha)</h5></div>
-                            <div className='aetm'><h5>ET for maximum expected yield (mm)</h5></div>
-                            <div className='acc'>
-                                <h5>Crop Price ($/ton)</h5>
-                                <p><small> <a href={"https://www.barchart.com/futures/grains"}> Look up crop price</a></small></p>
-                            </div>
-                            <div className='apc'><h5>Production Cost ($/ha)</h5></div>
+                    <div className='f1'>
+                        <div className='aco'><h4>Crop</h4></div>
+                        <div className='aey'><h5>Maximum expected yield (tons/ha)</h5></div>
+                        <div className='aetm'><h5>ET for maximum expected yield (mm)</h5></div>
+                        <div className='acc'>
+                            <h5>Crop Price ($/ton)</h5>
                         </div>
+                        <div className='apc'><h5>Production Cost ($/ha)</h5></div>
+                    </div>
                     <div className='f1'>
                     <p> Crop 1</p>
                     <div className='adoc'>
@@ -2366,25 +2441,27 @@ function Home() {
                     <button className="gooey-button" style = {{marginLeft:"1%" , marginTop:"1%"}} onClick = {rap}> Compare Profit </button>
                     <button className="gooey-button" style = {{marginLeft:"1%" , marginTop:"1%" }} onClick = {mweap}>Compare Water saving potential</button>
                 </div>
-                <div className='graph'>
-                <Bar
-                data={dataap}
-                options={{
-                    title:{
-                    display:true,
-                    fontSize:20
-                    },
-                }}
-                />
-                </div>
-                <div>
-                <h2>Irrigation Management Tip</h2>
-                <p>(based on Water saving potential)</p>
-                <p>Crop 1 -> {imt1}</p>
-                <p>Crop 2 -> {imt2}</p>
-                <p>Crop 3 -> {imt3}</p>
-                <p>Crop 4 -> {imt4}</p>
-                <p>Crop 5 -> {imt5}</p>
+                <div className='adout'>
+                    <div className='graph'>
+                    <Bar
+                    data={dataap}
+                    options={{
+                        title:{
+                        display:true,
+                        fontSize:20
+                        },
+                    }}
+                    />
+                    </div>
+                    <div>
+                    <h2>Irrigation Management Tip</h2>
+                    <p>(based on Water saving potential)</p>
+                    <p>Crop 1 -> {imt1}</p>
+                    <p>Crop 2 -> {imt2}</p>
+                    <p>Crop 3 -> {imt3}</p>
+                    <p>Crop 4 -> {imt4}</p>
+                    <p>Crop 5 -> {imt5}</p>
+                    </div>
                 </div>
             </div>
         </div>

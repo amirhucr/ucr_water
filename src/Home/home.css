@@ -206,6 +206,7 @@
 }
 .acc{
     margin-left: 3.5%;
+    margin-top: 2.5%;
 }
 .apc{
     margin-left: 10%;
@@ -230,4 +231,8 @@
 .adpn4{
     margin: 1.5%;
     margin-left: 7%;
+}
+.mainhead{
+    text-align: left;
+    text-align: justify;
 }
