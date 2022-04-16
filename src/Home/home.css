@@ -1,6 +1,9 @@
 .home{
     display: block;
-    padding: 5%;
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+    /* padding: 5%; */
 }
 .crop-image img{
     max-height: 100px;
@@ -235,4 +238,8 @@
 .mainhead{
     text-align: left;
     text-align: justify;
+}
+.csout{
+    text-align: left;
+    margin-left: 40%;
 }

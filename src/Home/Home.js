@@ -202,7 +202,7 @@ function Home() {
         ]
       }
       const datatw ={
-        labels: ['LRw','ETa', 'IEw','IWR'],
+        labels: ['LRw','ET', 'IEw','IWR'],
         datasets: [
           {
             axis: 'y',
@@ -1154,8 +1154,8 @@ function Home() {
             return
         }
         if (weca != null && weca != ""){
-            if(weca< 0 || weca > 3000){
-                alert("Available water should be between 0 and 3000")
+            if(weca< 0 || weca > 5500){
+                alert("Available water should be between 0 and 5500")
                 return
             }
         }
@@ -1287,7 +1287,7 @@ function Home() {
             pc5 = null
         }
         if(c1 <0 || c2 <0 || c3 <0 || c4 <0 || c5 <0){
-            alert("Crop cost cannot be negative")
+            alert("Crop price cannot be negative")
             return
         }
         if(pc1 <0 || pc2 <0 || pc3 <0 || pc4 <0 || pc5 <0){
@@ -1296,12 +1296,6 @@ function Home() {
         }
         setginfo('Profit ($/ha)') 
         setbgc('#daa520')
-        let eci =0;
-        let ecw =0;
-        let ETm =0;
-        let ky = 0;
-        let Ym = 0;
-        let Eta = 0;
         let Ya = 0;
         let cost = 0;
         let pcost = 0;
@@ -1313,7 +1307,18 @@ function Home() {
         let etm_arr = [et1, et2, et3, et4, et5]
         let c_arr = [c1,c2, c3, c4, c5]
         let p_arr = [pc1, pc2, pc3, pc4, pc5]
+        let imt_arr = [imt1,imt2,imt3,imt4,imt5]
         for(let i=0;i<my_arr.length;i++){
+            let eci =0;
+            let ecw =0;
+            let ETm =0;
+            let ky = 0;
+            let Ym = 0;
+            let Eta = 0;
+            let temp = 1;
+            let lr = 0;
+            let aiw3 = 0;
+            let wsp =0;
             if (y_arr[i] == ""){
                 y_arr[i] = null
             }
@@ -1466,6 +1471,7 @@ function Home() {
             }
             else{
                 Ym = 0;
+                temp = 0;
             }
             Eta = weca * (aie/100) * (1-(ecw/((5*eci) - ecw)))
             Ya = Ym * ((ky*((Eta/ETm)-1))+1)
@@ -1475,9 +1481,38 @@ function Home() {
             revenue = Ya * cost
             pcost = p_arr[i] ?? (0.2 * revenue)
             profit = revenue - pcost
-            ans_arr.push(profit.toFixed(0))
+            lr = ecw/((5*eci) - ecw)
+            aiw3= (ETm )/((aie/100)*(1-lr))
+            wsp = ((weca - aiw3) / weca) * temp
+            if(weca == 0){
+                profit = 0
+            }
+            ans_arr.push(Number(profit).toFixed(0))
+            if ((weca *(aie/100)) < ETm){
+                // let value = 0;
+                // value = ((ETm - (weca*(aie/100)))/ETm) *100
+                imt_arr[i]= "There may be yield reduction as deficit irrigation of " + -1 *(((weca - aiw3) * 100) / weca).toFixed(0) +"% is practiced"
+            }
+            else if ((weca *(aie/100) > ETm) && (weca < aiw3)){
+                imt_arr[i] ="Not enough water for leaching. There could be yield reduction because of salinity build up."
+            }
+            else if (aiw3 == weca ){
+                imt_arr[i] ="Maximum yield could be achieved, since IE, ET and leaching requirements are fulfilled."
+            }
+            else if ( weca > aiw3 ){
+                imt_arr[i]=(wsp*100).toFixed(0) + "% of the water can be conserved"
+            }
+            else{
+                imt_arr[i] = " "
+            }
         }
+        
         setais(ans_arr)
+        setimt1(imt_arr[0])
+        setimt2(imt_arr[1])
+        setimt3(imt_arr[2])
+        setimt4(imt_arr[3])
+        setimt5(imt_arr[4])
 
     }
     function yap(){
@@ -1490,8 +1525,8 @@ function Home() {
             return
         }
         if (weca != null && weca != ""){
-            if(weca< 0 || weca > 3000){
-                alert("Available water should be between 0 and 3000")
+            if(weca< 0 || weca > 5500){
+                alert("Available water should be between 0 and 5500")
                 return
             }
         }
@@ -1641,21 +1676,26 @@ function Home() {
         }
         setginfo('Crop Yield (tons/ha)') 
         setbgc('#9acd32')
-        let eci =0;
-        let ecw =0;
-        let ETm =0;
-        let ky = 0;
-        let Ym = 0;
-        let Eta = 0;
         let Ya = 0;
         let ans_arr = [];
         let my_arr = [ayv1, ayv2, ayv3, ayv4, ayv5]
         let y_arr = [ay1, ay2, ay3, ay4, ay5]
         let etm_arr = [et1, et2, et3, et4, et5]
+        let imt_arr = [imt1,imt2,imt3,imt4,imt5]
         while(ais.length > 0) {
             ais.pop();
         }
         for(let i=0;i<my_arr.length;i++){
+            let eci =0;
+            let ecw =0;
+            let ETm =0;
+            let ky = 0;
+            let Ym = 0;
+            let Eta = 0;
+            let temp = 1;
+            let lr = 0;
+            let aiw3 = 0;
+            let wsp =0;
             if (y_arr[i] == ""){
                 y_arr[i] = null
             }
@@ -1796,9 +1836,19 @@ function Home() {
             }
             else{
                 Ym = 0;
+                temp = 0;
             }
-            Eta = weca * (aie/100) * (1-(ecw/((5*eci) - ecw)))
-            Ya = Ym * ((ky*((Eta/ETm)-1)+1))
+            // console.log(Ym)
+            if(weca > ETm){
+                Eta = weca * (aie/100) * (1-(ecw/((5*eci) - ecw)))
+                Ya = Ym * ((ky*((Eta/ETm)-1)+1))
+            }
+            else{
+                Eta = weca * (aie/100) 
+                Ya = Ym * ((ky*((Eta/ETm)-1)+1))
+            }
+            
+            console.log(Ya)
             if (Ya>Ym){
                 Ya = Ym
             }
@@ -1807,8 +1857,33 @@ function Home() {
             }
             // setans([...ans,Ya]);
             ans_arr.push(Ya.toFixed(1))
+            lr = ecw/((5*eci) - ecw)
+            aiw3= (ETm )/((aie/100)*(1-lr))
+            wsp = ((weca - aiw3) / weca) * temp
+            if ((weca *(aie/100)) < ETm){
+                // let value = 0;
+                // value = ((ETm - (weca*(aie/100)))/ETm) *100
+                imt_arr[i]= "There may be yield reduction as deficit irrigation of " + -1 *(((weca - aiw3) * 100) / weca).toFixed(0) +"% is practiced"
+            }
+            else if ((weca *(aie/100) > ETm) && (weca < aiw3)){
+                imt_arr[i] ="Not enough water for leaching. There could be yield reduction because of salinity build up."
+            }
+            else if (aiw3 == weca ){
+                imt_arr[i] ="Maximum yield could be achieved, since IE, ET and leaching requirements are fulfilled."
+            }
+            else if ( weca > aiw3 ){
+                imt_arr[i]=(wsp*100).toFixed(0) + "% of the water can be conserved"
+            }
+            else{
+                imt_arr[i] = " "
+            }
         }
         setais(ans_arr)
+        setimt1(imt_arr[0])
+        setimt2(imt_arr[1])
+        setimt3(imt_arr[2])
+        setimt4(imt_arr[3])
+        setimt5(imt_arr[4])
     }
     function mweap(){
         if (weca == null){
@@ -1820,8 +1895,8 @@ function Home() {
             return
         }
         if (weca != null && weca != ""){
-            if(weca< 0 || weca > 3000){
-                alert("Available water should be between 0 and 3000")
+            if(weca< 0 || weca > 5500){
+                alert("Available water should be between 0 and 5500")
                 return
             }
         }
@@ -2050,11 +2125,11 @@ function Home() {
             }
             // console.log(wsp)
 
-            ans_arr.push((wsp*100))
+            ans_arr.push(Number((wsp*100)).toFixed(0))
             if ((weca *(aie/100)) < ETm){
                 // let value = 0;
                 // value = ((ETm - (weca*(aie/100)))/ETm) *100
-                imt_arr[i]= "Deficit irrigation is practiced"
+                imt_arr[i]= "There may be yield reduction as deficit irrigation of " + -1 *(((weca - aiw3) * 100) / weca).toFixed(0) +"% is practiced"
             }
             else if ((weca *(aie/100) > ETm) && (weca < aiw3)){
                 imt_arr[i] ="Not enough water for leaching. There could be yield reduction because of salinity build up."
@@ -2063,7 +2138,7 @@ function Home() {
                 imt_arr[i] ="Maximum yield could be achieved, since IE, ET and leaching requirements are fulfilled."
             }
             else if ( weca > aiw3 ){
-                imt_arr[i]="Water can be conserved"
+                imt_arr[i]= (wsp*100).toFixed(0) + "% of the water can be conserved"
             }
             else{
                 imt_arr[i] = " "
@@ -2082,16 +2157,16 @@ function Home() {
     return (
         <div className='home'>
             <div className='mainhead'>
-                <h2><u>Crop-specific Irrigation Recommendation</u></h2>
+                <h2>Crop-specific Irrigation Recommendation</h2>
                 <p>Select a crop and click on the button below to find out the maximum yield and irrigation water requirements.</p>
                 <p>If known, users are encouraged to enter the salinity of irrigation water, soil type,
                 and irrigation system/ efficiency to obtain the results for the actual scenario. If not
                 known, the default irrigation water salinity, soil texture and irrigation efficiency
-                used are 1.2dS/m, sandy loam type, and 68%, respectively.</p>
-                <p>Leaching requirements are calculated using two methods (standard method and
-                    SALEACH method). For irrigation water demand, the leaching requirements based
+                used are 1.2dS/m, sandy loam type, and 68% (for flood irrigation system), respectively.</p>
+                <p>Leaching requirements are calculated using two methods (the standard method and
+                    the SALEACH method). For irrigation water demand, the leaching requirements based
                     on the standard method are considered. Deficit irrigation graph shows the % of
-                    maximum yield that might be reduced if deficit irrigation is practiced by 10-50%.</p>
+                    the maximum yield that might be reduced if the deficit irrigation is practiced by 10-50%.</p>
             </div>
             <div className='r0'>
                 <div className='cardr0'>
@@ -2149,7 +2224,7 @@ function Home() {
                 }
                 } />
             </p> 
-            <p><small> <a href={"https://casoilresource.lawr.ucdavis.edu/gmap/"}> Look up soil map</a></small></p>
+            <p><small> <a href="https://casoilresource.lawr.ucdavis.edu/gmap/" target="_blank"> Look up soil map</a></small></p>
             </div>
                 </div>
 
@@ -2258,17 +2333,17 @@ function Home() {
             </div>
             <div className='ads'>
                 <div className='mainhead'>
-                    <h2><u>Optimum Crop Selection</u></h2>
+                    <h2>Optimum Crop Selection</h2>
                     <p>Enter the total water available and select up to five crops to run the irrigation and crop
                     optimization in terms of crop yield, profit and water saving potential while achieving
-                    maximum yield. Irrigation efficiency in field, crop evapotranspiration and leaching
+                    maximum yield. Irrigation efficiency, crop evapotranspiration and leaching
                     requirements based on the water salinity are considered for the optimization.</p>
                     <p>If known for the field, users can enter the irrigation water salinity and irrigation efficiency to
                     obtain the results for the actual scenario. Else, the default values of irrigation water salinity
-                    and irrigation efficiency used are 1.2dS/m, and 68%, respectively. For the selected crops,
-                    users are encouraged to use the maximum expected yield, evapotranspiration for maximum
+                    and irrigation efficiency used are 1.2dS/m, and 68% (for flood irrigation system), respectively. For the selected crops,
+                    users are encouraged to use the maximum expected yield, evapotranspiration for the maximum
                     yield, updated crop prices and site-specific production cost for accurate results.</p>
-                    <p>Crop prices from USDA and 2021 California state agriculture overview are used as default.
+                    <p>Crop prices from the USDA and the 2021 California state agriculture overview are used as default.
                     (Sources - https://www.nass.usda.gov/Publications/Todays_Reports/reports/agpr0721.pdf
                     
                     https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=CALIFORNIA)</p>
@@ -2455,12 +2530,13 @@ function Home() {
                     </div>
                     <div>
                     <h2>Irrigation Management Tip</h2>
-                    <p>(based on Water saving potential)</p>
+                    <div className='csout'>
                     <p>Crop 1 -> {imt1}</p>
                     <p>Crop 2 -> {imt2}</p>
                     <p>Crop 3 -> {imt3}</p>
                     <p>Crop 4 -> {imt4}</p>
                     <p>Crop 5 -> {imt5}</p>
+                    </div>
                     </div>
                 </div>
             </div>
