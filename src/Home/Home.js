@@ -193,7 +193,7 @@ function Home() {
         labels: cpsw,
         datasets: [
           {
-            label: 'Water efficiency (tons/(ha*mm))',
+            label: 'Water saving potential (% of total water available for irrigation)',
             backgroundColor: `#00ffff`,
             borderColor: 'rgba(0,0,0,1)',
             borderWidth: 0.5,
@@ -1146,11 +1146,11 @@ function Home() {
     }
     function rap(){
         if (weca == null){
-            alert("Please enter amount of water available")
+            alert("Please enter the total water available for irrigation (mm)")
             return
         }
         if (weca == ""){
-            alert("Please enter amount of water available")
+            alert("Please enter the total water available for irrigation (mm)")
             return
         }
         if (weca != null && weca != ""){
@@ -1452,7 +1452,7 @@ function Home() {
                ky = 1.15;
                Ym = y_arr[i] ?? 14;
                cost = c_arr[i] ?? 1237.50;
-               if ( Ym > 10 || Ym <20){
+               if ( Ym > 20 || Ym <10){
                 alert("The maximum expected yield for Spinach should be between 10(tons/ha) to 20(tons/ha)")
                 return
             }
@@ -1464,7 +1464,7 @@ function Home() {
               ky = 1.1;
                Ym = y_arr[i] ?? 27;
                cost = c_arr[i] ?? 1482.14;
-               if ( Ym > 40 || 20){
+               if ( Ym > 40 || Ym <20){
                 alert("The maximum expected yield for Sweet Corn should be between 20(tons/ha) to 40(tons/ha)")
                 return
             }
@@ -1500,7 +1500,7 @@ function Home() {
                 imt_arr[i] ="Maximum yield could be achieved, since IE, ET and leaching requirements are fulfilled."
             }
             else if ( weca > aiw3 ){
-                imt_arr[i]=(wsp*100).toFixed(0) + "% of the water can be conserved"
+                imt_arr[i]=(wsp*100).toFixed(0) + "% of the water can be conserved and still maximum yield could be obtained."
             }
             else{
                 imt_arr[i] = " "
@@ -1517,11 +1517,11 @@ function Home() {
     }
     function yap(){
         if (weca == null){
-            alert("Please enter amount of water available")
+            alert("Please enter the total water available for irrigation (mm)")
             return
         }
         if (weca == ""){
-            alert("Please enter amount of water available")
+            alert("Please enter the total water available for irrigation (mm)")
             return
         }
         if (weca != null && weca != ""){
@@ -1818,7 +1818,7 @@ function Home() {
                ETm= etm_arr[i] ?? 200;
                ky = 1.15;
                Ym = y_arr[i] ?? 14;
-               if ( Ym > 10 || Ym <20){
+               if ( Ym > 20 || Ym <10){
                 alert("The maximum expected yield for Spinach should be between 10(tons/ha) to 20(tons/ha)")
                 return
             }
@@ -1829,7 +1829,7 @@ function Home() {
               ETm= etm_arr[i] ?? 600;
               ky = 1.1;
                Ym = y_arr[i] ?? 27;
-               if ( Ym > 40 || 20){
+               if ( Ym > 40 || Ym < 20){
                 alert("The maximum expected yield for Sweet Corn should be between 20(tons/ha) to 40(tons/ha)")
                 return
             }
@@ -1856,7 +1856,7 @@ function Home() {
                 Ya = 0
             }
             // setans([...ans,Ya]);
-            ans_arr.push(Ya.toFixed(1))
+            ans_arr.push(Number(Ya).toFixed(1))
             lr = ecw/((5*eci) - ecw)
             aiw3= (ETm )/((aie/100)*(1-lr))
             wsp = ((weca - aiw3) / weca) * temp
@@ -1872,7 +1872,7 @@ function Home() {
                 imt_arr[i] ="Maximum yield could be achieved, since IE, ET and leaching requirements are fulfilled."
             }
             else if ( weca > aiw3 ){
-                imt_arr[i]=(wsp*100).toFixed(0) + "% of the water can be conserved"
+                imt_arr[i]=(wsp*100).toFixed(0) + "% of the water can be conserved and still maximum yield could be obtained."
             }
             else{
                 imt_arr[i] = " "
@@ -1887,11 +1887,11 @@ function Home() {
     }
     function mweap(){
         if (weca == null){
-            alert("Please enter amount of water available")
+            alert("Please enter the total water available for irrigation (mm)")
             return
         }
         if (weca == ""){
-            alert("Please enter amount of water available")
+            alert("Please enter the total water available for irrigation (mm)")
             return
         }
         if (weca != null && weca != ""){
@@ -1997,7 +1997,7 @@ function Home() {
                 aie = 68
             }
         }
-        setginfo('Water saving percentage(%)') 
+        setginfo('Water saving potential (% of total water available for irrigation)') 
         setbgc(`#6495ed`)
         let ans_arr = [];
         let my_arr = [ayv1, ayv2, ayv3, ayv4, ayv5]
@@ -2138,7 +2138,7 @@ function Home() {
                 imt_arr[i] ="Maximum yield could be achieved, since IE, ET and leaching requirements are fulfilled."
             }
             else if ( weca > aiw3 ){
-                imt_arr[i]= (wsp*100).toFixed(0) + "% of the water can be conserved"
+                imt_arr[i]= (wsp*100).toFixed(0) + "% of the water can be conserved and still maximum yield could be obtained."
             }
             else{
                 imt_arr[i] = " "
@@ -2334,9 +2334,9 @@ function Home() {
             <div className='ads'>
                 <div className='mainhead'>
                     <h2>Optimum Crop Selection</h2>
-                    <p>Enter the total water available and select up to five crops to run the irrigation and crop
+                    <p>Enter the total water available for irrigation and select up to five crops to run the irrigation and crop
                     optimization in terms of crop yield, profit and water saving potential while achieving
-                    maximum yield. Irrigation efficiency, crop evapotranspiration and leaching
+                    the maximum yield. Irrigation efficiency, crop evapotranspiration and leaching
                     requirements based on the water salinity are considered for the optimization.</p>
                     <p>If known for the field, users can enter the irrigation water salinity and irrigation efficiency to
                     obtain the results for the actual scenario. Else, the default values of irrigation water salinity
@@ -2344,9 +2344,9 @@ function Home() {
                     users are encouraged to use the maximum expected yield, evapotranspiration for the maximum
                     yield, updated crop prices and site-specific production cost for accurate results.</p>
                     <p>Crop prices from the USDA and the 2021 California state agriculture overview are used as default.
-                    (Sources - https://www.nass.usda.gov/Publications/Todays_Reports/reports/agpr0721.pdf
+                    (Sources - <a href = "https://www.nass.usda.gov/Publications/Todays_Reports/reports/agpr0721.pdf" target="_blank"> link 1</a> ,
                     
-                    https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=CALIFORNIA)</p>
+                    <a href = "https://www.nass.usda.gov/Quick_Stats/Ag_Overview/stateOverview.php?state=CALIFORNIA" target="_blank"> link 2</a>)</p>
                     <p><a href="https://www.barchart.com/futures/grains" target="_blank"> Look up recent crop price</a></p>
                 </div>
                 
