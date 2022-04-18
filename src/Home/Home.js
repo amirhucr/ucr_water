@@ -82,6 +82,7 @@ const crops =[
     { label: "Micro-Mini ", value:  9},
     { label: " Hose-Pull ", value:  10},
     { label: "Center-Pivot ", value:  11},
+    { label: "Drip", value: 12},
   ]
 
 function Home() {
@@ -566,6 +567,10 @@ function Home() {
             else if(it ==4){
                 k = 0.682
                 clz = 85
+            }
+            else if( it == 12){
+                k =0.883
+                clz = 40
             }
             else {
                 k = 0.769
@@ -1155,7 +1160,7 @@ function Home() {
         }
         if (weca != null && weca != ""){
             if(weca< 0 || weca > 5500){
-                alert("Available water should be between 0 and 5500")
+                alert("Available water should be between 0 mm and 5500 mm")
                 return
             }
         }
@@ -1252,6 +1257,9 @@ function Home() {
             else if (ait == 11){
                 aie = 80
             }
+            else if (ait == 12){
+                aie = 86
+            }
             else{
                 aie = 68
             }
@@ -1302,6 +1310,7 @@ function Home() {
         let revenue = 0;
         let profit =0 ;
         let ans_arr = [];
+        let aiw3 = 0;
         let my_arr = [ayv1, ayv2, ayv3, ayv4, ayv5]
         let y_arr = [ay1, ay2, ay3, ay4, ay5]
         let etm_arr = [et1, et2, et3, et4, et5]
@@ -1526,7 +1535,7 @@ function Home() {
         }
         if (weca != null && weca != ""){
             if(weca< 0 || weca > 5500){
-                alert("Available water should be between 0 and 5500")
+                alert("Available water should be between 0 mm and 5500 mm")
                 return
             }
         }
@@ -1669,6 +1678,9 @@ function Home() {
             }
             else if (ait == 11){
                 aie = 80
+            }
+            else if (ait == 12){
+                aie = 86
             }
             else{
                 aie = 68
@@ -1839,7 +1851,9 @@ function Home() {
                 temp = 0;
             }
             // console.log(Ym)
-            if(weca > ETm){
+            lr = ecw/((5*eci) - ecw)
+            aiw3= (ETm )/((aie/100)*(1-lr))
+            if(weca > aiw3){
                 Eta = weca * (aie/100) * (1-(ecw/((5*eci) - ecw)))
                 Ya = Ym * ((ky*((Eta/ETm)-1)+1))
             }
@@ -1857,8 +1871,6 @@ function Home() {
             }
             // setans([...ans,Ya]);
             ans_arr.push(Number(Ya).toFixed(1))
-            lr = ecw/((5*eci) - ecw)
-            aiw3= (ETm )/((aie/100)*(1-lr))
             wsp = ((weca - aiw3) / weca) * temp
             if ((weca *(aie/100)) < ETm){
                 // let value = 0;
@@ -1896,7 +1908,7 @@ function Home() {
         }
         if (weca != null && weca != ""){
             if(weca< 0 || weca > 5500){
-                alert("Available water should be between 0 and 5500")
+                alert("Total available water should be between 0 mm and 5500 mm")
                 return
             }
         }
@@ -1992,6 +2004,9 @@ function Home() {
             }
             else if (ait == 11){
                 aie = 80
+            }
+            else if (ait == 12){
+                aie = 86
             }
             else{
                 aie = 68

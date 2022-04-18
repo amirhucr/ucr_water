@@ -1,7 +1,7 @@
 export const MenuItems = [
     {
         title: 'Help?',
-        url :'https://salinity.ucr.edu/assets/SALEACH_Help.pdf',
+        url :'',
         cName : 'help'
     },
 
