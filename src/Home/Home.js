@@ -1503,7 +1503,7 @@ function Home() {
             if ((weca *(aie/100)) < ETm){
                 // let value = 0;
                 // value = ((ETm - (weca*(aie/100)))/ETm) *100
-                imt_arr[i]= "There may be yield reduction as deficit irrigation of " + -1 *(((weca - aiw3) * 100) / weca).toFixed(0) +"% is practiced"
+                imt_arr[i]= "There may be yield reduction as deficit irrigation of " + (((ETm - weca *(aie/100)) * 100) / ETm).toFixed(0) +"% is practiced"
             }
             else if ((weca *(aie/100) > ETm) && (weca < aiw3)){
                 imt_arr[i] ="Not enough water for leaching. There could be yield reduction because of salinity build up."
@@ -1878,7 +1878,7 @@ function Home() {
             if ((weca *(aie/100)) < ETm){
                 // let value = 0;
                 // value = ((ETm - (weca*(aie/100)))/ETm) *100
-                imt_arr[i]= "There may be yield reduction as deficit irrigation of " + -1 *(((weca - aiw3) * 100) / weca).toFixed(0) +"% is practiced"
+                imt_arr[i]= "There may be yield reduction as deficit irrigation of " + (((ETm - weca *(aie/100)) * 100) / ETm).toFixed(0) +"% is practiced"
             }
             else if ((weca *(aie/100) > ETm) && (weca < aiw3)){
                 imt_arr[i] ="Not enough water for leaching. There could be yield reduction because of salinity build up."
@@ -2147,7 +2147,7 @@ function Home() {
             if ((weca *(aie/100)) < ETm){
                 // let value = 0;
                 // value = ((ETm - (weca*(aie/100)))/ETm) *100
-                imt_arr[i]= "There may be yield reduction as deficit irrigation of " + -1 *(((weca - aiw3) * 100) / weca).toFixed(0) +"% is practiced"
+                imt_arr[i]= "There may be yield reduction as deficit irrigation of " + (((ETm - weca *(aie/100)) * 100) / ETm).toFixed(0) +"% is practiced"
             }
             else if ((weca *(aie/100) > ETm) && (weca < aiw3)){
                 imt_arr[i] ="Not enough water for leaching. There could be yield reduction because of salinity build up."
