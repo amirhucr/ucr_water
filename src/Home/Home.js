@@ -447,6 +447,9 @@ function Home() {
             else if (it == 11){
                 ie = 80
             }
+            else if (it == 12) {
+                ie =  86
+            }
             else{
                 ie = 68
             }
