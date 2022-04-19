@@ -1160,7 +1160,7 @@ function Home() {
         }
         if (weca != null && weca != ""){
             if(weca< 0 || weca > 5500){
-                alert("Available water should be between 0 mm and 5500 mm")
+                alert("Total water available for irrigation should be between 0 mm and 5500 mm")
                 return
             }
         }
@@ -1535,7 +1535,7 @@ function Home() {
         }
         if (weca != null && weca != ""){
             if(weca< 0 || weca > 5500){
-                alert("Available water should be between 0 mm and 5500 mm")
+                alert("Total water available for irrigation should be between 0 mm and 5500 mm")
                 return
             }
         }
@@ -1908,7 +1908,7 @@ function Home() {
         }
         if (weca != null && weca != ""){
             if(weca< 0 || weca > 5500){
-                alert("Total available water should be between 0 mm and 5500 mm")
+                alert("Total water available for irrigation should be between 0 mm and 5500 mm")
                 return
             }
         }
