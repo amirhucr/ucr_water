@@ -231,9 +231,9 @@ function Home() {
         ],
       }
       let datadf = [
-        { argument: '10%', value: d1 },
+        { argument: '10%', value: d1  },
         { argument: '20%', value: d2 },
-        { argument: '30%', value: d3 },
+        { argument: '30%', value: d3  },
         { argument: '40%', value: d4 },
         { argument: '50%', value: d5 },
       ];
@@ -489,14 +489,14 @@ function Home() {
             ky = 0.85;
            eci=6.9;
            ecw=ec ?? 1.2;
-           ETm=1200;
+           ETm=1300;
            Ym = 19;
         }
         else if (pa ==5 ){
             ky = 0.9;
            eci=4;
            ecw= ec ?? 1.2;
-           ETm=1250;
+           ETm=1350;
            Ym = 24;
         }
         else if (pa == 6){
@@ -681,11 +681,11 @@ function Home() {
         d3 = ky*(1-((0.7 * ETm)/ETm)) ;
         d4 = ky*(1-((0.6 * ETm)/ETm)) ;
         d5 = ky*(1-((0.5 * ETm)/ETm)) ;
-        setd1((d1*100).toFixed(0))
-        setd2((d2*100).toFixed(0))
-        setd3((d3*100).toFixed(0))
-        setd4((d4*100).toFixed(0))
-        setd5((d5*100).toFixed(0))
+        setd1((d1*100).toFixed(0) + "%" )
+        setd2((d2*100).toFixed(0) + "%" )
+        setd3((d3*100).toFixed(0) + "%" )
+        setd4((d4*100).toFixed(0) + "%" )
+        setd5((d5*100).toFixed(0) + "%" )
         lr = ecw/((5*eci) - ecw)
         iw1= (ETm )
         iw3= (ETm )/((ie/100)*(1-lr))
@@ -1376,7 +1376,7 @@ function Home() {
             else if (my_arr[i] == 4){
                eci=6.9;
                ecw = ad_ec ?? 1.2;
-               ETm= etm_arr[i] ?? 1200;
+               ETm= etm_arr[i] ?? 1300;
                ky = 0.9;
                Ym =y_arr[i] ??  19;
                cost = c_arr[i] ?? 200;
@@ -1388,7 +1388,7 @@ function Home() {
             else if (my_arr[i] ==5 ){
                eci=4;
                ecw = ad_ec ?? 1.2;
-               ETm= etm_arr[i] ?? 1250;
+               ETm= etm_arr[i] ?? 1350;
                ky = 0.9;
                Ym = y_arr[i] ?? 24;
                cost = c_arr[i] ?? 200;
@@ -1753,7 +1753,7 @@ function Home() {
             else if (my_arr[i] == 4){
                eci=6.9;
                ecw= ad_ec ?? 1.2;
-               ETm= etm_arr[i] ?? 1200;
+               ETm= etm_arr[i] ?? 1300;
                ky = 0.9;
                Ym = y_arr[i] ?? 19;
                if ( Ym > 25 || Ym < 15){
@@ -1764,7 +1764,7 @@ function Home() {
             else if (my_arr[i] ==5 ){
                eci=4;
                ecw=  ad_ec ?? 1.2;
-               ETm= etm_arr[i] ?? 1250;
+               ETm= etm_arr[i] ?? 1350;
                ky = 0.9;
                Ym = y_arr[i] ??24;
                if ( Ym > 30 || Ym < 20){
@@ -2069,14 +2069,14 @@ function Home() {
             else if (my_arr[i] == 4){
                eci=6.9;
                ecw=ad_ec ?? 1.2;
-               ETm= etm_arr[i] ?? 1200;
+               ETm= etm_arr[i] ?? 1300;
                ky = 0.9;
                Ym = y_arr[i] ?? 19;
             }
             else if (my_arr[i] ==5 ){
                eci=4;
                ecw=  ad_ec ?? 1.2;
-               ETm= etm_arr[i] ?? 1250;
+               ETm= etm_arr[i] ?? 1350;
                ky = 0.9;
                Ym = y_arr[i] ?? 24;
             }
