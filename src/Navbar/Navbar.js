@@ -8,7 +8,7 @@ class Navbar extends Component{
         return(
             <nav className="NavbarItems">
                 <div className="navbar-logo"><img src={logo} width="100" height="50" />  </div>
-                <div className="head">Irrigation Water Optimizer</div>
+                <div className="head"><b>IMT-Desert:</b> An Irrigation Management Tool for Southern California Desert Region</div>
                 <div className="nav-menu">
                     {MenuItems.map((item, index) => {
                         return(
